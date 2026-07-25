@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joshua Azze Distel</title>
+<meta name="description" content="Joshua Azze Distel — Engenharia da Computação. Currículo Lattes, LinkedIn e GitHub.">
+<meta name="theme-color" content="#eef2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1724" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:  #eef2f7;
+    --card:   #ffffff;
+    --ink:    #0e2136;
+    --muted:  #4a6580;
+    --rule:   #c6d5e3;
+    --accent: #1b5a94;
+    --shadow: 0 1px 2px rgba(14, 33, 54, .06), 0 12px 32px -20px rgba(14, 33, 54, .35);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:  #0b1724;
+      --card:   #12212f;
+      --ink:    #e4ecf3;
+      --muted:  #9db4c8;
+      --rule:   #27394c;
+      --accent: #7ab0e0;
+      --shadow: none;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .cartao {
+    width: 100%;
+    max-width: 44rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: clamp(2rem, 6vw, 3.5rem);
+  }
+
+  .nome {
+    margin: 0;
+    font-family: Newsreader, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -.015em;
+  }
+
+  .papel {
+    margin: .6rem 0 0;
+    color: var(--muted);
+    font-size: .95rem;
+  }
+
+  .registro {
+    margin-top: clamp(2rem, 6vw, 3rem);
+    border-top: 1px solid var(--rule);
+  }
+
+  .linha {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: .25rem 1.5rem;
+    padding: 1.15rem 0 1.15rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    border-left: 2px solid transparent;
+    color: inherit;
+    text-decoration: none;
+    transition: border-left-color .18s ease, padding-left .18s ease, background-color .18s ease;
+  }
+
+  .rotulo {
+    font-weight: 500;
+    font-size: 1.05rem;
+  }
+
+  .ident {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .875rem;
+    color: var(--muted);
+    text-align: right;
+    transition: color .18s ease;
+  }
+
+  @media (hover: hover) {
+    .linha:hover {
+      border-left-color: var(--accent);
+      padding-left: 1.4rem;
+    }
+    .linha:hover .rotulo { color: var(--accent); }
+    .linha:hover .ident  { color: var(--ink); }
+  }
+
+  .linha:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-left-color: var(--accent);
+  }
+
+  .rodape {
+    margin-top: clamp(1.75rem, 5vw, 2.5rem);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .8125rem;
+    color: var(--muted);
+  }
+
+  .rodape a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+  }
+
+  .rodape a:hover,
+  .rodape a:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 30rem) {
+    .linha { grid-template-columns: 1fr; }
+    .ident { text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <main class="cartao">
+    <h1 class="nome">Joshua Azze Distel</h1>
+    <p class="papel">Engenharia da Computação</p>
+
+    <nav class="registro" aria-label="Perfis">
+      <a class="linha" href="http://lattes.cnpq.br/0893551011803408">
+        <span class="rotulo">Currículo Lattes</span>
+        <span class="ident">0893551011803408</span>
+      </a>
+
+      <a class="linha" href="https://www.linkedin.com/in/joshazze/">
+        <span class="rotulo">LinkedIn</span>
+        <span class="ident">/in/joshazze</span>
+      </a>
+
+      <a class="linha" href="https://github.com/joshazze">
+        <span class="rotulo">GitHub</span>
+        <span class="ident">@joshazze</span>
+      </a>
+    </nav>
+
+    <p class="rodape"><a href="mailto:contato@jadistel.com">contato@jadistel.com</a></p>
+  </main>
+</body>
+</html>

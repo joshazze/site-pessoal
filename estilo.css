@@ -84,6 +84,31 @@ main {
 
 .capa { padding: 2.75rem 0 0; }
 
+/* home: quatro linhas e o rodapé, tudo numa tela */
+body.curta main {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+body.curta .capa { padding-top: 0; }
+body.curta .quadro { margin-top: 2.5rem; }
+
+.pe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem 1.25rem;
+  margin-top: 2rem;
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--tinta-2);
+}
+
+.pe a { text-decoration: none; box-shadow: inset 0 -1px 0 var(--filete); }
+.pe a:hover, .pe a:focus-visible { color: var(--tinta); box-shadow: inset 0 -2px 0 var(--marca-forte); }
+
 .orgao {
   margin: 0;
   font-family: var(--mono);
@@ -361,6 +386,7 @@ p + p { margin-top: .55rem; }
 
   .quadro, .legenda, .fonte, .texto, .kw, .pulso, .ref, .ferramentas { margin-left: 4.25rem; }
   .linha { padding-left: .9rem; }
+  body.curta .quadro, body.curta .pe { margin-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

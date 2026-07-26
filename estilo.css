@@ -94,6 +94,33 @@ body.curta main {
 }
 
 body.curta .capa { padding-top: 0; }
+
+/* a página se escreve: linha de filiação datilografada, depois nome, linhas e pé */
+.cursor {
+  display: inline-block;
+  width: .5em;
+  height: 1.05em;
+  margin-left: .12em;
+  background: var(--marca-forte);
+  vertical-align: -.16em;
+  animation: piscar 1.05s steps(1) infinite;
+}
+
+@keyframes piscar { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+body.curta h1        { animation: subir .75s cubic-bezier(.16, 1, .3, 1) .62s both; }
+body.curta .sub      { animation: subir .7s cubic-bezier(.16, 1, .3, 1) .78s both; }
+body.curta .linha    { animation: subir .6s cubic-bezier(.16, 1, .3, 1) both; }
+body.curta .linha:nth-child(1) { animation-delay: .96s; }
+body.curta .linha:nth-child(2) { animation-delay: 1.05s; }
+body.curta .linha:nth-child(3) { animation-delay: 1.14s; }
+body.curta .linha:nth-child(4) { animation-delay: 1.23s; }
+body.curta .pe       { animation: subir .6s cubic-bezier(.16, 1, .3, 1) 1.4s both; }
 body.curta .quadro { margin-top: 2.5rem; }
 
 .pe {
@@ -186,6 +213,8 @@ p + p { margin-top: .55rem; }
 .quadro { border-top: 1px solid var(--borda); }
 
 .linha {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: start;
@@ -219,12 +248,28 @@ p + p { margin-top: .55rem; }
   transition: transform .3s cubic-bezier(.16, 1, .3, 1), color .2s ease;
 }
 
-.linha.viva, .linha:active { background: var(--marca); }
+.linha > * { position: relative; z-index: 1; }
+
+/* o marca-texto é passado da esquerda para a direita, como caneta */
+.linha::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--marca);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.linha.viva::before, .linha:active::before { transform: scaleX(1); }
+.linha.saindo::before { transform-origin: 100% 50%; transform: scaleX(0); }
+.linha.morta::before { display: none; }
+
 .linha.viva .seta { transform: translate(3px, -3px); color: var(--tinta); }
 .linha:focus-visible { outline: 2px solid var(--marca-forte); outline-offset: -2px; }
 
 @media (hover: hover) {
-  .linha:hover { background: var(--marca); }
+  .linha:hover::before { transform: scaleX(1); }
   .linha:hover .seta { transform: translate(3px, -3px); color: var(--tinta); }
 }
 

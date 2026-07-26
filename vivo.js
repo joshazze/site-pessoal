@@ -4,19 +4,45 @@ const MESES = ['jan.','fev.','mar.','abr.','maio','jun.','jul.','ago.','set.','o
 const parado = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const dataABNT = d => d.getDate() + ' ' + MESES[d.getMonth()] + ' ' + d.getFullYear();
-const hora = d => String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+const dd = n => String(n).padStart(2, '0');
+const hora = d => dd(d.getHours()) + ':' + dd(d.getMinutes());
+const horaSeg = d => hora(d) + ':' + dd(d.getSeconds());
 
 /* 1. data de acesso das referências e relógio da sessão */
+
+const relogio = document.getElementById('agora');
 
 const marcarHora = () => {
   const agora = new Date();
   document.querySelectorAll('.acesso').forEach(el => el.textContent = dataABNT(agora));
-  const rel = document.getElementById('agora');
-  if (rel) rel.textContent = dataABNT(agora) + ', ' + hora(agora);
+  if (!relogio) return;
+  relogio.textContent = relogio.hasAttribute('data-hora')
+    ? horaSeg(agora)
+    : dataABNT(agora) + ', ' + hora(agora);
 };
 
 marcarHora();
-setInterval(marcarHora, 20000);
+setInterval(marcarHora, relogio && relogio.hasAttribute('data-hora') ? 1000 : 20000);
+
+/* a linha de filiação é datilografada na abertura, com cursor */
+
+const orgao = document.body.classList.contains('curta') && document.querySelector('.orgao');
+
+if (orgao && !parado) {
+  const texto = orgao.textContent;
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  orgao.textContent = '';
+  orgao.append(cursor);
+  let i = 0;
+  const bater = setInterval(() => {
+    cursor.before(texto[i++]);
+    if (i >= texto.length) {
+      clearInterval(bater);
+      setTimeout(() => cursor.remove(), 900);
+    }
+  }, 17);
+}
 
 /* 2. quadro que respira: uma linha acende de cada vez, sem ninguém tocar */
 
@@ -31,7 +57,15 @@ if (linhas.length && !parado) {
 
   let i = 0, pausaAte = 0, aceso = null;
 
-  const apagar = () => { if (aceso) { aceso.classList.remove('viva'); aceso = null; } };
+  /* a caneta sai pela direita: tira o 'viva' e deixa o 'saindo' completar a varredura */
+  const apagar = () => {
+    if (!aceso) return;
+    const l = aceso;
+    aceso = null;
+    l.classList.remove('viva');
+    l.classList.add('saindo');
+    setTimeout(() => l.classList.remove('saindo'), 620);
+  };
 
   const bater = () => {
     apagar();
@@ -40,14 +74,14 @@ if (linhas.length && !parado) {
     if (!fila.length) return;
     aceso = fila[i++ % fila.length];
     aceso.classList.add('viva');
-    setTimeout(() => { if (aceso) aceso.classList.remove('viva'); }, 1500);
+    setTimeout(apagar, 1600);
   };
 
   /* quem interage manda: o ciclo se cala por 12 segundos */
   const calar = () => { pausaAte = Date.now() + 12000; apagar(); };
   addEventListener('pointerdown', calar, { passive: true });
-  addEventListener('pointermove', calar, { passive: true });
   addEventListener('keydown', calar);
+  linhas.forEach(l => l.addEventListener('pointerenter', calar));
   document.addEventListener('visibilitychange', apagar);
 
   setTimeout(() => { bater(); setInterval(bater, 3400); }, 2200);
@@ -123,14 +157,22 @@ if (pulso) {
 
   let ultimo = null;
 
+  const curto = pulso.hasAttribute('data-curto');
+
   const escrever = () => {
     if (!ultimo) return;
     const verbo = VERBO[ultimo.tipo] || 'atividade';
+    const nome = curto ? ultimo.repo.split('/').pop() : ultimo.repo;
+    const quando = desde(Date.now() - ultimo.quando);
+    if (curto) {
+      pulso.textContent = verbo + ' ' + quando + ' em ' + nome;
+      return;
+    }
     const link = document.createElement('a');
     link.href = 'https://github.com/' + ultimo.repo;
-    link.textContent = ultimo.repo;
+    link.textContent = nome;
     pulso.textContent = verbo + ' em ';
-    pulso.append(link, ', ' + desde(Date.now() - ultimo.quando));
+    pulso.append(link, ', ' + quando);
   };
 
   const buscar = async () => {

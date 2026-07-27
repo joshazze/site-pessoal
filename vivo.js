@@ -242,41 +242,37 @@ if (bib) bib.addEventListener('click', () => copiar(bib,
   + '}',
   'copiar BibTeX'));
 
-/* 7. no celular o clique treme, enche a linha e só então abre. sem segurar: o toque longo do
-   iOS é do sistema (menu de preview) e não vale a pena disputar */
+/* 7. no celular o tremor é nativo: o dedo cai num switch invisível esticado sobre a linha, que é
+   a única coisa que o iOS aceita como gesto háptico (clique sintético não vibra, testado em
+   iOS 18.7). O switch alterna, a linha enche como barra de progresso e o link abre no fim. */
 
 const tatil = matchMedia('(hover: none)').matches;
 
 if (tatil && document.body.classList.contains('curta')) {
   const ENCHE = 340;
 
-  /* o iOS não tem navigator.vibrate: alternar um switch nativo dentro do gesto dispara o tátil.
-     precisa estar renderizado de verdade, então vai para fora da tela, sem opacity nem clip. */
-  const rotulo = document.createElement('label');
-  rotulo.className = 'tatil';
-  rotulo.setAttribute('aria-hidden', 'true');
-  const chave = document.createElement('input');
-  chave.type = 'checkbox';
-  chave.setAttribute('switch', '');
-  chave.tabIndex = -1;
-  rotulo.append(chave);
-  document.body.append(rotulo);
-
-  const tremer = forca => {
-    try { if (navigator.vibrate) navigator.vibrate(forca); } catch (_) {}
-    try { rotulo.click(); } catch (_) {}
-  };
-
   for (const linha of document.querySelectorAll('.linha[href]')) {
+    const celula = document.createElement('div');
+    celula.className = 'celula';
+    linha.parentNode.insertBefore(celula, linha);
+    celula.append(linha);
+
+    const toque = document.createElement('input');
+    toque.type = 'checkbox';
+    toque.setAttribute('switch', '');
+    toque.className = 'toque';
+    toque.tabIndex = -1;
+    toque.setAttribute('aria-hidden', 'true');
+    celula.append(toque);
+
     let indo = false;
 
-    linha.addEventListener('click', e => {
-      if (e.detail === 0) return;   /* teclado abre direto, sem espetáculo */
-      e.preventDefault();
+    /* nada de preventDefault aqui: cancelar a alternância do switch mata o tátil */
+    celula.addEventListener('click', e => {
+      if (e.detail === 0) return;
       if (indo) return;
       indo = true;
 
-      tremer(18);
       linha.classList.remove('viva', 'saindo');
       linha.classList.add('tocando');
 
@@ -289,6 +285,13 @@ if (tatil && document.body.classList.contains('curta')) {
 
       setTimeout(() => { location.href = linha.href; }, ENCHE);
     });
+
+    /* Android continua com a API de verdade, que o iOS não tem */
+    if (navigator.vibrate) {
+      celula.addEventListener('pointerdown', e => {
+        if (e.pointerType !== 'mouse') { try { navigator.vibrate(18); } catch (_) {} }
+      });
+    }
   }
 
   /* voltar pelo histórico não pode achar a linha cheia */

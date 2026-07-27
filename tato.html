@@ -16,6 +16,21 @@
   .direto { display: flex; align-items: center; gap: .9rem; min-height: 4.75rem;
             padding: .95rem .8rem; border-bottom: 1px solid var(--borda); }
   .direto input { width: 3.25rem; height: 2rem; }
+  .celula { position: relative; }
+  .celula .linha { border-bottom: 1px solid var(--borda); }
+  .toque {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 2;
+    -webkit-appearance: auto;
+    appearance: auto;
+  }
+  .op01  { opacity: .01; }
+  .op12  { opacity: .12; }
+  .op100 { opacity: 1; }
   .laudo { font-family: var(--mono); font-size: 1rem; color: var(--tinta-2); margin-top: 1.5rem;
            padding-top: 1rem; border-top: 1px solid var(--filete); line-height: 1.6; overflow-wrap: anywhere; }
 </style>
@@ -39,6 +54,25 @@
   <button class="cita teste" id="t2">2. switch alternado por código</button>
   <button class="cita teste" id="t3">3. navigator.vibrate(30)</button>
   <button class="cita teste" id="t4">4. vibrate em padrão longo</button>
+
+
+  <p class="orgao" style="margin-top:2.5rem">Segunda rodada: switch invisível cobrindo a linha</p>
+  <p class="fonte" style="margin-bottom:.75rem">Toque no meio de cada linha, como se fosse abrir o link. Diga quais vibraram.</p>
+
+  <div class="quadro">
+    <div class="celula">
+      <div class="linha"><span class="reg">5. overlay quase invisível</span><span class="fim">opacity .01</span></div>
+      <input class="toque op01" type="checkbox" switch aria-hidden="true" tabindex="-1">
+    </div>
+    <div class="celula">
+      <div class="linha"><span class="reg">6. overlay bem apagado</span><span class="fim">opacity .12</span></div>
+      <input class="toque op12" type="checkbox" switch aria-hidden="true" tabindex="-1">
+    </div>
+    <div class="celula">
+      <div class="linha"><span class="reg">7. overlay visível</span><span class="fim">opacity 1, controle</span></div>
+      <input class="toque op100" type="checkbox" switch aria-hidden="true" tabindex="-1">
+    </div>
+  </div>
 
   <p class="laudo" id="laudo"></p>
 </main>

@@ -140,7 +140,8 @@ body.curta .quadro { margin-top: 2.5rem; }
   margin: 0;
   font-family: var(--mono);
   font-size: 1rem;
-  letter-spacing: .04em;
+  letter-spacing: .015em;
+  line-height: 1.5;
   color: var(--tinta-2);
 }
 

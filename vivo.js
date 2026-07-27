@@ -29,18 +29,20 @@ setInterval(marcarHora, relogio && relogio.hasAttribute('data-hora') ? 1000 : 20
 const orgao = document.body.classList.contains('curta') && document.querySelector('.orgao');
 
 if (orgao && !parado) {
-  const texto = orgao.textContent;
+  const partes = orgao.innerHTML.split(/<br\s*\/?>/i).map(s => s.trim());
   const cursor = document.createElement('span');
   cursor.className = 'cursor';
   orgao.textContent = '';
   orgao.append(cursor);
-  let i = 0;
+
+  let p = 0, i = 0;
   const bater = setInterval(() => {
-    cursor.before(texto[i++]);
-    if (i >= texto.length) {
-      clearInterval(bater);
-      setTimeout(() => cursor.remove(), 900);
-    }
+    if (i < partes[p].length) { cursor.before(partes[p][i++]); return; }
+    p++;
+    i = 0;
+    if (p < partes.length) { cursor.before(document.createElement('br')); return; }
+    clearInterval(bater);
+    setTimeout(() => cursor.remove(), 900);
   }, 17);
 }
 

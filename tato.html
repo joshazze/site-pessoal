@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teste de tato</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/estilo.css?v=3">
+<style>
+  .teste { display: block; width: 100%; text-align: left; margin-top: 1rem; }
+  .direto { display: flex; align-items: center; gap: .9rem; min-height: 4.75rem;
+            padding: .95rem .8rem; border-bottom: 1px solid var(--borda); }
+  .direto input { width: 3.25rem; height: 2rem; }
+  .laudo { font-family: var(--mono); font-size: 1rem; color: var(--tinta-2); margin-top: 1.5rem;
+           padding-top: 1rem; border-top: 1px solid var(--filete); line-height: 1.6; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+
+<main>
+  <div class="capa">
+    <p class="orgao">Diagnóstico</p>
+    <h1>Tato</h1>
+    <p class="sub">Três testes para saber se este aparelho vibra na web</p>
+  </div>
+
+  <div class="quadro">
+    <div class="direto">
+      <label><input type="checkbox" switch></label>
+      <span><b>1. Switch de verdade</b><br>toque no interruptor aqui do lado</span>
+    </div>
+  </div>
+
+  <button class="cita teste" id="t2">2. switch alternado por código</button>
+  <button class="cita teste" id="t3">3. navigator.vibrate(30)</button>
+  <button class="cita teste" id="t4">4. vibrate em padrão longo</button>
+
+  <p class="laudo" id="laudo"></p>
+</main>
+
+<label class="tatil" aria-hidden="true"><input type="checkbox" switch tabindex="-1"></label>
+
+<script>
+  const laudo = document.getElementById('laudo');
+  const oculto = document.querySelector('.tatil');
+  const linhas = [
+    'vibrate na API: ' + (('vibrate' in navigator) ? 'existe' : 'não existe'),
+    'switch entendido: ' + (CSS.supports('appearance', 'auto') && document.querySelector('input[switch]').matches(':is(input)') ? 'atributo aceito no HTML' : 'atributo ignorado'),
+    'toque grosso: ' + (matchMedia('(hover: none)').matches ? 'sim' : 'não'),
+    navigator.userAgent
+  ];
+  laudo.textContent = linhas.join('\n');
+  laudo.style.whiteSpace = 'pre-line';
+
+  const marca = (b, txt) => { const o = b.textContent; b.textContent = txt; setTimeout(() => b.textContent = o, 1400); };
+
+  document.getElementById('t2').addEventListener('click', e => {
+    oculto.click();
+    marca(e.currentTarget, '2. disparado');
+  });
+  document.getElementById('t3').addEventListener('click', e => {
+    const r = navigator.vibrate ? navigator.vibrate(30) : 'sem API';
+    marca(e.currentTarget, '3. retorno: ' + r);
+  });
+  document.getElementById('t4').addEventListener('click', e => {
+    const r = navigator.vibrate ? navigator.vibrate([40, 60, 120]) : 'sem API';
+    marca(e.currentTarget, '4. retorno: ' + r);
+  });
+</script>
+</body>
+</html>

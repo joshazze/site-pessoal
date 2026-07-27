@@ -1,3 +1,16 @@
+/* diagnóstico sob demanda: jadistel.com/?debug mostra o que o dedo acerta e não navega */
+const DEBUG = location.search.includes('debug');
+const dizer = (() => {
+  if (!DEBUG) return () => {};
+  const caixa = document.createElement('pre');
+  caixa.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99;margin:0;padding:10px;'
+    + 'max-height:45vh;overflow:auto;background:#000;color:#0f0;font:12px/1.45 ui-monospace,monospace;'
+    + 'white-space:pre-wrap';
+  addEventListener('DOMContentLoaded', () => document.body.append(caixa));
+  addEventListener('error', e => { caixa.textContent += '\nERRO: ' + e.message + ' @' + e.lineno; });
+  return txt => { caixa.textContent += txt + '\n'; caixa.scrollTop = caixa.scrollHeight; };
+})();
+
 /* o documento não espera o toque: a hora corre, o quadro respira e o GitHub reporta sozinho */
 
 const MESES = ['jan.','fev.','mar.','abr.','maio','jun.','jul.','ago.','set.','out.','nov.','dez.'];
@@ -248,6 +261,8 @@ if (bib) bib.addEventListener('click', () => copiar(bib,
 
 const tatil = matchMedia('(hover: none)').matches;
 
+dizer('hover:none = ' + tatil + ' | body.curta = ' + document.body.classList.contains('curta'));
+
 if (tatil && document.body.classList.contains('curta')) {
   const ENCHE = 340;
 
@@ -264,11 +279,19 @@ if (tatil && document.body.classList.contains('curta')) {
     toque.tabIndex = -1;
     toque.setAttribute('aria-hidden', 'true');
     celula.append(toque);
+    dizer('linha embrulhada: ' + linha.querySelector('.reg').textContent);
 
     let indo = false;
 
+    if (DEBUG) {
+      celula.addEventListener('pointerdown', e => dizer('pointerdown alvo=' + e.target.tagName
+        + '.' + (e.target.className || '') + ' tipo=' + e.pointerType));
+      toque.addEventListener('change', () => dizer('switch alternou: tátil deveria ter saído'));
+    }
+
     /* nada de preventDefault aqui: cancelar a alternância do switch mata o tátil */
     celula.addEventListener('click', e => {
+      dizer('click alvo=' + e.target.tagName + ' detail=' + e.detail + ' indo=' + indo);
       if (e.detail === 0) return;
       if (indo) return;
       indo = true;
@@ -283,7 +306,8 @@ if (tatil && document.body.classList.contains('curta')) {
       linha.style.setProperty('--dur', ENCHE + 'ms');
       linha.style.setProperty('--enche', '1');
 
-      setTimeout(() => { location.href = linha.href; }, ENCHE);
+      dizer('animando, abriria ' + linha.getAttribute('href'));
+      setTimeout(() => { if (!DEBUG) location.href = linha.href; else { indo = false; dizer('(navegação suspensa pelo debug)'); } }, ENCHE);
     });
 
     /* Android continua com a API de verdade, que o iOS não tem */

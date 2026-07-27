@@ -242,14 +242,16 @@ if (bib) bib.addEventListener('click', () => copiar(bib,
   + '}',
   'copiar BibTeX'));
 
-/* 7. no celular o link pede firmeza: treme ao encostar, enche o marca-texto e só abre no fim */
+/* 7. no celular o clique treme, enche a linha e só então abre. sem segurar: o toque longo do
+   iOS é do sistema (menu de preview) e não vale a pena disputar */
 
 const tatil = matchMedia('(hover: none)').matches;
 
 if (tatil && document.body.classList.contains('curta')) {
-  const ESPERA = 380;
+  const ENCHE = 340;
 
-  /* o iOS não implementa navigator.vibrate; alternar um switch nativo dispara o tátil do sistema */
+  /* o iOS não tem navigator.vibrate: alternar um switch nativo dentro do gesto dispara o tátil.
+     precisa estar renderizado de verdade, então vai para fora da tela, sem opacity nem clip. */
   const rotulo = document.createElement('label');
   rotulo.className = 'tatil';
   rotulo.setAttribute('aria-hidden', 'true');
@@ -262,34 +264,39 @@ if (tatil && document.body.classList.contains('curta')) {
 
   const tremer = forca => {
     try { if (navigator.vibrate) navigator.vibrate(forca); } catch (_) {}
-    rotulo.click();
+    try { rotulo.click(); } catch (_) {}
   };
 
   for (const linha of document.querySelectorAll('.linha[href]')) {
-    let conta = null;
+    let indo = false;
 
-    const soltar = () => {
-      clearTimeout(conta);
-      conta = null;
-      linha.classList.remove('segurando');
-    };
+    linha.addEventListener('click', e => {
+      if (e.detail === 0) return;   /* teclado abre direto, sem espetáculo */
+      e.preventDefault();
+      if (indo) return;
+      indo = true;
 
-    linha.addEventListener('pointerdown', e => {
-      if (e.pointerType === 'mouse') return;
-      tremer(10);
-      linha.classList.add('segurando');
-      conta = setTimeout(() => {
-        soltar();
-        tremer(26);
-        location.href = linha.href;
-      }, ESPERA);
+      tremer(18);
+      linha.classList.remove('viva', 'saindo');
+      linha.classList.add('tocando');
+
+      /* fixa o zero, força o reflow e só então enche: sem isso a transição não roda */
+      linha.style.setProperty('--dur', '0ms');
+      linha.style.setProperty('--enche', '0');
+      void linha.offsetWidth;
+      linha.style.setProperty('--dur', ENCHE + 'ms');
+      linha.style.setProperty('--enche', '1');
+
+      setTimeout(() => { location.href = linha.href; }, ENCHE);
     });
-
-    for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) {
-      linha.addEventListener(ev, soltar);
-    }
-
-    /* o toque nunca navega sozinho; teclado (detail 0) segue direto */
-    linha.addEventListener('click', e => { if (e.detail !== 0) e.preventDefault(); });
   }
+
+  /* voltar pelo histórico não pode achar a linha cheia */
+  addEventListener('pageshow', () => {
+    for (const l of document.querySelectorAll('.linha.tocando')) {
+      l.classList.remove('tocando');
+      l.style.removeProperty('--enche');
+      l.style.removeProperty('--dur');
+    }
+  });
 }

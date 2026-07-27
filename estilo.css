@@ -266,10 +266,19 @@ p + p { margin-top: .55rem; }
   transition: transform .6s cubic-bezier(.22, 1, .36, 1);
 }
 
-.linha.viva::before, .linha:active::before { transform: scaleX(1); }
+.linha.viva::before { transform: scaleX(1); }
 
-/* segurar o dedo enche a linha em 0,38s: é o progresso do toque, e no fim o link abre */
-.linha.segurando::before { transition: transform .38s linear; transform: scaleX(1); }
+/* no dedo, quem manda no preenchimento é a animação do clique, não o :active */
+@media (hover: hover) {
+  .linha:active::before { transform: scaleX(1); }
+}
+
+/* toque: a linha enche como barra de progresso e o link abre no fim. vence as outras regras */
+.linha.tocando::before {
+  transform-origin: 0 50%;
+  transform: scaleX(var(--enche, 0));
+  transition: transform var(--dur, 620ms) linear;
+}
 
 @media (hover: none) {
   body.curta .linha {
@@ -279,14 +288,13 @@ p + p { margin-top: .55rem; }
   }
 }
 
-/* alvo do retorno tátil do iOS, fora da vista e fora do fluxo */
+/* alvo do retorno tátil do iOS: precisa ser renderizado de verdade, só que fora da tela */
 .tatil {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-  clip-path: inset(50%);
+  position: fixed;
+  top: -120px;
+  left: -120px;
+  width: 24px;
+  height: 24px;
 }
 .linha.saindo::before { transform-origin: 100% 50%; transform: scaleX(0); }
 .linha.morta::before { display: none; }

@@ -225,6 +225,7 @@ p + p { margin-top: .55rem; }
   border-bottom: 1px solid var(--borda);
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: background .3s ease;
 }
 
@@ -266,6 +267,27 @@ p + p { margin-top: .55rem; }
 }
 
 .linha.viva::before, .linha:active::before { transform: scaleX(1); }
+
+/* segurar o dedo enche a linha em 0,38s: é o progresso do toque, e no fim o link abre */
+.linha.segurando::before { transition: transform .38s linear; transform: scaleX(1); }
+
+@media (hover: none) {
+  body.curta .linha {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* alvo do retorno tátil do iOS, fora da vista e fora do fluxo */
+.tatil {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  clip-path: inset(50%);
+}
 .linha.saindo::before { transform-origin: 100% 50%; transform: scaleX(0); }
 .linha.morta::before { display: none; }
 

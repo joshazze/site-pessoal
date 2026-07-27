@@ -241,3 +241,55 @@ if (bib) bib.addEventListener('click', () => copiar(bib,
   + '  urldate      = {' + new Date().toISOString().slice(0, 10) + '}\n'
   + '}',
   'copiar BibTeX'));
+
+/* 7. no celular o link pede firmeza: treme ao encostar, enche o marca-texto e só abre no fim */
+
+const tatil = matchMedia('(hover: none)').matches;
+
+if (tatil && document.body.classList.contains('curta')) {
+  const ESPERA = 380;
+
+  /* o iOS não implementa navigator.vibrate; alternar um switch nativo dispara o tátil do sistema */
+  const rotulo = document.createElement('label');
+  rotulo.className = 'tatil';
+  rotulo.setAttribute('aria-hidden', 'true');
+  const chave = document.createElement('input');
+  chave.type = 'checkbox';
+  chave.setAttribute('switch', '');
+  chave.tabIndex = -1;
+  rotulo.append(chave);
+  document.body.append(rotulo);
+
+  const tremer = forca => {
+    try { if (navigator.vibrate) navigator.vibrate(forca); } catch (_) {}
+    rotulo.click();
+  };
+
+  for (const linha of document.querySelectorAll('.linha[href]')) {
+    let conta = null;
+
+    const soltar = () => {
+      clearTimeout(conta);
+      conta = null;
+      linha.classList.remove('segurando');
+    };
+
+    linha.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse') return;
+      tremer(10);
+      linha.classList.add('segurando');
+      conta = setTimeout(() => {
+        soltar();
+        tremer(26);
+        location.href = linha.href;
+      }, ESPERA);
+    });
+
+    for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) {
+      linha.addEventListener(ev, soltar);
+    }
+
+    /* o toque nunca navega sozinho; teclado (detail 0) segue direto */
+    linha.addEventListener('click', e => { if (e.detail !== 0) e.preventDefault(); });
+  }
+}

@@ -289,10 +289,11 @@ if (tatil && document.body.classList.contains('curta')) {
       toque.addEventListener('change', () => dizer('switch alternou: tátil deveria ter saído'));
     }
 
-    /* nada de preventDefault aqui: cancelar a alternância do switch mata o tátil */
+    /* nada de preventDefault aqui: cancelar a alternância do switch mata o tátil.
+       e nada de checar e.detail: no iOS o clique que vem de um checkbox chega com detail 0,
+       igualzinho ao clique de teclado, e a guarda antiga matava todo toque. */
     celula.addEventListener('click', e => {
       dizer('click alvo=' + e.target.tagName + ' detail=' + e.detail + ' indo=' + indo);
-      if (e.detail === 0) return;
       if (indo) return;
       indo = true;
 

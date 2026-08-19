@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/forum.css?v=1">
+<link rel="stylesheet" href="/forum.css?v=2">
 </head>
 <body>
 
@@ -36,7 +36,19 @@
 
   <p class="trilha"><a href="/blog">Índice do fórum</a> » Projetos</p>
 
-  <table class="quadro">
+  <form class="controles" id="controles" hidden>
+    <label for="filtro">Mostrar tópicos:</label>
+    <select id="filtro">
+          <option value="">Todos os tópicos</option>
+          <optgroup label="Competência"><option value="backend">backend (3)</option><option value="criptografia aplicada">criptografia aplicada (2)</option><option value="design de interacao">design de interação (2)</option><option value="lideranca">liderança (2)</option><option value="pitch">pitch (2)</option><option value="produto">produto (4)</option><option value="pwa">PWA (3)</option></optgroup>
+          <optgroup label="Stack"><option value="bash">Bash (2)</option><option value="docker">Docker (2)</option><option value="flask">Flask (2)</option><option value="javascript">JavaScript (2)</option><option value="markdown">Markdown (2)</option><option value="postgresql">PostgreSQL (3)</option><option value="python">Python (2)</option></optgroup>
+    </select>
+    <label for="busca">Pesquisar:</label>
+    <input type="search" id="busca" autocomplete="off" spellcheck="false">
+    <button type="submit" class="botao">Ir</button>
+  </form>
+
+  <table class="quadro" id="tabela">
     <thead>
       <tr><th class="cat" colspan="3">Projetos</th></tr>
       <tr>
@@ -46,7 +58,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr data-busca="vies linguistico em material didatico gerado por llm iniciacao cientifica, coautoria com o prof. osmar ventura gomes 18 ago 2026 python pandas anova ollama embeddings pesquisa estatistica desenho experimental escrita cientifica" data-tags="python|pandas|anova|ollama|embeddings|pesquisa|estatistica|desenho experimental|escrita cientifica">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/artigo-ic">Viés linguístico em material didático gerado por LLM</a>
           <span class="resumo">Iniciação científica, coautoria com o Prof. Osmar Ventura Gomes</span>
@@ -55,7 +67,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">18 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="liga academica ibbot cofundacao e direcao da liga de robotica do ibmec bh 17 ago 2026 esp32 inmp441 c++ eletronica fabricacao lideranca hardware gestao de projeto orcamento" data-tags="esp32|inmp441|c++|eletronica|fabricacao|lideranca|hardware|gestao de projeto|orcamento">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/ibbot">Liga Acadêmica IbBot</a>
           <span class="resumo">Cofundação e direção da liga de robótica do Ibmec BH</span>
@@ -64,16 +76,16 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">17 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="liga academica ibtech diretoria academica na chapa unificada: trilhas de formacao, revisao das entregas e credenciais verificaveis 16 ago 2026 node.js ethereum open badges 3.0 blockcerts sha-256 lideranca criptografia aplicada revisao de codigo processo" data-tags="node.js|ethereum|open badges 3.0|blockcerts|sha-256|lideranca|criptografia aplicada|revisao de codigo|processo">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/liga-ibtech">Liga Acadêmica IbTech</a>
-          <span class="resumo">Vice-presidência: trilhas de formação, revisão das entregas e credenciais verificáveis</span>
+          <span class="resumo">Diretoria acadêmica na chapa unificada: trilhas de formação, revisão das entregas e credenciais verificáveis</span>
           <span class="marcas"><span class="marca-item">Node.js</span><span class="marca-item">Ethereum</span><span class="marca-item">Open Badges 3.0</span><span class="marca-item">Blockcerts</span><span class="marca-item">SHA-256</span></span>
         </td>
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">16 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="ibsala reserva e consulta de salas do ibmec bh, no ar para os alunos 15 ago 2026 flask docker postgresql supabase web push cloudflare pages backend pwa banco de dados seguranca deploy produto" data-tags="flask|docker|postgresql|supabase|web push|cloudflare pages|backend|pwa|banco de dados|seguranca|deploy|produto">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/ibsala">ibsala</a>
           <span class="resumo">Reserva e consulta de salas do Ibmec BH, no ar para os alunos</span>
@@ -82,7 +94,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">15 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="blank page plugin do obsidian que tira o atrito entre querer escrever e estar escrevendo 14 ago 2026 typescript obsidian api esbuild produto ferramenta de autor design de interacao" data-tags="typescript|obsidian api|esbuild|produto|ferramenta de autor|design de interacao">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/blank-page">Blank Page</a>
           <span class="resumo">Plugin do Obsidian que tira o atrito entre querer escrever e estar escrevendo</span>
@@ -91,7 +103,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">14 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="fernando pessoa um heteronimo para cada ferramenta: personas de ia que persistem e ativam sozinhas 11 ago 2026 bash hooks claude code markdown arquitetura de agentes design de sistema escrita tecnica" data-tags="bash|hooks|claude code|markdown|arquitetura de agentes|design de sistema|escrita tecnica">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/fernando-pessoa">Fernando Pessoa</a>
           <span class="resumo">Um heterônimo para cada ferramenta: personas de IA que persistem e ativam sozinhas</span>
@@ -100,7 +112,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">11 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="cerebro memoria permanente para assistente de ia, com o custo de contexto medido 09 ago 2026 bash jq obsidian markdown arquitetura analise de grafos medicao de desempenho documentacao" data-tags="bash|jq|obsidian|markdown|arquitetura|analise de grafos|medicao de desempenho|documentacao">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/cerebro">Cérebro</a>
           <span class="resumo">Memória permanente para assistente de IA, com o custo de contexto medido</span>
@@ -109,7 +121,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">09 Ago 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="atletica ibmec bh site institucional, catalogo com reservas e gestao de estoque 24 jul 2026 flask jinja htmx postgresql docker backend produto operacao entrega com prazo" data-tags="flask|jinja|htmx|postgresql|docker|backend|produto|operacao|entrega com prazo">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/atletica">Atlética Ibmec BH</a>
           <span class="resumo">Site institucional, catálogo com reservas e gestão de estoque</span>
@@ -118,7 +130,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">24 Jul 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="dados cifrados no aparelho um padrao de app pessoal que nao tem servidor para vazar, com o myco como caso 02 jun 2026 webcrypto pbkdf2 aes-gcm indexeddb vite criptografia aplicada privacidade por desenho pwa" data-tags="webcrypto|pbkdf2|aes-gcm|indexeddb|vite|criptografia aplicada|privacidade por desenho|pwa">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/cifra-local">Dados cifrados no aparelho</a>
           <span class="resumo">Um padrão de app pessoal que não tem servidor para vazar, com o myco como caso</span>
@@ -127,7 +139,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">02 Jun 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="anatomia de tres choques hackathon nacional ibmec 2026, equipe os terriveis, etapa belo horizonte 22 mai 2026 python statsmodels prophet scikit-learn var weasyprint econometria analise de dados pitch trabalho em equipe" data-tags="python|statsmodels|prophet|scikit-learn|var|weasyprint|econometria|analise de dados|pitch|trabalho em equipe">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/hackathon-ibmec-2026">Anatomia de três choques</a>
           <span class="resumo">Hackathon Nacional Ibmec 2026, equipe Os Terríveis, etapa Belo Horizonte</span>
@@ -136,7 +148,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">22 Mai 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="figurinhas copa 2026 pwa para acompanhar o album, com ocr lendo o codigo da figurinha na foto 20 mai 2026 javascript capacitor ocr fastapi postgresql caddy pwa visao computacional aplicada backend ios" data-tags="javascript|capacitor|ocr|fastapi|postgresql|caddy|pwa|visao computacional aplicada|backend|ios">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/figurinhas-copa">Figurinhas Copa 2026</a>
           <span class="resumo">PWA para acompanhar o álbum, com OCR lendo o código da figurinha na foto</span>
@@ -145,7 +157,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">20 Mai 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="cartao de visita sem framework um quarto de chale pixelado em primeira pessoa, zero dependencia 03 mai 2026 html5 css3 javascript vanilla frontend acessibilidade design de interacao" data-tags="html5|css3|javascript|vanilla|frontend|acessibilidade|design de interacao">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/cartao-de-visita">Cartão de visita sem framework</a>
           <span class="resumo">Um quarto de chalé pixelado em primeira pessoa, zero dependência</span>
@@ -154,7 +166,7 @@
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">03 Mai 2026</td>
       </tr>
-      <tr>
+      <tr data-busca="carreirai startup de orientacao de carreira com ia, cofundada, vencedora e encerrada 08 fev 2026 llm assistente conversacional prototipagem produto validacao com usuario pitch cofundacao" data-tags="llm|assistente conversacional|prototipagem|produto|validacao com usuario|pitch|cofundacao">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/carreirai">CarreirAI</a>
           <span class="resumo">Startup de orientação de carreira com IA, cofundada, vencedora e encerrada</span>
@@ -167,7 +179,7 @@
   </table>
 
   <p class="rodape-info">
-    <span>13 tópicos no total</span>
+    <span id="contagem" aria-live="polite">13 tópicos no total</span>
     <span>Página <b>1</b> de <b>1</b></span>
   </p>
 
@@ -176,6 +188,8 @@
   </div>
 
 </div>
+
+<script src="/forum.js?v=2"></script>
 
 </body>
 </html>

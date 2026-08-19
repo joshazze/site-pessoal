@@ -36,7 +36,9 @@
 
   <p class="trilha"><a href="/blog">Índice do fórum</a> » Projetos</p>
 
-  <table class="quadro">
+{{FILTRO}}
+
+  <table class="quadro" id="tabela">
     <thead>
       <tr><th class="cat" colspan="3">Projetos</th></tr>
       <tr>
@@ -51,7 +53,7 @@
   </table>
 
   <p class="rodape-info">
-    <span>{{CONTAGEM}} no total</span>
+    <span id="contagem" aria-live="polite">{{CONTAGEM}} no total</span>
     <span>Página <b>1</b> de <b>1</b></span>
   </p>
 
@@ -60,6 +62,8 @@
   </div>
 
 </div>
+
+<script src="/forum.js?v={{V}}"></script>
 
 </body>
 </html>

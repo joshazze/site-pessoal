@@ -109,6 +109,44 @@ a:focus-visible { outline: 2px solid var(--cabeca); outline-offset: 1px; }
 .trilha { margin: 0 0 8px; font-size: 11px; font-weight: bold; color: var(--tinta-2); }
 .trilha a { font-weight: bold; }
 
+/* ---------- barra de filtro e busca ---------- */
+
+/* fica escondida sem JavaScript: controle que não controla nada é pior que
+   controle nenhum. o forum.js revela ao ligar */
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+  margin: 0 0 8px;
+  padding: 7px 9px;
+  border: 1px solid var(--moldura);
+  background: var(--cat);
+  font-size: 11px;
+}
+
+.controles[hidden] { display: none; }
+.controles label { font-weight: bold; color: var(--tinta); }
+
+.controles select,
+.controles input {
+  padding: 2px 4px;
+  border: 1px solid var(--moldura);
+  border-top-color: #8f9aa3;
+  border-left-color: #8f9aa3;
+  background: var(--linha-a);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 11px;
+}
+
+.controles input { flex: 1 1 9rem; min-width: 0; }
+.controles select { max-width: 100%; }
+.controles select:focus-visible,
+.controles input:focus-visible { outline: 2px solid var(--cabeca); outline-offset: 1px; }
+
+.controles .botao { padding: 2px 10px; }
+
 /* ---------- a tabela, que é o fórum inteiro ---------- */
 
 .quadro {
@@ -137,7 +175,14 @@ a:focus-visible { outline: 2px solid var(--cabeca); outline-offset: 1px; }
 }
 
 .quadro td { padding: 7px 8px; background: var(--linha-a); vertical-align: top; }
-.quadro tr:nth-child(even) td { background: var(--linha-b); }
+
+/* sem script a zebra é posicional. com script quem pinta é a classe, porque
+   nth-child conta linha escondida e filtrar deixaria duas claras coladas */
+.quadro:not(.js) tbody tr:nth-child(even) td { background: var(--linha-b); }
+.quadro.js tbody tr.par td { background: var(--linha-b); }
+
+.quadro tr[hidden] { display: none; }
+.quadro .nada td { text-align: center; color: var(--tinta-2); font-style: italic; padding: 16px 8px; }
 
 /* ---------- linha de tópico ---------- */
 

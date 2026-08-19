@@ -14,6 +14,8 @@ injetar tag.
 import html
 import re
 import sys
+import unicodedata
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -22,7 +24,11 @@ POSTS = RAIZ / "posts"
 MODELO = RAIZ / "modelo"
 SAIDA_POSTS = RAIZ / "blog"
 
-VERSAO = "1"  # cache buster do forum.css
+VERSAO = "2"  # cache buster do forum.css e do forum.js
+
+# tag só entra no select de filtro se aparecer em pelo menos tantos posts:
+# filtrar para um resultado só é trabalho da busca, não do filtro
+MIN_FILTRO = 2
 
 MES_FORUM = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
              "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
@@ -220,10 +226,22 @@ def marcas(itens):
     )
 
 
+def sem_acento(txt):
+    """busca não pode depender de o visitante digitar o acento certo."""
+    nfd = unicodedata.normalize("NFD", str(txt).lower())
+    return "".join(c for c in nfd if unicodedata.category(c) != "Mn")
+
+
 def linha_topico(p):
     """uma linha da tabela do índice. sem coluna de respostas e sem 'última mensagem':
-    as duas gritam vazio ou abandono, que é o que não pode aparecer."""
-    return f"""      <tr>
+    as duas gritam vazio ou abandono, que é o que não pode aparecer.
+
+    data-busca e data-tags são o índice de busca da página: já vêm normalizados
+    daqui, para o JS do cliente só comparar string."""
+    tudo = [p["titulo"], p["sub"], data_forum(p["data"])] + p["stack"] + p["competencias"]
+    busca = html.escape(" ".join(sem_acento(t) for t in tudo), quote=True)
+    tags = html.escape("|".join(sem_acento(t) for t in p["stack"] + p["competencias"]), quote=True)
+    return f"""      <tr data-busca="{busca}" data-tags="{tags}">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/{p['slug']}">{html.escape(p['titulo'], quote=True)}</a>
           <span class="resumo">{html.escape(p['sub'], quote=True)}</span>
@@ -232,6 +250,36 @@ def linha_topico(p):
         <td class="autor esconde-estreito">joshazze</td>
         <td class="data esconde-estreito">{data_forum(p['data'])}</td>
       </tr>"""
+
+
+def bloco_filtro(posts):
+    """o select de filtro sai dos dados, não de uma lista escrita à mão: tag que
+    some dos posts some do filtro sozinha."""
+    def opcoes(chave):
+        conta = Counter(t for p in posts for t in p[chave])
+        vivos = sorted((t for t, n in conta.items() if n >= MIN_FILTRO), key=sem_acento)
+        return "".join(
+            f'<option value="{html.escape(sem_acento(t), quote=True)}">'
+            f"{html.escape(t, quote=True)} ({conta[t]})</option>"
+            for t in vivos
+        )
+
+    comp, pilha = opcoes("competencias"), opcoes("stack")
+    grupos = ""
+    if comp:
+        grupos += f'\n          <optgroup label="Competência">{comp}</optgroup>'
+    if pilha:
+        grupos += f'\n          <optgroup label="Stack">{pilha}</optgroup>'
+
+    return f"""  <form class="controles" id="controles" hidden>
+    <label for="filtro">Mostrar tópicos:</label>
+    <select id="filtro">
+          <option value="">Todos os tópicos</option>{grupos}
+    </select>
+    <label for="busca">Pesquisar:</label>
+    <input type="search" id="busca" autocomplete="off" spellcheck="false">
+    <button type="submit" class="botao">Ir</button>
+  </form>"""
 
 
 def bloco_links(p):
@@ -340,6 +388,7 @@ def main():
     indice = preencher(modelo_indice, {
         "V": VERSAO,
         "CONTAGEM": f"{total} tópico" + ("s" if total != 1 else ""),
+        "FILTRO": bloco_filtro(posts),
         "TOPICOS": "\n".join(linha_topico(p) for p in posts),
     })
     (RAIZ / "blog.html").write_text(indice, encoding="utf-8")

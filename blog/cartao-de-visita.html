@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Cartão de visita sem framework</title>
+<meta name="description" content="Cartão de visita sem framework: Um quarto de chalé pixelado em primeira pessoa, zero dependência">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Cartão de visita sem framework :: oqojfr?">
+<meta property="og:description" content="Cartão de visita sem framework: Um quarto de chalé pixelado em primeira pessoa, zero dependência">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/cartao-de-visita">
+<link rel="canonical" href="https://jadistel.com/blog/cartao-de-visita">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Cartão de visita sem framework</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 13</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>03 Mai 2026</b></span>
+            <span>Assunto: <b>Cartão de visita sem framework</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Um quarto de chalé pixelado em primeira pessoa, zero dependência</dd>
+              <dt>Stack</dt><dd><span class="marca-item">HTML5</span><span class="marca-item">CSS3</span><span class="marca-item">JavaScript</span><span class="marca-item">Vanilla</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">frontend</span><span class="marca-item">acessibilidade</span><span class="marca-item">design de interação</span></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/ibtech-projeto01-joshua">joshazze/ibtech-projeto01-joshua</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O enunciado era um cartão de visita pessoal em HTML, CSS e JavaScript puros. Sem framework, sem build.</p>
+<p>Cartão de visita pessoal é o gênero mais gasto da web. Foto redonda, nome grande, três parágrafos sobre paixão por tecnologia, ícones de rede social no rodapé. Todo mundo faz o mesmo, e o resultado é uma página que ninguém lembra dez segundos depois de fechar.</p>
+<p>Eu queria a restrição, não o gênero. Sem framework não é limitação quando a página inteira cabe em três arquivos.</p>
+<h2>O que eu fiz</h2>
+<p>A página é um quarto de chalé pixelado, e você está dentro dele, olhando para a parede.</p>
+<p>Cada seção é uma parte do quarto, e cada parte carrega uma informação que num cartão de visita comum seria um bloco de texto:</p>
+<ul>
+<li><strong>A janela</strong> tem a vista das montanhas e a frase de apresentação, que rotaciona.</li>
+<li><strong>A mesa de estudos</strong> tem um monitor com um terminal rodando <code>whoami</code>, e é ali que ficam o sobre e as competências.</li>
+<li><strong>O mural de cortiça</strong> tem três polaroides, três frases emolduradas e uma TV de tubo.</li>
+<li><strong>A prateleira</strong> tem treze livros, um por marco, e o troféu.</li>
+<li><strong>A mesa de cabeceira</strong> tem luminária, um despertador que marca a hora de verdade, e o contato com botão de copiar.</li>
+</ul>
+<p>A estética é de jogo pixelado, com cor chapada, sombra sólida e uma fonte só na página inteira. O ponto de vista é o que faz a peça funcionar: não é um portfólio sobre alguém, é o quarto de alguém, e você entrou.</p>
+<h2>Como funciona</h2>
+<p>Três decisões técnicas seguram tudo.</p>
+<p>Os dois temas, dia e noite, trocam <strong>apenas variáveis CSS na raiz</strong>. Nenhuma regra é reescrita, nenhuma classe é adicionada em elemento nenhum: o botão troca o valor de uma dúzia de variáveis e a página inteira muda junto, incluindo as sombras. A preferência fica no <code>localStorage</code> e a primeira visita respeita o <code>prefers-color-scheme</code> do sistema.</p>
+<p>A animação de entrada usa <code>IntersectionObserver</code>, não escuta de rolagem. Cada seção ganha a classe de visível uma única vez, quando entra na tela, e o observador para de observar aquela seção. Escutar <code>scroll</code> dispara centenas de vezes por segundo para fazer a mesma conta que o navegador já faz de graça.</p>
+<p>E o modal é o <code>&lt;dialog&gt;</code> nativo com <code>showModal()</code>, o que traz de brinde o foco preso dentro dele, o fechar no Escape e o fundo inerte. Reimplementar isso à mão é onde a maioria dos cartões de visita quebra a navegação por teclado.</p>
+<h2>O que aprendi</h2>
+<p>Foram 237 commits num único dia.</p>
+<p>Não é orgulho, é diagnóstico. Aquilo é o número de vezes que eu mudei um valor, olhei, e mudei de novo, porque pixel art depende de decisões que você não consegue prever no papel: a sombra tem dois ou três pixels, a paleta aguenta o tema noite sem virar borrão, o livro na prateleira lê como livro ou como retângulo colorido. Trabalho visual não se planeja, se itera olhando, e o ciclo tem que custar quase nada para o processo funcionar.</p>
+<p>O que tornou o ciclo barato foi exatamente a ausência de build. Salvar o arquivo e apertar F5 é instantâneo. Com um empacotador no meio, mesmo rápido, cada uma daquelas 237 iterações teria custado alguns segundos e alguma dúvida sobre se o que eu vejo é a versão nova. Multiplicado por 237, a ferramenta que existe para acelerar teria me atrasado.</p>
+<p>Não usar framework não foi obediência ao enunciado. Foi o que fez a peça ficar boa.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Página no ar no GitHub Pages, com repositório público.</li>
+<li>Zero dependência: nada de Bootstrap, Tailwind, jQuery, React, Vue ou Svelte. Uma única fonte externa na página toda.</li>
+<li>HTML semântico com marcação de rede social configurada, <code>&lt;dialog&gt;</code> nativo para o modal e navegação por teclado funcionando sem código extra.</li>
+<li>Dois temas completos com a troca de uma dúzia de variáveis CSS, respeitando a preferência do sistema na primeira visita.</li>
+<li>Cinco seções, treze marcos na prateleira e um despertador que marca a hora certa.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20cartao-de-visita">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/carreirai">&laquo; Tópico anterior: CarreirAI</a></span>
+    <span><a href="/blog/figurinhas-copa">Próximo tópico: Figurinhas Copa 2026 &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

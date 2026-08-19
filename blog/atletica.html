@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Atlética Ibmec BH</title>
+<meta name="description" content="Atlética Ibmec BH: Site institucional, catálogo com reservas e gestão de estoque">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Atlética Ibmec BH :: oqojfr?">
+<meta property="og:description" content="Atlética Ibmec BH: Site institucional, catálogo com reservas e gestão de estoque">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/atletica">
+<link rel="canonical" href="https://jadistel.com/blog/atletica">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Atlética Ibmec BH</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 13</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>24 Jul 2026</b></span>
+            <span>Assunto: <b>Atlética Ibmec BH</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Site institucional, catálogo com reservas e gestão de estoque</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Flask</span><span class="marca-item">Jinja</span><span class="marca-item">HTMX</span><span class="marca-item">PostgreSQL</span><span class="marca-item">Docker</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">backend</span><span class="marca-item">produto</span><span class="marca-item">operação</span><span class="marca-item">entrega com prazo</span></dd>
+              <dt>No ar</dt><dd><a href="https://atleticaibmecbh.com.br">atleticaibmecbh.com.br</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Atlética universitária vende. Camisa, caneca, ingresso de festa, kit de calouro. E vende do jeito que dá: um post no Instagram com a foto do produto, um formulário para o pedido, e uma planilha compartilhada onde alguém da diretoria tenta lembrar quantas camisas tamanho M ainda existem.</p>
+<p>Isso funciona até o dia em que duas pessoas reservam a última peça ao mesmo tempo. Aí o problema deixa de ser de software e vira de constrangimento, porque alguém precisa mandar mensagem cancelando.</p>
+<h2>O que eu fiz</h2>
+<p>Um site que faz as três coisas de uma vez: a página institucional que apresenta a atlética, o catálogo em que o aluno reserva, e o painel em que a diretoria administra o que existe em estoque.</p>
+<p>A pilha é deliberadamente sem graça. Flask com Jinja para as páginas, HTMX para as partes que precisam responder sem recarregar, PostgreSQL para os dados, tudo em Docker. Sem framework de frontend, sem processo de build de JavaScript, sem camada de API separada do servidor que renderiza.</p>
+<h2>Como funciona</h2>
+<p>HTMX é a escolha que carrega o projeto, e ela merece explicação porque é contraintuitiva em 2026.</p>
+<p>Um catálogo com reserva precisa de umas cinco interações que não podem recarregar a página: mudar o tamanho selecionado, atualizar a quantidade, ver o preço mudar, reservar sem perder a rolagem. A resposta padrão hoje é montar um frontend em React ou Svelte, o que traz junto uma API para servir aquele frontend, um build, e a duplicação do modelo de dados nos dois lados.</p>
+<p>Com HTMX o servidor continua devolvendo HTML e o navegador troca só o pedaço que mudou. O modelo de dados vive num lugar só, o Jinja que já renderiza a página também renderiza o fragmento, e não existe passo de build para quebrar. Para um catálogo de dezenas de itens mantido por uma diretoria que troca todo ano, isso é o que decide se o sistema sobrevive à formatura de quem escreveu.</p>
+<h2>O que aprendi</h2>
+<p>O usuário mandou um print e escreveu &quot;GRID CARALHO&quot;.</p>
+<p>Eu tinha acabado de mudar a grade de produtos para três por três, deployado, conferido na máquina, e estava tudo certo. O CSS no servidor era o novo. E o navegador dele insistia em mostrar o layout antigo.</p>
+<p>O template linka o CSS com um <code>?v=</code> fixo, escrito à mão, e eu tinha alterado a folha de estilo sem tocar naquele número. Do ponto de vista do navegador, o endereço era idêntico ao de ontem, então não havia motivo nenhum para baixar de novo. O arquivo estava correto no servidor e errado na tela, que é a pior combinação possível para depurar, porque tudo o que você verifica dá certo.</p>
+<p>A lição não é sobre cache, é sobre onde a verificação termina. Eu tinha conferido o deploy e chamado aquilo de pronto. Deploy conferido no servidor não é mudança entregue: entregue é o que aparece na tela de quem usa, num navegador que já esteve ali antes. Desde então, mexer em CSS e bumpar a versão do asset é uma edição só, nunca duas.</p>
+<p>E o print continua sendo o relatório de bug mais eficiente que eu já recebi.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Site institucional, catálogo com reservas e painel de estoque no ar em <code>atleticaibmecbh.com.br</code>, servindo o corpo discente do Ibmec BH.</li>
+<li>Reserva com controle de estoque no banco, o que elimina a dupla reserva do mesmo item que a planilha compartilhada permitia.</li>
+<li>Zero dependência de frontend e zero passo de build, com o mesmo template servindo página completa e fragmento.</li>
+<li>Roda em contêiner na mesma máquina que hospeda outros dois sistemas das entidades acadêmicas, dividindo custo de infraestrutura.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20atletica">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/cifra-local">&laquo; Tópico anterior: Dados cifrados no aparelho</a></span>
+    <span><a href="/blog/cerebro">Próximo tópico: Cérebro &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

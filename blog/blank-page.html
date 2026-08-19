@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Blank Page</title>
+<meta name="description" content="Blank Page: Plugin do Obsidian que tira o atrito entre querer escrever e estar escrevendo">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Blank Page :: oqojfr?">
+<meta property="og:description" content="Blank Page: Plugin do Obsidian que tira o atrito entre querer escrever e estar escrevendo">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/blank-page">
+<link rel="canonical" href="https://jadistel.com/blog/blank-page">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Blank Page</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 13</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>14 Ago 2026</b></span>
+            <span>Assunto: <b>Blank Page</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Plugin do Obsidian que tira o atrito entre querer escrever e estar escrevendo</dd>
+              <dt>Stack</dt><dd><span class="marca-item">TypeScript</span><span class="marca-item">Obsidian API</span><span class="marca-item">esbuild</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">produto</span><span class="marca-item">ferramenta de autor</span><span class="marca-item">design de interação</span></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/obsidian-blank-page">joshazze/obsidian-blank-page</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O professor começou a falar e eu preciso despejar aquilo em algum lugar, agora.</p>
+<p>Esse é o problema inteiro. No Obsidian, o caminho entre &quot;preciso anotar isso&quot; e &quot;estou anotando&quot; passa por criar a nota, decidir o nome, arrastar para a pasta certa e lembrar de marcar. São quatro decisões antes da primeira palavra, e são quatro decisões que acontecem exatamente quando a sua atenção deveria estar na aula.</p>
+<p>A saída óbvia é um template. Só que template resolve o corpo da nota, não o caminho até ela: você ainda tem que abrir o seletor, achar o template e responder o modal.</p>
+<h2>O que eu fiz</h2>
+<p>Um plugin que faz uma coisa. Um clique, e a nota já existe nomeada, arquivada e marcada.</p>
+<p>Clique com o botão direito na pasta <code>Física</code> e sai <code>Física 2026-07-26.md</code> dentro dela. A mesma ação está na barra lateral, num comando que aceita atalho de teclado, e numa URI (<code>obsidian://blank-page?vault=...&amp;profile=...</code>), o que permite um atalho global do sistema abrir o Obsidian direto numa nota nova, mesmo com o app fechado.</p>
+<p>Tudo é perfil, então o plugin se dobra ao fluxo de quem usa em vez do contrário: pasta de destino, padrão de nome com marcadores, template curto, e uma agenda opcional no formato <code>mon 08:00-11:40 &gt; Courses/Data Engineering</code>, que faz o perfil da aula ficar ativo sozinho no horário da aula.</p>
+<h2>Como funciona</h2>
+<p>Duas decisões de desenho carregam o plugin.</p>
+<p>A primeira é sequestrar o &quot;Nova nota&quot; nativo. Uma nota vazia criada dentro de uma pasta que pertence a um perfil recebe o nome e o template automaticamente. Não há nada novo para aprender, o gesto continua sendo o de sempre.</p>
+<p>A segunda é a fila. Toda captura pode ser registrada num arquivo de entrada, uma linha por nota, e é isso que separa o material cru do material tratado. Depois, numa passada calma, você (ou um script, ou um agente) sabe exatamente o que ainda está por limpar. As linhas são wikilinks, então sobrevivem a renomear a nota, e a fila não apodrece.</p>
+<p>E existe o caminho de volta, que quase todo sistema de captura esquece: um item no menu de qualquer nota devolve ela para a fila, tirando a tag de pronta, limpando as propriedades que a revisão escreveu e recolocando a linha no arquivo de entrada. Selecione dez notas no explorador e ele reabre as dez.</p>
+<h2>O que aprendi</h2>
+<p>Templater e QuickAdd fazem isso. Os dois são excelentes, e os dois são maiores que este problema.</p>
+<p>Essa frase está no README porque foi a decisão mais difícil do projeto. Templater é um motor de templates, QuickAdd é um sistema de macros. Com qualquer um deles você constrói o Blank Page inteiro, depois de aprender o motor. A pergunta que eu tive que responder é se existe espaço para uma ferramenta que faz um pedaço do que os grandes fazem e não pede estudo nenhum.</p>
+<p>Existe, e o motivo é o momento de uso. Uma ferramenta que você configura no domingo pode exigir aprendizado. Uma ferramenta que você usa quando o professor já começou a falar não pode exigir nada. O custo de aprender uma linguagem de template não aparece no dia em que você aprende, aparece toda vez que você precisa mexer nela sob pressão.</p>
+<p>Escopo pequeno defendido é funcionalidade, não limitação.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Plugin publicado em repositório público sob licença MIT, instalável por BRAT enquanto não entra na loja da comunidade.</li>
+<li>Cinco pontos de entrada para a mesma ação: menu de pasta, barra lateral, comando com atalho, URI de sistema e o &quot;Nova nota&quot; nativo sequestrado.</li>
+<li>Onze marcadores de nome disponíveis, entre data, hora, pasta, contador e título.</li>
+<li>A fila de captura fecha o ciclo nos dois sentidos, com reabertura em lote de várias notas ao mesmo tempo.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20blank-page">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/fernando-pessoa">&laquo; Tópico anterior: Fernando Pessoa</a></span>
+    <span><a href="/blog/ibsala">Próximo tópico: ibsala &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

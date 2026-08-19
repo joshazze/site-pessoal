@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Dados cifrados no aparelho</title>
+<meta name="description" content="Dados cifrados no aparelho: Um padrão de app pessoal que não tem servidor para vazar, com o myco como caso">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Dados cifrados no aparelho :: oqojfr?">
+<meta property="og:description" content="Dados cifrados no aparelho: Um padrão de app pessoal que não tem servidor para vazar, com o myco como caso">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/cifra-local">
+<link rel="canonical" href="https://jadistel.com/blog/cifra-local">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Dados cifrados no aparelho</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 13</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>02 Jun 2026</b></span>
+            <span>Assunto: <b>Dados cifrados no aparelho</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Um padrão de app pessoal que não tem servidor para vazar, com o myco como caso</dd>
+              <dt>Stack</dt><dd><span class="marca-item">WebCrypto</span><span class="marca-item">PBKDF2</span><span class="marca-item">AES-GCM</span><span class="marca-item">IndexedDB</span><span class="marca-item">Vite</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">criptografia aplicada</span><span class="marca-item">privacidade por desenho</span><span class="marca-item">PWA</span></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/myco">joshazze/myco</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Todo app pessoal começa igual: você quer registrar uma coisa sua, num lugar que seja seu. Plantas, treinos, gastos, o que for.</p>
+<p>E aí vem a pergunta chata. Onde isso mora? A resposta padrão é um banco no servidor, com login e senha, o que significa que agora existe um servidor com os seus dados dentro, e você virou responsável por ele. Backup, atualização de dependência, um dia um vazamento. Para um app que só você usa, isso é uma responsabilidade enorme em troca de nada.</p>
+<p>A outra resposta padrão é guardar tudo em claro no navegador, o que resolve o servidor e cria outro problema: qualquer script na página, qualquer extensão, qualquer pessoa com o aparelho na mão lê tudo.</p>
+<h2>O que eu fiz</h2>
+<p>Um padrão que eu usei em mais de um app: os dados nascem cifrados no aparelho e nunca saem dele em claro. Não existe conta, não existe servidor, e não existe nada meu para vazar, porque eu não tenho nada.</p>
+<p>O caso nomeado aqui é o <strong>myco</strong>, um app de jardinagem que guarda vasos, setores, adubação e compostagem. É público, é bobo, e é justamente por ser bobo que serve de exemplo: se o padrão vale a pena para um caderno de plantas, ele vale para qualquer coisa. O mesmo módulo de criptografia roda hoje em outro app pessoal meu, com dados bem menos triviais.</p>
+<h2>Como funciona</h2>
+<p>A senha nunca é guardada e nunca vira chave diretamente.</p>
+<p>Ela passa por PBKDF2 com 250.000 iterações e SHA-256, junto com um sal aleatório gerado na criação da base, e o que sai é uma chave AES-GCM de 256 bits. As iterações existem para tornar cara a tentativa de adivinhação: quem capturar a base cifrada precisa pagar 250 mil derivações por palpite, o que transforma um ataque de dicionário de minutos em algo impraticável.</p>
+<p>Cada gravação é cifrada com AES-GCM e um vetor de inicialização novo, o que dá confidencialidade e integridade na mesma operação: um byte alterado no armazenamento faz a decifragem falhar em vez de devolver lixo silenciosamente. Tudo roda pela WebCrypto do próprio navegador, sem biblioteca de criptografia de terceiro, e o resultado cifrado descansa em IndexedDB.</p>
+<p>Existe um verificador curto gravado junto, cifrado com a mesma chave. Ele serve para dizer &quot;senha errada&quot; na hora de destravar, em vez de tentar decifrar a base inteira e falhar de um jeito confuso.</p>
+<h2>O que aprendi</h2>
+<p>O backup é onde o desenho todo quase morreu.</p>
+<p>Sem servidor, não existe recuperar senha. Se a pessoa esquece, os dados acabaram, e isso não é bug, é a consequência direta da promessa. Foi a parte mais difícil de aceitar, e a que quase me fez colocar um servidor de volta só para ter um &quot;esqueci minha senha&quot; que funciona.</p>
+<p>A saída foi exportar a base cifrada como arquivo, que a pessoa guarda onde quiser. O arquivo é inútil sem a senha, então pode viver no Drive, no e-mail, num pendrive, sem que nada disso vire superfície de ataque. E aí o modelo fica honesto de verdade: o app não protege você de esquecer a senha, e diz isso na cara, em vez de fingir que existe uma porta dos fundos que na prática é a porta da frente de qualquer atacante.</p>
+<p>Segurança que depende de o usuário não errar é teatro. Segurança que declara o que não faz é engenharia.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Padrão em produção em dois apps pessoais, com o mesmo módulo de criptografia compartilhado entre eles.</li>
+<li>PBKDF2 com 250.000 iterações e SHA-256 derivando chave AES-GCM de 256 bits, tudo pela WebCrypto nativa, sem dependência de biblioteca externa de criptografia.</li>
+<li>Zero servidor e zero conta: nenhum dado do usuário existe fora do aparelho dele.</li>
+<li>Exportação da base cifrada como caminho de backup, guardável em qualquer lugar sem virar risco.</li>
+<li>O caso nomeado, <code>myco</code>, é público sob licença aberta, instalável como app e com o código de cifra em um arquivo só, legível de uma sentada.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20cifra-local">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/hackathon-ibmec-2026">&laquo; Tópico anterior: Anatomia de três choques</a></span>
+    <span><a href="/blog/atletica">Próximo tópico: Atlética Ibmec BH &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

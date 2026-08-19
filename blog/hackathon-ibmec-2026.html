@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Anatomia de três choques</title>
+<meta name="description" content="Anatomia de três choques: Hackathon Nacional Ibmec 2026, equipe Os Terríveis, etapa Belo Horizonte">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Anatomia de três choques :: oqojfr?">
+<meta property="og:description" content="Anatomia de três choques: Hackathon Nacional Ibmec 2026, equipe Os Terríveis, etapa Belo Horizonte">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/hackathon-ibmec-2026">
+<link rel="canonical" href="https://jadistel.com/blog/hackathon-ibmec-2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Anatomia de três choques</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Mai 2026</span>
+          <span class="stat">Mensagens: 5</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>22 Mai 2026</b></span>
+            <span>Assunto: <b>Anatomia de três choques</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Hackathon Nacional Ibmec 2026, equipe Os Terríveis, etapa Belo Horizonte</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Python</span><span class="marca-item">statsmodels</span><span class="marca-item">Prophet</span><span class="marca-item">scikit-learn</span><span class="marca-item">VAR</span><span class="marca-item">weasyprint</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">econometria</span><span class="marca-item">análise de dados</span><span class="marca-item">pitch</span><span class="marca-item">trabalho em equipe</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O manual do desafio pedia uma coisa específica: o Brasil de 2014 a 2024, três choques (a recessão de 2015 e 2016, a COVID em 2020, a espiral inflacionária de 2021 e 2022), quatro perguntas obrigatórias, e a correlação entre o macro e o balanço das empresas, com o varejo como setor recomendado.</p>
+<p>Nós tínhamos uma tese pronta antes de ler o manual. Painel comparando S&amp;P e Ibovespa, IA como quinto fator de precificação. Bonita, ambiciosa e completamente fora do que foi pedido. Quando o manual finalmente foi lido, com o cronômetro já correndo, jogamos fora as mil e trezentas linhas de briefing que tínhamos escrito em cima dela. Um dia principal, das nove às dezoito, e o pitch às dezessete para a banca regional.</p>
+<h2>O que eu fiz</h2>
+<p>A tese que entregamos tem uma frase: três choques, um transmissor, e a transmissão é defasada. O transmissor é o câmbio.</p>
+<p>A regressão de Okun contemporânea, aquela que liga produto e desemprego, explica pouco no Brasil do período. R² de 0,16. A leitura preguiçosa disso é que o modelo falhou. A leitura que sustentamos é que ele está medindo no instante errado: o choque cambial leva de dois a quatro trimestres para chegar ao emprego, e nesse caminho ele passa primeiro pelo balanço das empresas. Um VAR com doze defasagens captura o que a regressão contemporânea perde. O câmbio antecipa desemprego com p = 0,0001 e inflação com p = 0,005, e a decomposição da variância mostra a série 92,5% exógena. O teste de Chow não rejeita estabilidade estrutural, então não há quebra em 2014 servindo de muleta.</p>
+<p>A parte micro veio de 129 empresas listadas na B3, com demonstrações da CVM Dados Abertos. O câmbio não empobrece o país de modo uniforme, ele redistribui: o ROE do varejo cai de 7,4% para 0,9%, praticamente zerando, enquanto o agroexportador ganha 18,9 pontos percentuais. Sobre isso rodaram K-Means para separar três regimes, validado por silhueta, e Prophet para a predição de 2024, com erro percentual médio de 8,9% no câmbio.</p>
+<h2>O que aprendi</h2>
+<p>O R² inicial não era 0,16. Era 0,67, e o câmbio aparecia dominando tudo com uma força que me deixou eufórico por uns quarenta minutos.</p>
+<p>Era mentira. A série de PIB que eu tinha puxado era número-índice de nível, não variação. Uma série não estacionária que sobe ao longo do tempo, colocada dentro de uma regressão, funciona como tendência temporal disfarçada, e o modelo casa qualquer outra série que também suba com o tempo. Regressão espúria clássica, a coisa que aparece no primeiro capítulo de qualquer livro de séries temporais, e que eu produzi ao vivo por não ter olhado o que a variável era antes de usá-la. Troquei pela variação percentual do PIB da tabela 5932 do SIDRA, rodei ADF em tudo, e o R² desabou para 0,16.</p>
+<p>O achado verdadeiro era mais fraco e mais interessante que o falso.</p>
+<p>A segunda lição veio de um mentor, umas três horas antes do pitch, e foram dois furos. O PDF acabava em &quot;Limitações&quot;, sem fechamento: dezoito páginas de rigor e nenhuma frase que dissesse o que aquilo significa para quem lê. E o pitch estava técnico demais para jurado leigo. Reescrevi a fala inteira em cima de uma loja de roupas e um produtor de soja, e o jargão migrou todo para o cartão de perguntas e respostas, onde ele defende sob demanda em vez de atrapalhar. Comprimi ao mínimo a parte do problema, que era igual para todos os grupos, e alonguei o diferencial. Tempo de pitch é do que só você tem.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Entrega de 18 páginas mais pitch e roteiro, aprovada na banca regional da etapa Belo Horizonte.</li>
+<li>Cadeia macro para micro fechada com número: câmbio antecipando desemprego (p = 0,0001) e o ROE do varejo caindo de 7,4% para 0,9% no mesmo período.</li>
+<li>129 empresas da B3 processadas a partir da CVM Dados Abertos. Nós tínhamos acesso a um terminal financeiro pago e não precisamos dele: dado público e auditável resolveu, e ainda deixou a análise reproduzível por qualquer banca.</li>
+<li>Limitação declarada no próprio texto: o câmbio real efetivo do Banco Central estava fora do ar, então usamos o nominal deflacionado pelo IPCA.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20hackathon-ibmec-2026">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span></span>
+    <span><a href="/blog/ibsala">Próximo tópico: ibsala &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

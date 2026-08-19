@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Liga Acadêmica IbTech</title>
+<meta name="description" content="Liga Acadêmica IbTech: Vice-presidência: trilhas de formação, revisão das entregas e credenciais verificáveis">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Liga Acadêmica IbTech :: oqojfr?">
+<meta property="og:description" content="Liga Acadêmica IbTech: Vice-presidência: trilhas de formação, revisão das entregas e credenciais verificáveis">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/liga-ibtech">
+<link rel="canonical" href="https://jadistel.com/blog/liga-ibtech">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Liga Acadêmica IbTech</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Mai 2026</span>
+          <span class="stat">Mensagens: 5</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>16 Ago 2026</b></span>
+            <span>Assunto: <b>Liga Acadêmica IbTech</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Vice-presidência: trilhas de formação, revisão das entregas e credenciais verificáveis</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Node.js</span><span class="marca-item">Ethereum</span><span class="marca-item">Open Badges 3.0</span><span class="marca-item">Blockcerts</span><span class="marca-item">SHA-256</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">liderança</span><span class="marca-item">criptografia aplicada</span><span class="marca-item">revisão de código</span><span class="marca-item">processo</span></dd>
+              <dt>No ar</dt><dd><a href="https://www.ligastechibmec.com.br">ligastechibmec.com.br</a></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/ibtech-credenciais">joshazze/ibtech-credenciais</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>A IbTech é a liga de software do Ibmec BH. Eu sou vice-presidente, e o trabalho tem três frentes que não se parecem: montar as trilhas de formação, revisar o que os membros entregam, e resolver o problema chato que toda liga acadêmica tem no fim do ciclo.</p>
+<p>O problema chato é o certificado. Ele existe para o membro colocar no LinkedIn e para o recrutador acreditar. Só que o certificado acadêmico brasileiro típico é um PDF com uma assinatura escaneada, e a única coisa que ele prova é que alguém tem Canva. Qualquer pessoa refaz o seu em dez minutos, com o nome trocado. A liga sabe disso, o membro sabe disso, e o recrutador também.</p>
+<h2>O que eu fiz</h2>
+<p>Do lado da formação, as trilhas e a revisão das entregas. Cada trabalho aprovado vai para um repositório central da liga por branch e pull request, com revisão nominal, e não some no Drive de quem fez.</p>
+<p>Do lado das credenciais, construí um emissor próprio. Cada certificado vira um JSON no padrão Open Badges 3.0, no formato Blockcerts. Calcula-se o SHA-256 de cada um, monta-se uma árvore de Merkle do lote inteiro, e só a raiz vai para a blockchain, numa única transação. Verificar é recalcular o hash do certificado, subir a árvore até a raiz e conferir se ela bate com a que está registrada na rede.</p>
+<p>O detalhe que faz isso valer a pena é o custo. Trinta e dois certificados poderiam ser trinta e duas transações. Com a árvore de Merkle são trinta e duas provas e uma transação só, e ainda assim adulterar qualquer nome quebra a raiz.</p>
+<h2>Como funciona</h2>
+<p>O pipeline é Node enxuto, três comandos: <code>build</code> gera os JSON, <code>anchor</code> monta a árvore e grava a raiz, <code>verify</code> refaz a conta. Não usei a tooling oficial do Blockcerts porque ela é Python e não roda na versão que eu tenho instalada, e reescrever o essencial em Node saiu mais rápido que resolver a incompatibilidade.</p>
+<p>A rede é Ethereum Sepolia, escolha feita pelo torneirinha: o faucet do Google Cloud oferece Sepolia e não oferece as alternativas. O código é agnóstico de rede, o RPC vive em variável de ambiente, e trocar de rede é trocar uma linha.</p>
+<p>Também descartei a plataforma comercial brasileira de badges. Ela cobra, exige CNPJ, e o que ela mostra ao recrutador no fim é um hash impresso na tela. A nossa não custa plataforma, não exige personalidade jurídica e verifica ao vivo, refazendo a criptografia no navegador de quem está olhando.</p>
+<h2>O que aprendi</h2>
+<p>Nenhum recrutador vai abrir um verificador. Essa foi a lição que me obrigou a jogar fora a primeira versão da página.</p>
+<p>A primeira versão era honesta e feia: um formulário, um campo de id, um &quot;válido&quot; em verde. Tecnicamente completa, e ninguém ia clicar duas vezes. A segunda versão trata a verificação como cerimônia. O certificado aparece emoldurado, a conferência acontece na frente de quem está olhando, com o painel mostrando o que está sendo recalculado, e no fim tem QR e exportação em PDF. O design reproduz o certificado oficial da liga, com o logo extraído do PDF original, para que a página não pareça um sistema de terceiro.</p>
+<p>A criptografia é a mesma nas duas versões. A diferença é que a segunda é vista.</p>
+<p>A outra lição foi de operação, não de código: não montei fluxo de e-mail e claim individual. Gera-se o lote inteiro de uma vez e avisa-se cada pessoa com o link pronto. Esperar trinta e duas pessoas clicarem em &quot;reivindicar minha credencial&quot; é a forma mais confiável de emitir doze.</p>
+<h2>Resultados</h2>
+<ul>
+<li>32 certificados emitidos e ancorados numa única transação, com verificação criptográfica ao vivo.</li>
+<li>Cada credencial tem URL própria, que é exatamente o que o botão &quot;Mostrar credencial&quot; do LinkedIn pede.</li>
+<li>Custo de plataforma zero, contra uma alternativa comercial que exige CNPJ e mensalidade.</li>
+<li>O código é público em <code>joshazze/ibtech-credenciais</code>, com uma explicação didática de como a árvore de Merkle sustenta a prova.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20liga-ibtech">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/ibsala">&laquo; Tópico anterior: ibsala</a></span>
+    <span><a href="/blog/ibbot">Próximo tópico: Liga Acadêmica IbBot &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

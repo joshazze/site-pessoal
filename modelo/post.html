@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITULO}} | oqojfr?</title>
+<meta name="description" content="{{DESC}}">
+<meta name="theme-color" content="#0a0713">
+<meta property="og:title" content="{{TITULO}} | oqojfr?">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/{{SLUG}}">
+<link rel="canonical" href="https://jadistel.com/blog/{{SLUG}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Mono:wght@400;500&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/retro.css?v={{V}}">
+</head>
+<body class="pagina-post" data-pagina="{{SLUG}}">
+
+<main>
+
+  <a class="volta" href="/blog" data-ev="voltar-arquivo">◀ arquivo</a>
+
+  <article>
+
+    <header class="post-capa">
+      <p class="sub-marca" style="letter-spacing:.2em">{{DATA_LONGA}}</p>
+      <h1>{{TITULO}}</h1>
+      <p class="sub">{{SUB}}</p>
+      <dl class="ficha">
+        <div>
+          <dt>stack</dt>
+          <dd class="tags">{{STACK}}</dd>
+        </div>
+        <div>
+          <dt>competências</dt>
+          <dd class="tags">{{COMPETENCIAS}}</dd>
+        </div>
+{{LINKS}}
+      </dl>
+    </header>
+
+    <div class="artigo">
+{{CORPO}}
+    </div>
+
+  </article>
+
+{{NAV}}
+
+  <footer class="pe-retro">
+    <span><a href="/blog">◀ oqojfr?</a></span>
+    <span><a href="/">J. A. Distel</a></span>
+  </footer>
+
+</main>
+
+<script src="/retro.js?v={{V}}"></script>
+</body>
+</html>

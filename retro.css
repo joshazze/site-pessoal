@@ -1,0 +1,505 @@
+/* oqojfr? — arquivo do que o joshua fez. cena noturna, 1985 olhando pra frente.
+   autônomo: o blog não carrega estilo.css. mobile primeiro. */
+
+:root {
+  color-scheme: dark;
+
+  /* a noite */
+  --noite:    #0a0713;
+  --noite-2:  #120c20;
+  --noite-3:  #1a1130;
+  --filete:   #2b1f4a;
+
+  /* neon: moldura, título e acento. nunca corpo de texto */
+  --neon-mag: #ff2e88;
+  --neon-cia: #22e0ff;
+  --neon-rox: #bd7dff;
+
+  /* os três mostradores do delorean */
+  --led-dest: #ff5c2b;
+  --led-pres: #2bff8f;
+  --led-part: #ffb302;
+
+  /* leitura: contraste alto, sem fantasma */
+  --texto:    #ece8f5;
+  --texto-2:  #b5abd0;
+
+  --slab: "Alfa Slab One", Rockwell, "Roboto Slab", Georgia, serif;
+  --serif: Tinos, "Times New Roman", "Liberation Serif", serif;
+  --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--noite);
+  color: var(--texto);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+::selection { background: var(--neon-mag); color: #fff; }
+
+main { width: min(100% - 2.4rem, 60rem); margin-inline: auto; padding-bottom: 5rem; }
+
+/* leitura corrida quer medida curta: 60rem no índice, 40rem no texto */
+.pagina-post main { width: min(100% - 2.4rem, 40rem); }
+
+/* ---------- topo: horizonte em fuga ---------- */
+
+.topo {
+  --h-horizonte: 130px;
+  position: relative;
+  padding: 2.6rem 0 calc(var(--h-horizonte) + 1.4rem);
+  text-align: center;
+  overflow: hidden;
+}
+
+@media (min-width: 700px) { .topo { --h-horizonte: 170px; padding-top: 3.4rem; } }
+
+.horizonte {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--h-horizonte);
+  perspective: 200px;
+  perspective-origin: 50% 0%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* a malha corre pro observador. sem asset, só gradiente em perspectiva */
+.horizonte::before {
+  content: "";
+  position: absolute;
+  inset: 0 -60%;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 44px, rgba(34, 224, 255, .55) 44px 46px),
+    repeating-linear-gradient(0deg,  transparent 0 44px, rgba(255, 46, 136, .45) 44px 46px);
+  transform: rotateX(70deg);
+  transform-origin: 50% 0%;
+  animation: correr 2.6s linear infinite;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 55%, #000 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 55%, #000 100%);
+}
+
+@keyframes correr { to { background-position: 0 0, 0 46px; } }
+
+/* a linha do horizonte, acesa */
+.topo::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: var(--h-horizonte);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-cia), var(--neon-mag), transparent);
+  box-shadow: 0 0 22px 3px rgba(255, 46, 136, .38);
+}
+
+/* ---------- a marca ---------- */
+
+.marca-caixa { position: relative; z-index: 1; perspective: 800px; }
+
+/* duas camadas: embaixo o miolo escuro com o contorno laranja, em cima o cromo
+   recortado no texto. ::after paint por cima do conteúdo do pai, que é o que faz
+   o cromo vencer o contorno em vez de sumir atrás dele. */
+.marca {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font-family: var(--slab);
+  font-size: clamp(2.6rem, 13.5vw, 6.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: .015em;
+  transform: rotateX(9deg);
+  color: #170b04;
+  -webkit-text-stroke: .07em var(--led-dest);
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, .6)) drop-shadow(0 0 30px rgba(255, 92, 43, .3));
+}
+
+.marca::after {
+  content: attr(data-marca);
+  position: absolute;
+  inset: 0;
+  -webkit-text-stroke: 0;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%, #dceaff 15%, #93b6e4 35%, #37507d 49%,
+    #7d5611 51%, #f3b23c 63%, #ffe9ac 79%, #d9760f 100%
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+
+.sub-marca {
+  position: relative;
+  z-index: 1;
+  margin: 1.1rem 0 0;
+  font-family: var(--mono);
+  font-size: .82rem;
+  letter-spacing: .16em;
+  text-transform: lowercase;
+  color: var(--neon-cia);
+  text-shadow: 0 0 14px rgba(34, 224, 255, .5);
+}
+
+@media (min-width: 700px) { .sub-marca { letter-spacing: .26em; } }
+
+/* ---------- time circuits ---------- */
+
+.circuitos {
+  position: relative;
+  z-index: 1;
+  margin: 2.6rem 0 0;
+  padding: .85rem .7rem .6rem;
+  border: 1px solid var(--filete);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, var(--noite-2), #0d0819);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 12px 40px -18px #000;
+}
+
+.circuito { display: grid; gap: .3rem; padding: .55rem .35rem; }
+.circuito + .circuito { border-top: 1px solid rgba(255, 255, 255, .05); }
+
+.circuito .rotulo {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.mostrador { display: flex; gap: .3rem; align-items: flex-end; flex-wrap: nowrap; }
+
+.cel { display: grid; gap: .12rem; flex: 1 1 0; min-width: 0; }
+
+.cel .cap {
+  font-family: var(--mono);
+  font-size: .48rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9a8cc0;
+  text-align: center;
+}
+
+/* o dígito: fantasma dos segmentos apagados embaixo, valor aceso em cima */
+.led {
+  position: relative;
+  display: block;
+  padding: .2rem .1rem;
+  border-radius: 3px;
+  background: #05030b;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), inset 0 2px 6px #000;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: clamp(.78rem, 3.6vw, 1.15rem);
+  letter-spacing: .04em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.led .off { color: currentColor; opacity: .1; }
+.led .on {
+  position: absolute;
+  inset: .2rem .1rem auto;
+  text-shadow: 0 0 7px currentColor, 0 0 18px currentColor;
+}
+
+.circuito[data-cor="dest"] { color: var(--led-dest); }
+.circuito[data-cor="pres"] { color: var(--led-pres); }
+.circuito[data-cor="part"] { color: var(--led-part); }
+.circuito .rotulo { color: currentColor; opacity: .72; }
+
+/* ---------- barra do arquivo ---------- */
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.4rem 0 .2rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--filete);
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+/* a placa do carro. enfeite honesto, não estatística */
+.placa {
+  padding: .16rem .5rem .1rem;
+  border: 2px solid #cfd6e4;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #f2f5fa, #c8d1e0);
+  color: #16203a;
+  font-weight: 500;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+
+/* ---------- lista de tópicos ---------- */
+
+.arquivo { border-top: 1px solid transparent; }
+
+.topico {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .1rem .8rem;
+  padding: 1.15rem .7rem;
+  border-bottom: 1px solid var(--filete);
+  text-decoration: none;
+  color: inherit;
+  isolation: isolate;
+}
+
+.topico > * { position: relative; z-index: 1; }
+
+/* varredura de neon da esquerda pra direita, como o marca-texto da home */
+.topico::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(255, 46, 136, .16), rgba(34, 224, 255, .08));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .42s cubic-bezier(.16, 1, .3, 1);
+}
+
+.topico.viva::before { transform: scaleX(1); }
+.topico.saindo::before { transform-origin: 100% 50%; transform: scaleX(0); }
+
+.topico .n {
+  grid-column: 1;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  color: var(--neon-rox);
+}
+
+.topico .titulo {
+  grid-column: 1;
+  font-family: var(--slab);
+  font-size: 1.32rem;
+  line-height: 1.2;
+  letter-spacing: .005em;
+}
+
+.topico .resumo { grid-column: 1; color: var(--texto-2); font-size: 1rem; }
+
+.topico .quando {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: start;
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--led-part);
+  white-space: nowrap;
+}
+
+.tags { grid-column: 1; display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .55rem; }
+
+.tag {
+  padding: .1rem .45rem;
+  border: 1px solid rgba(34, 224, 255, .38);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .07em;
+  color: var(--neon-cia);
+}
+
+.tag.comp { border-color: rgba(255, 46, 136, .4); color: var(--neon-mag); }
+
+/* contador de leitura, em led pequeno */
+.views {
+  grid-column: 2;
+  align-self: end;
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  color: var(--led-pres);
+  text-shadow: 0 0 8px rgba(43, 255, 143, .45);
+  white-space: nowrap;
+}
+
+.views[hidden] { display: none; }
+
+.topico:focus-visible { outline: 2px solid var(--neon-cia); outline-offset: -2px; }
+
+@media (min-width: 700px) {
+  .topico { grid-template-columns: 1fr 9rem; padding: 1.35rem .9rem; }
+  .topico .titulo { font-size: 1.55rem; }
+  .topico .quando, .topico .views { text-align: right; }
+}
+
+/* ---------- o post ---------- */
+
+.volta {
+  display: inline-block;
+  margin: 1.8rem 0 0;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--neon-cia);
+}
+
+.volta:hover, .volta:focus-visible { text-shadow: 0 0 12px currentColor; }
+
+.post-capa { padding: 2.2rem 0 1.4rem; border-bottom: 1px solid var(--filete); }
+
+.post-capa h1 {
+  margin: .5rem 0 .3rem;
+  font-family: var(--slab);
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--texto);
+  text-shadow: 0 0 30px rgba(168, 85, 247, .35);
+}
+
+.post-capa .sub { margin: 0 0 1rem; color: var(--texto-2); font-size: 1.1rem; }
+
+.artigo { font-size: 1.05rem; }
+.artigo h2 {
+  margin: 2.6rem 0 .7rem;
+  font-family: var(--mono);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--neon-mag);
+}
+
+.artigo h2::before { content: "▚ "; color: var(--neon-rox); }
+
+.artigo h3 { margin: 1.8rem 0 .5rem; font-family: var(--slab); font-size: 1.2rem; font-weight: 400; }
+.artigo p { margin: 0 0 .95rem; }
+.artigo ul, .artigo ol { margin: 0 0 1rem; padding-left: 1.3rem; }
+.artigo li { margin-bottom: .38rem; }
+.artigo a { color: var(--neon-cia); text-decoration: none; box-shadow: inset 0 -1px 0 currentColor; }
+.artigo a:hover, .artigo a:focus-visible { text-shadow: 0 0 12px currentColor; }
+.artigo strong { color: #fff; }
+.artigo img { max-width: 100%; height: auto; border: 1px solid var(--filete); border-radius: 4px; }
+
+.artigo blockquote {
+  margin: 1.4rem 0;
+  padding: .2rem 0 .2rem 1rem;
+  border-left: 2px solid var(--neon-rox);
+  color: var(--texto-2);
+  font-style: italic;
+}
+
+.artigo code {
+  padding: .08rem .22rem;
+  border-radius: 3px;
+  background: var(--noite-3);
+  font-family: var(--mono);
+  font-size: .88em;
+  color: var(--neon-cia);
+  white-space: nowrap;
+}
+
+.artigo pre {
+  margin: 1.3rem 0;
+  padding: .9rem 1rem;
+  overflow-x: auto;
+  border: 1px solid rgba(34, 224, 255, .28);
+  border-radius: 5px;
+  background: #05030b;
+  box-shadow: inset 0 0 30px -12px rgba(34, 224, 255, .5);
+}
+
+.artigo pre code { white-space: pre; padding: 0; background: none; color: var(--texto); font-size: .82rem; line-height: 1.65; }
+
+.ficha {
+  display: grid;
+  gap: .55rem;
+  margin: 1.4rem 0 0;
+  padding: .95rem 1rem;
+  border: 1px solid var(--filete);
+  border-radius: 5px;
+  background: var(--noite-2);
+}
+
+.ficha dt {
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.ficha dd { margin: .15rem 0 0; }
+.ficha .tags { margin-top: .2rem; }
+.ficha a { color: var(--neon-cia); text-decoration: none; box-shadow: inset 0 -1px 0 currentColor; }
+.ficha a:hover, .ficha a:focus-visible { text-shadow: 0 0 12px currentColor; }
+
+/* ---------- navegação entre posts ---------- */
+
+.circuito-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--filete);
+  font-family: var(--mono);
+  font-size: .74rem;
+}
+
+.circuito-nav a { max-width: 46%; text-decoration: none; color: var(--texto-2); }
+.circuito-nav a:hover, .circuito-nav a:focus-visible { color: var(--neon-cia); }
+.circuito-nav .dir { margin-left: auto; text-align: right; }
+.circuito-nav b { display: block; font-weight: 500; color: var(--texto); font-size: .92rem; }
+
+/* ---------- rodapé ---------- */
+
+.pe-retro {
+  margin-top: 3.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--filete);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.4rem;
+  justify-content: space-between;
+}
+
+.pe-retro a { color: var(--neon-cia); text-decoration: none; }
+
+/* ---------- quem pede quieto, recebe quieto ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .horizonte::before { animation: none; }
+  .topico::before { transition: none; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* ---------- impressão: a cena noturna vira papel ---------- */
+
+@media print {
+  body { background: #fff; color: #000; }
+  .topo, .circuitos, .horizonte, .circuito-nav { display: none; }
+  .artigo a { color: #000; box-shadow: none; }
+}

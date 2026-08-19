@@ -20,7 +20,7 @@
 
   --sans: Verdana, Geneva, Tahoma, "DejaVu Sans", sans-serif;
   --mono: "Courier New", Courier, monospace;
-  --marca-fonte: Poppins, "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  --marca-fonte: Fraunces, Georgia, "Times New Roman", serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,30 +65,30 @@ a:focus-visible { outline: 2px solid var(--cabeca); outline-offset: 1px; }
 
 .logo { padding: 20px 0 13px; text-align: center; }
 
-/* o wordmark é a única coisa do fórum que não é Verdana: quatro bocas redondas
-   (o, q, o, j) pedem geométrica, e aí o ponto do j e o ? viram desenho */
+/* o wordmark é a única coisa do fórum que não é Verdana. serifa de display:
+   o contraste de traço e o rabo do j dão desenho onde o Verdana dava só texto */
 .logo .marca {
   display: block;
   font-family: var(--marca-fonte);
-  font-size: 38px;
+  font-size: 40px;
   font-weight: 700;
-  letter-spacing: -.02em;
-  line-height: 1;
+  font-optical-sizing: auto;
+  letter-spacing: 0;
+  line-height: 1.08;
   color: var(--marca-cor);
 }
 
+/* a tagline volta pro Verdana: serifa em 11px com tracking largo fica suja */
 .logo .tagline {
   display: block;
-  margin-top: 7px;
-  font-family: var(--marca-fonte);
+  margin-top: 6px;
   font-size: 11px;
-  font-weight: 400;
   letter-spacing: .11em;
   color: var(--tinta-2);
 }
 
 @media (max-width: 700px) {
-  .logo .marca { font-size: 31px; }
+  .logo .marca { font-size: 33px; }
   .logo .tagline { font-size: 10.5px; letter-spacing: .07em; }
 }
 

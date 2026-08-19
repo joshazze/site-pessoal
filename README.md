@@ -3,10 +3,11 @@
 Registro público de Joshua Azze Distel em `jadistel.com`, com a assinatura acadêmica J. A.
 Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Google Fonts.
 
-- `index.html` — resumo, quadro dos registros canônicos (Lattes, LinkedIn, GitHub), a produção e
-  o blog, mais as referências em NBR 6023.
+- `index.html` — resumo, quadro dos registros canônicos (Lattes, LinkedIn, GitHub) e o blog, mais
+  as referências em NBR 6023.
 - `producao.html` — servida em `/producao`: artigo de iniciação científica, prêmios e atuação nas
-  ligas. **Escrita à mão**, não passa pelo gerador.
+  ligas. **Escrita à mão**, não passa pelo gerador. Não está linkada na home: chega-se por ela pelo
+  menu do fórum e pelo sitemap.
 - `blog.html` — servida em `/blog`: o arquivo **oqojfr?**, um registro por projeto. **Gerado.**
 - `blog/<slug>.html` — um post por projeto. **Gerados.**
 - `posts/*.md` — a fonte dos posts, o que se escreve à mão.

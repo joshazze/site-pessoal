@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Fernando Pessoa</title>
+<meta name="description" content="Fernando Pessoa: Um heterônimo para cada ferramenta: personas de IA que persistem e ativam sozinhas">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Fernando Pessoa :: oqojfr?">
+<meta property="og:description" content="Fernando Pessoa: Um heterônimo para cada ferramenta: personas de IA que persistem e ativam sozinhas">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/fernando-pessoa">
+<link rel="canonical" href="https://jadistel.com/blog/fernando-pessoa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Fernando Pessoa</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 13</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>11 Ago 2026</b></span>
+            <span>Assunto: <b>Fernando Pessoa</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Um heterônimo para cada ferramenta: personas de IA que persistem e ativam sozinhas</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Bash</span><span class="marca-item">hooks</span><span class="marca-item">Claude Code</span><span class="marca-item">Markdown</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">arquitetura de agentes</span><span class="marca-item">design de sistema</span><span class="marca-item">escrita técnica</span></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/fernando-pessoa-agents">joshazze/fernando-pessoa-agents</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Quem usa um assistente de IA a sério acumula instrução. &quot;Escreve sem travessão.&quot; &quot;Quando eu estiver estudando, não me dá a resposta pronta.&quot; &quot;Refatora minhas notas sem perder informação.&quot;</p>
+<p>Despejadas no mesmo arquivo gigante, essas regras se contradizem e se diluem. A regra de estudo vaza no trabalho de produção e o assistente se recusa a escrever código que você precisa entregar. A regra de voz some depois de vinte mil tokens de conversa. E o arquivo cresce até você estar pagando por trinta mil bytes de instrução em cada turno de cada sessão.</p>
+<p>O problema não é de conteúdo, é de isolamento e persistência. Uma regra de estudo e uma de produção nunca deveriam estar ligadas ao mesmo tempo. Uma regra de voz precisa sobreviver à conversa inteira. E uma palavra de segurança precisa ser um bit de estado, não uma sugestão simpática.</p>
+<h2>O que eu fiz</h2>
+<p>Fernando Pessoa, o poeta, não escrevia com pseudônimo. Escrevia com heterônimo: autores inteiros e distintos, cada um com biografia, estética e visão de mundo próprias, coexistindo na mesma pessoa. Caeiro era o mestre bucólico, Reis o classicista estoico, Campos o modernista febril. Pessoa era o ortônimo que fingia todos.</p>
+<p>Apliquei a estrutura a um assistente. Em vez de um prompt monolítico tentando ser bom em tudo, existe um ortônimo (o assistente conversacional padrão) que despacha heterônimos: personas estreitas, cada uma obcecada por uma tarefa só, com voz e regras próprias. O ortônimo não bate prego com a mão tendo vários martelos bonitos. Ele escolhe o martelo.</p>
+<h2>Como funciona</h2>
+<p>A metáfora é a parte fácil e é a parte que não importa. A contribuição é a arquitetura de persistência, e ela tem três camadas:</p>
+<ul>
+<li><strong>Definição</strong>: um bloco carregado toda sessão. É a especificação da persona, e está sempre presente.</li>
+<li><strong>Hook</strong>: um script disparado por evento. Pode reforçar a persona a cada turno, ou interceptar uma ação antes de ela acontecer.</li>
+<li><strong>Memória</strong>: um arquivo que sobrevive entre sessões e volta por recall quando o assunto aparece.</li>
+</ul>
+<p>A regra que amarra tudo é esta: <strong>o gatilho decide a camada</strong>.</p>
+<p>Uma persona convocada pelo nome precisa só da camada 1, porque quem chama já traz o contexto. Uma persona ambiente, que deve estar ligada o tempo todo, precisa de um hook que a lembre a cada turno, senão ela se dilui na conversa longa e você vê a voz mudando sem ninguém ter pedido. E uma persona de guarda, que existe para impedir uma ação, não pode ser instrução nenhuma: ela precisa de um hook que intercepte a chamada da ferramenta e negue, porque uma persona bem escrita ainda é uma persona persuadível.</p>
+<p>Os quatro heterônimos do repositório cobrem os três casos de propósito. O Marcus refatora material cru em nota de vault sem perder informação e é chamado pelo nome. O Rogi é a voz de escrita e vive nas três camadas. O Stefano ensina e se recusa a resolver, com uma guarda que bloqueia a escrita do arquivo de exercício. O quarto é uma palavra de segurança.</p>
+<h2>O que aprendi</h2>
+<p>Persona ambiente sem hook não existe.</p>
+<p>Eu descobri isso da forma chata: escrevi a especificação de voz, coloquei no arquivo sempre carregado, testei, funcionou lindamente por dez turnos. No turno quarenta, com o contexto cheio de código e log, a voz tinha ido embora. A instrução continuava lá, tecnicamente presente, competindo por atenção com tudo que entrou depois.</p>
+<p>Instrução no início da sessão não é uma regra, é uma sugestão que envelhece.</p>
+<p>A segunda lição foi sobre a persona de guarda, e ela é mais desconfortável, porque toca no que uma persona é. Uma persona que precisa impedir você de fazer algo não pode ser escrita como texto, por melhor que o texto seja. Enquanto for texto, ela negocia. Um hook que intercepta a ferramenta e devolve erro não negocia, porque não é linguagem, é código rodando fora do modelo. A persona explica o porquê. O hook garante o quê.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Framework público sob licença MIT, com instalador, registro de heterônimos e três modelos para escrever os seus.</li>
+<li>Quatro heterônimos prontos, cobrindo os três modos de ativação: convocação pelo nome, persona ambiente e guarda que bloqueia ação.</li>
+<li>O repositório anterior de um dos agentes foi absorvido pelo framework e virou o heterônimo de referência, com o repo antigo arquivado em somente leitura.</li>
+<li>Documentação com manifesto e arquivo de citação, para o método poder ser referenciado como método.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20fernando-pessoa">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/cerebro">&laquo; Tópico anterior: Cérebro</a></span>
+    <span><a href="/blog/blank-page">Próximo tópico: Blank Page &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: ibsala</title>
+<meta name="description" content="ibsala: Reserva e consulta de salas do Ibmec BH, no ar para os alunos">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="ibsala :: oqojfr?">
+<meta property="og:description" content="ibsala: Reserva e consulta de salas do Ibmec BH, no ar para os alunos">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/ibsala">
+<link rel="canonical" href="https://jadistel.com/blog/ibsala">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=1">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » ibsala</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Ago 2026</span>
+          <span class="stat">Mensagens: 1</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>15 Ago 2026</b></span>
+            <span>Assunto: <b>ibsala</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Reserva e consulta de salas do Ibmec BH, no ar para os alunos</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Flask</span><span class="marca-item">Docker</span><span class="marca-item">PostgreSQL</span><span class="marca-item">Supabase</span><span class="marca-item">Web Push</span><span class="marca-item">Cloudflare Pages</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">backend</span><span class="marca-item">PWA</span><span class="marca-item">banco de dados</span><span class="marca-item">segurança</span><span class="marca-item">deploy</span><span class="marca-item">produto</span></dd>
+              <dt>No ar</dt><dd><a href="https://ibsala.com.br">ibsala.com.br</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O Ibmec BH publica a ocupação das salas numa planilha que a coordenação atualiza durante o dia. Ela é correta e é ilegível. Para saber se a 204 está livre às 15h você abre o arquivo, acha a aba do dia, cruza a linha do horário com a coluna da sala e torce para ninguém ter mexido nos últimos dez minutos. Todo mundo desistia no segundo passo e saía andando pelo prédio.</p>
+<p>Comecei o <code>app-salas</code> em 6 de março de 2026 com um escopo minúsculo: uma página que responde quais salas estão livres agora. O resto veio porque os alunos pediram.</p>
+<h2>O que eu fiz</h2>
+<p>Duas versões inteiras, e a segunda existe porque a primeira acertou o problema e errou a fundação.</p>
+<p>A primeira foi Flask em contêiner numa VM da GCP, com Google Sheets como banco. Funcionava. Ela ganhou cadastro com Google OAuth, notificação por web push, painel administrativo, página de privacidade, exportação e autoexclusão de conta para atender à LGPD, e uma suíte que chegou a 263 testes rodando em CI junto com <code>gitleaks</code> e <code>pip-audit</code>. Só o <code>pip-audit</code> apontou 16 CVEs em dependências transitivas numa única rodada, e o CI passou a barrar merge com dependência vulnerável.</p>
+<p>O problema é que a planilha como banco cobra juros. Cada consulta virava chamada de API com cota, cada escrita concorrente era uma corrida, e a captura da grade rodava no GitHub Actions entregando de 6 a 10 execuções por dia quando o agendamento pedia 48. O Actions simplesmente não garante horário.</p>
+<p>Em 23 de julho comecei a reescrita. Postgres de verdade no Supabase, autenticação e funções de borda no mesmo lugar, frontend estático no Cloudflare Pages, e a captura movida para <code>pg_cron</code> dentro do próprio banco. O corte para produção foi em 10 de agosto de 2026, com 70 alunos migrados e email de recadastro enviado para todos.</p>
+<h2>Como funciona</h2>
+<p>O universo de salas deixou de ser subproduto do scraper. Ele vem de um repertório fixo e versionado, com 58 salas canônicas, 22 apelidos conhecidos e 11 grafias que devem ser ignoradas. Grafia que ninguém reconhece não vira sala nova: cai numa fila de quarentena para eu olhar depois.</p>
+<p>Essa decisão nasceu de um bug bonito. A origem escreve pares de sala concatenados com barra, tipo <code>302/303</code>, então havia uma regra que quebrava tudo que tinha barra. Aí apareceu <code>114 LAB QUIMICA/FISICA</code>. A regra da barra rodava antes do repertório, engolia o nome como se fossem duas salas, e a 114 passou a ser servida como livre com aula dentro. Nem quarentena gerava, porque nada ali parecia estranho ao código. A ordem inverteu: canônica e apelido ganham da barra.</p>
+<p>O aviso é PWA instalável com web push, incluindo iOS, que é onde a coisa dói. No iPhone o push só existe se o app estiver na tela de início, o <code>ServiceWorkerContainer</code> segura a fila de mensagens do worker até alguém chamar <code>startMessages()</code>, e um clique sintético não vibra. Cada uma dessas eu descobri quebrando a cara num aparelho real, nunca no simulador.</p>
+<h2>O que aprendi</h2>
+<p>Duas coisas que eu não teria aprendido lendo.</p>
+<p>A primeira veio de uma auditoria de segurança no banco novo. Eu tinha escrito uma policy de RLS que deixava o aluno atualizar a própria linha, e ela estava certa na metade que eu olhei. Policy de <code>UPDATE</code> no Postgres tem duas metades: o <code>USING</code>, que decide quais linhas você enxerga para escrever, e o <code>WITH CHECK</code>, que decide como a linha pode ficar depois. Sem o <code>WITH CHECK</code>, o aluno enxergava só a própria linha, escrevia só na própria linha, e podia escrever o próprio papel. Aluno logado alterando o próprio <code>role</code>. A correção foi uma migration com <code>WITH CHECK</code> explícito mais um trigger de guarda nas colunas sensíveis, e desde então eu leio toda policy de escrita procurando a metade que falta.</p>
+<p>A segunda foi pior, porque não era código.</p>
+<p>Quatro dias depois do corte, um aluno que tinha se descadastrado e saído recebeu uma notificação. Eu já tinha conferido o sistema novo: o cascade apagava em dois níveis, os testes provavam, o banco confirmava. O sistema novo estava certo. Só que o antigo nunca parou. A VM continuava lá, o contêiner do agendador continuava com <code>restart: always</code>, e ele seguia lendo a aba de inscrições da planilha velha e disparando push, sozinho, todo dia, para uma base que eu considerava morta. Eu tinha virado o DNS e chamado aquilo de desligar.</p>
+<p>Virar o DNS não desliga nada. Desligar é <code>stop</code> no processo, com a mão, na máquina, e conferir depois.</p>
+<h2>Resultados</h2>
+<ul>
+<li>No ar em <code>ibsala.com.br</code> desde março de 2026, com o corte para a arquitetura nova em 10 de agosto e 70 alunos migrados sem perda de conta.</li>
+<li>A captura da grade saiu de 6 a 10 execuções por dia para as 48 previstas, ao trocar o agendador externo por <code>pg_cron</code> dentro do banco.</li>
+<li>O repertório fixo derrubou a lista de salas livres de 49 para 31 e fez as duas versões passarem a devolver exatamente a mesma resposta, sala por sala, nos seis horários do dia.</li>
+<li>263 testes verdes em CI, com verificação de segredo e auditoria de dependência como jobs obrigatórios. 16 CVEs corrigidas numa rodada.</li>
+<li>Conformidade com a LGPD implementada e no ar: relatório de impacto, exportação e exclusão da própria conta, retenção com expurgo agendado e log de auditoria das ações administrativas.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20ibsala">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -84,8 +84,8 @@ main {
 
 .capa { padding: 2.75rem 0 0; }
 
-/* home: quatro linhas e o rodapé, tudo numa tela */
-body.curta main {
+/* home: a abertura ocupa uma tela inteira; o registro vem rolando depois dela */
+body.curta .tela {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -115,17 +115,16 @@ body.curta .capa { padding-top: 0; }
 
 body.curta h1        { animation: subir .75s cubic-bezier(.16, 1, .3, 1) .62s both; }
 body.curta .sub      { animation: subir .7s cubic-bezier(.16, 1, .3, 1) .78s both; }
-body.curta .linha    { animation: subir .6s cubic-bezier(.16, 1, .3, 1) both; }
-body.curta .linha:nth-child(1) { animation-delay: .96s; }
-body.curta .linha:nth-child(2) { animation-delay: 1.05s; }
-body.curta .linha:nth-child(3) { animation-delay: 1.14s; }
-body.curta .linha:nth-child(4) { animation-delay: 1.23s; }
-body.curta .celula:nth-child(1) .linha { animation-delay: .96s; }
-body.curta .celula:nth-child(2) .linha { animation-delay: 1.05s; }
-body.curta .celula:nth-child(3) .linha { animation-delay: 1.14s; }
-body.curta .celula:nth-child(4) .linha { animation-delay: 1.23s; }
+body.curta .tela .linha    { animation: subir .6s cubic-bezier(.16, 1, .3, 1) both; }
+body.curta .tela .linha:nth-child(1) { animation-delay: .96s; }
+body.curta .tela .linha:nth-child(2) { animation-delay: 1.05s; }
+body.curta .tela .linha:nth-child(3) { animation-delay: 1.14s; }
+body.curta .tela .portal { animation: subir .6s cubic-bezier(.16, 1, .3, 1) 1.23s both; }
+body.curta .tela .celula:nth-child(1) .linha { animation-delay: .96s; }
+body.curta .tela .celula:nth-child(2) .linha { animation-delay: 1.05s; }
+body.curta .tela .celula:nth-child(3) .linha { animation-delay: 1.14s; }
 body.curta .pe       { animation: subir .6s cubic-bezier(.16, 1, .3, 1) 1.4s both; }
-body.curta .quadro { margin-top: 2.5rem; }
+body.curta .tela .quadro { margin-top: 2.5rem; }
 
 .pe {
   display: flex;
@@ -318,6 +317,100 @@ p + p { margin-top: .55rem; }
   .linha:hover::before { transform: scaleX(1); }
   .linha:hover .seta { transform: translate(3px, -3px); color: var(--tinta); }
 }
+
+/* ---------- portal: a janela pro fórum ---------- */
+
+/* o bloco que leva ao oqojfr? não é desenhado como o quadro deste documento,
+   e sim como o próprio fórum: paleta subSilver, Verdana, a grade de 1px que o
+   phpBB fazia com border-spacing e a pastinha de tópico */
+.portal {
+  --p-moldura: #98aab1;
+  --p-cabeca:  #006699;
+  --p-linha:   #efefef;
+  --p-tinta:   #0b0b0b;
+  --p-tinta-2: #4a5560;
+
+  display: grid;
+  gap: 1px;
+  margin-top: 2.5rem;
+  padding: 1px;
+  border: 1px solid var(--p-moldura);
+  background: var(--p-moldura);
+  color: var(--p-tinta);
+  font-family: Verdana, Geneva, Tahoma, "DejaVu Sans", sans-serif;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .portal {
+    --p-moldura: #3a4147;
+    --p-cabeca:  #0a4f73;
+    --p-linha:   #22252a;
+    --p-tinta:   #e8e8e8;
+    --p-tinta-2: #a8b2bd;
+  }
+}
+
+.portal-cat {
+  padding: 5px 9px;
+  background: var(--p-cabeca);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.portal-corpo { padding: 10px 10px 12px; background: var(--p-linha); }
+
+.portal-topico { display: flex; align-items: center; gap: 7px; }
+
+/* a pastinha, dois retângulos e uma borda, sem imagem */
+.portal .pasta {
+  width: 15px;
+  height: 12px;
+  flex: none;
+  border: 1px solid #7d6a1e;
+  border-radius: 1px 2px 2px 2px;
+  background: linear-gradient(#f7dd7c, #e3bf3d);
+}
+
+.portal .pasta::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 2px;
+  margin: -3px 0 0 1px;
+  border: 1px solid #7d6a1e;
+  border-bottom: 0;
+  border-radius: 1px 1px 0 0;
+  background: #f7dd7c;
+}
+
+.portal-titulo {
+  font-family: Fraunces, Georgia, var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  line-height: 1.1;
+  color: var(--p-cabeca);
+}
+
+@media (prefers-color-scheme: dark) { .portal-titulo { color: #7cc4e8; } }
+
+.portal-sub { display: block; margin-top: 5px; font-size: 12px; color: var(--p-tinta-2); }
+
+.portal-pe {
+  display: block;
+  margin-top: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--p-tinta-2);
+}
+
+.portal:hover .portal-titulo,
+.portal:focus-visible .portal-titulo { text-decoration: underline; }
+
+.portal:focus-visible { outline: 2px solid var(--marca-forte); outline-offset: 2px; }
 
 /* item sem destino público: entra como registro, não como link */
 .linha.morta { color: var(--tinta-2); }

@@ -280,7 +280,8 @@ def preencher(modelo, campos):
 
 def escrever_sitemap(posts):
     """só as três rotas públicas. posts/ e modelo/ ficam de fora, e o robots.txt repete."""
-    urls = ["https://jadistel.com/", "https://jadistel.com/blog"]
+    urls = ["https://jadistel.com/", "https://jadistel.com/producao",
+            "https://jadistel.com/blog"]
     urls += [f"https://jadistel.com/blog/{p['slug']}" for p in posts]
     corpo = "\n".join(f"  <url><loc>{u}</loc></url>" for u in urls)
     (RAIZ / "sitemap.xml").write_text(

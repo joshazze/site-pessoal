@@ -3,8 +3,10 @@
 Registro público de Joshua Azze Distel em `jadistel.com`, com a assinatura acadêmica J. A.
 Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Google Fonts.
 
-- `index.html` — resumo, quadro dos registros canônicos (Lattes, LinkedIn, GitHub) e as
-  referências em NBR 6023.
+- `index.html` — resumo, quadro dos registros canônicos (Lattes, LinkedIn, GitHub), a produção e
+  o blog, mais as referências em NBR 6023.
+- `producao.html` — servida em `/producao`: artigo de iniciação científica, prêmios e atuação nas
+  ligas. **Escrita à mão**, não passa pelo gerador.
 - `blog.html` — servida em `/blog`: o arquivo **oqojfr?**, um registro por projeto. **Gerado.**
 - `blog/<slug>.html` — um post por projeto. **Gerados.**
 - `posts/*.md` — a fonte dos posts, o que se escreve à mão.
@@ -95,15 +97,15 @@ tem nada disso: ele é estático por decisão.
 ## Deploy no Cloudflare Pages
 
 Cada push na `main` republica. Framework preset **None**, sem build command, output `/` (raiz).
-O Pages serve `blog.html` em `/blog` e `blog/ibsala.html` em `/blog/ibsala` sozinho. `_redirects`
-manda `/producao` para `/blog` com 301. O apex convive com os MX do email por CNAME flattening.
+O Pages serve `producao.html` em `/producao`, `blog.html` em `/blog` e `blog/ibsala.html` em
+`/blog/ibsala` sozinho. O apex convive com os MX do email por CNAME flattening.
 
 ## Conferir localmente
 
 ```sh
 python3 gerar.py
 python3 -m http.server 8000
-# http://localhost:8000  ·  /blog.html  ·  /blog/ibsala.html
+# http://localhost:8000  ·  /producao.html  ·  /blog.html  ·  /blog/ibsala.html
 ```
 
 Conferir o deploy por `https://site-pessoal-39d.pages.dev`, não por `jadistel.com`: na rede de

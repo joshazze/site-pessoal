@@ -84,7 +84,7 @@ main {
 
 .capa { padding: 2.75rem 0 0; }
 
-/* home: quatro linhas e o rodapé, tudo numa tela */
+/* home: cinco linhas e o rodapé, tudo numa tela */
 body.curta main {
   min-height: 100svh;
   display: flex;
@@ -120,11 +120,13 @@ body.curta .linha:nth-child(1) { animation-delay: .96s; }
 body.curta .linha:nth-child(2) { animation-delay: 1.05s; }
 body.curta .linha:nth-child(3) { animation-delay: 1.14s; }
 body.curta .linha:nth-child(4) { animation-delay: 1.23s; }
+body.curta .linha:nth-child(5) { animation-delay: 1.32s; }
 body.curta .celula:nth-child(1) .linha { animation-delay: .96s; }
 body.curta .celula:nth-child(2) .linha { animation-delay: 1.05s; }
 body.curta .celula:nth-child(3) .linha { animation-delay: 1.14s; }
 body.curta .celula:nth-child(4) .linha { animation-delay: 1.23s; }
-body.curta .pe       { animation: subir .6s cubic-bezier(.16, 1, .3, 1) 1.4s both; }
+body.curta .celula:nth-child(5) .linha { animation-delay: 1.32s; }
+body.curta .pe       { animation: subir .6s cubic-bezier(.16, 1, .3, 1) 1.49s both; }
 body.curta .quadro { margin-top: 2.5rem; }
 
 .pe {

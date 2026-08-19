@@ -319,6 +319,16 @@ p + p { margin-top: .55rem; }
   .linha:hover .seta { transform: translate(3px, -3px); color: var(--tinta); }
 }
 
+/* a linha do blog usa a marca dele: mesma serifa de display do oqojfr? */
+.linha-blog .reg {
+  font-family: Fraunces, Georgia, var(--serif);
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
 /* item sem destino público: entra como registro, não como link */
 .linha.morta { color: var(--tinta-2); }
 .linha.morta .reg { color: var(--tinta); }

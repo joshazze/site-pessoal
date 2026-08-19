@@ -3,9 +3,10 @@
 Registro público de Joshua Azze Distel em `jadistel.com`, com a assinatura acadêmica J. A.
 Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Google Fonts.
 
-- `index.html` — documento único: abertura de uma tela (nome, quadro dos três registros canônicos
-  e o portal do blog), e rolando abaixo dela as seções 1 Artigos e textos e 2 Prêmios e atuação,
-  com as referências em NBR 6023. **Escrita à mão**, não passa pelo gerador.
+- `index.html` — uma tela só: nome, quadro dos três registros canônicos (Lattes, LinkedIn, GitHub)
+  e o portal do blog. **Escrita à mão**, não passa pelo gerador. Cada mudança no `estilo.css` exige
+  bumpar o `?v=N` do link aqui, senão o navegador serve o CSS velho (o Pages não honra
+  `Cache-Control` em asset da raiz).
 - `blog.html` — servida em `/blog`: o arquivo **oqojfr?**, um registro por projeto. **Gerado.**
 - `blog/<slug>.html` — um post por projeto. **Gerados.**
 - `posts/*.md` — a fonte dos posts, o que se escreve à mão.

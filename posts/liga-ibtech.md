@@ -1,7 +1,7 @@
 ---
 slug: liga-ibtech
 titulo: Liga Acadêmica IbTech
-sub: Vice-presidência: trilhas de formação, revisão das entregas e credenciais verificáveis
+sub: Diretoria acadêmica na chapa unificada: trilhas de formação, revisão das entregas e credenciais verificáveis
 data: 2026-08-16
 stack: [Node.js, Ethereum, Open Badges 3.0, Blockcerts, SHA-256]
 competencias: [liderança, criptografia aplicada, revisão de código, processo]
@@ -11,7 +11,7 @@ repo: https://github.com/joshazze/ibtech-credenciais
 
 ## Contexto
 
-A IbTech é a liga de software do Ibmec BH. Eu sou vice-presidente, e o trabalho tem três frentes que não se parecem: montar as trilhas de formação, revisar o que os membros entregam, e resolver o problema chato que toda liga acadêmica tem no fim do ciclo.
+A IbTech é a liga de software do Ibmec BH. Eu sou diretor acadêmico na alta cúpula da chapa unificada, e o trabalho tem três frentes que não se parecem: montar as trilhas de formação, revisar o que os membros entregam, e resolver o problema chato que toda liga acadêmica tem no fim do ciclo.
 
 O problema chato é o certificado. Ele existe para o membro colocar no LinkedIn e para o recrutador acreditar. Só que o certificado acadêmico brasileiro típico é um PDF com uma assinatura escaneada, e a única coisa que ele prova é que alguém tem Canva. Qualquer pessoa refaz o seu em dez minutos, com o nome trocado. A liga sabe disso, o membro sabe disso, e o recrutador também.
 

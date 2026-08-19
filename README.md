@@ -3,9 +3,9 @@
 Registro público de Joshua Azze Distel em `jadistel.com`, com a assinatura acadêmica J. A.
 Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Google Fonts.
 
-- `index.html` — documento único: abertura de uma tela (nome, quadro dos registros canônicos e o
-  blog), e rolando abaixo dela as seções 1 Artigos e textos e 2 Prêmios e atuação, com as
-  referências em NBR 6023. **Escrita à mão**, não passa pelo gerador.
+- `index.html` — documento único: abertura de uma tela (nome, quadro dos três registros canônicos
+  e o portal do blog), e rolando abaixo dela as seções 1 Artigos e textos e 2 Prêmios e atuação,
+  com as referências em NBR 6023. **Escrita à mão**, não passa pelo gerador.
 - `blog.html` — servida em `/blog`: o arquivo **oqojfr?**, um registro por projeto. **Gerado.**
 - `blog/<slug>.html` — um post por projeto. **Gerados.**
 - `posts/*.md` — a fonte dos posts, o que se escreve à mão.
@@ -32,6 +32,11 @@ a única requisição externa é o Fraunces do Google Fonts, usado só no wordma
 
 Segue `prefers-color-scheme`: claro é o subSilver original, escuro mantém a mesma estrutura com as
 superfícies rebaixadas.
+
+O bloco que leva ao fórum a partir da home (`.portal` em `estilo.css`) é desenhado como o fórum,
+não como o quadro do documento: barra de categoria azul, pastinha de tópico, Verdana e a grade de
+1px. Ele tem tokens próprios, não puxa `forum.css`, e fica fora do ciclo de destaque do `vivo.js`
+por não ser `.linha`.
 
 A lista é cronológica com o mais recente no topo. Não existe "atualizado há X dias", nem "última
 mensagem", nem contador de respostas, nem qualquer marca que sugira projeto abandonado. A única

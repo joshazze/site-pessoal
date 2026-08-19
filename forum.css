@@ -20,6 +20,7 @@
 
   --sans: Verdana, Geneva, Tahoma, "DejaVu Sans", sans-serif;
   --mono: "Courier New", Courier, monospace;
+  --marca-fonte: Poppins, "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,21 +63,33 @@ a:focus-visible { outline: 2px solid var(--cabeca); outline-offset: 1px; }
 
 /* ---------- cabeçalho e menu ---------- */
 
-.logo { padding: 18px 0 12px; text-align: center; }
+.logo { padding: 20px 0 13px; text-align: center; }
 
+/* o wordmark é a única coisa do fórum que não é Verdana: quatro bocas redondas
+   (o, q, o, j) pedem geométrica, e aí o ponto do j e o ? viram desenho */
 .logo .marca {
   display: block;
-  font-size: 30px;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-family: var(--marca-fonte);
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1;
   color: var(--marca-cor);
 }
 
 .logo .tagline {
   display: block;
-  margin-top: 3px;
+  margin-top: 7px;
+  font-family: var(--marca-fonte);
   font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .11em;
   color: var(--tinta-2);
+}
+
+@media (max-width: 700px) {
+  .logo .marca { font-size: 31px; }
+  .logo .tagline { font-size: 10.5px; letter-spacing: .07em; }
 }
 
 .menu {

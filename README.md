@@ -12,6 +12,7 @@ Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Googl
 - `gerar.py` — transforma `posts/*.md` em `blog.html`, `blog/*.html` e `sitemap.xml`.
 - `estilo.css` / `vivo.js` — identidade e movimento da home.
 - `forum.css` — identidade do fórum. Sem JavaScript: o blog é estático de verdade.
+  O wordmark é a única peça fora do Verdana: Poppins 700, com fallback para Trebuchet MS.
 
 ## Design
 
@@ -25,7 +26,8 @@ Verdana no corpo e Courier New no código. Índice em tabela de tópicos; post c
 à esquerda (nome, patente, avatar, registrado em, mensagens) e a mensagem à direita. Citação e
 código vêm nas caixas com a barrinha "Citar:" e "Código:".
 
-Zero animação e zero JavaScript. Fontes do sistema, nenhuma requisição externa.
+Zero animação e zero JavaScript. O corpo todo usa fonte do sistema (Verdana, Courier New);
+a única requisição externa é o Poppins do Google Fonts, usado só no wordmark e na tagline.
 
 Segue `prefers-color-scheme`: claro é o subSilver original, escuro mantém a mesma estrutura com as
 superfícies rebaixadas.

@@ -3,59 +3,90 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{{TITULO}} | oqojfr?</title>
+<title>oqojfr? :: Ver tópico: {{TITULO}}</title>
 <meta name="description" content="{{DESC}}">
-<meta name="theme-color" content="#0a0713">
-<meta property="og:title" content="{{TITULO}} | oqojfr?">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="{{TITULO}} :: oqojfr?">
 <meta property="og:description" content="{{DESC}}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jadistel.com/blog/{{SLUG}}">
 <link rel="canonical" href="https://jadistel.com/blog/{{SLUG}}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IBM+Plex+Mono:wght@400;500&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/retro.css?v={{V}}">
+<link rel="stylesheet" href="/forum.css?v={{V}}">
 </head>
-<body class="pagina-post" data-pagina="{{SLUG}}">
+<body>
 
-<main>
+<div class="pagina">
 
-  <a class="volta" href="/blog" data-ev="voltar-arquivo">◀ arquivo</a>
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
 
-  <article>
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Registro acadêmico</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
 
-    <header class="post-capa">
-      <p class="sub-marca" style="letter-spacing:.2em">{{DATA_LONGA}}</p>
-      <h1>{{TITULO}}</h1>
-      <p class="sub">{{SUB}}</p>
-      <dl class="ficha">
-        <div>
-          <dt>stack</dt>
-          <dd class="tags">{{STACK}}</dd>
-        </div>
-        <div>
-          <dt>competências</dt>
-          <dd class="tags">{{COMPETENCIAS}}</dd>
-        </div>
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » {{TITULO}}</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: {{MEMBRO_DESDE}}</span>
+          <span class="stat">Mensagens: {{TOTAL}}</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>{{DATA}}</b></span>
+            <span>Assunto: <b>{{TITULO}}</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>{{SUB}}</dd>
+              <dt>Stack</dt><dd>{{STACK}}</dd>
+              <dt>Competências</dt><dd>{{COMPETENCIAS}}</dd>
 {{LINKS}}
-      </dl>
-    </header>
+            </dl>
+          </div>
 
-    <div class="artigo">
+          <div class="corpo">
 {{CORPO}}
-    </div>
+          </div>
 
-  </article>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20{{SLUG}}">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
 
 {{NAV}}
 
-  <footer class="pe-retro">
-    <span><a href="/blog">◀ oqojfr?</a></span>
-    <span><a href="/">J. A. Distel</a></span>
-  </footer>
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
 
-</main>
+</div>
 
-<script src="/retro.js?v={{V}}"></script>
 </body>
 </html>

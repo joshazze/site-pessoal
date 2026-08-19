@@ -1,0 +1,381 @@
+/* oqojfr? — fórum estático. paleta e mobiliário do phpBB 2 subSilver, que é o que
+   todo mundo tinha em 2003. sem animação, sem gradiente, sem sombra colorida.
+   fontes do sistema: Verdana e Courier New já estão no Mac e no Windows. */
+
+:root {
+  color-scheme: light;
+
+  --pagina:   #e5e5e5;
+  --moldura:  #98aab1;   /* borda externa e o espaço de 1px entre células */
+  --cat:      #d1d7dc;   /* barra de categoria */
+  --cabeca:   #006699;   /* th, o azul do subSilver */
+  --linha-a:  #efefef;
+  --linha-b:  #dee3e7;
+  --tinta:    #0b0b0b;
+  --tinta-2:  #4a5560;
+  --link:     #006699;
+  --visitado: #4f7f9b;
+  --botao:    #e8eaec;
+  --marca-cor: #006699;
+
+  --sans: Verdana, Geneva, Tahoma, "DejaVu Sans", sans-serif;
+  --mono: "Courier New", Courier, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --pagina:   #16181c;
+    --moldura:  #3a4147;
+    --cat:      #2a2f36;
+    --cabeca:   #0a4f73;
+    --linha-a:  #22252a;
+    --linha-b:  #2a2e35;
+    --tinta:    #e8e8e8;
+    --tinta-2:  #a8b2bd;
+    --link:     #7cc4e8;
+    --visitado: #a99bd4;
+    --botao:    #2f343b;
+    --marca-cor: #7cc4e8;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 8px 34px;
+  background: var(--pagina);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:visited { color: var(--visitado); }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--cabeca); outline-offset: 1px; }
+
+.pagina { max-width: 840px; margin: 0 auto; }
+
+/* ---------- cabeçalho e menu ---------- */
+
+.logo { padding: 18px 0 12px; text-align: center; }
+
+.logo .marca {
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--marca-cor);
+}
+
+.logo .tagline {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--tinta-2);
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 14px;
+  margin: 0 0 14px;
+  padding: 6px 8px;
+  list-style: none;
+  border-top: 1px solid var(--moldura);
+  border-bottom: 1px solid var(--moldura);
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.trilha { margin: 0 0 8px; font-size: 11px; font-weight: bold; color: var(--tinta-2); }
+.trilha a { font-weight: bold; }
+
+/* ---------- a tabela, que é o fórum inteiro ---------- */
+
+.quadro {
+  width: 100%;
+  border: 1px solid var(--moldura);
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: var(--moldura);
+  font-size: 12px;
+}
+
+.quadro th {
+  padding: 4px 8px;
+  background: var(--cabeca);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: .02em;
+}
+
+.quadro th.cat {
+  background: var(--cat);
+  color: var(--tinta);
+  font-size: 12px;
+}
+
+.quadro td { padding: 7px 8px; background: var(--linha-a); vertical-align: top; }
+.quadro tr:nth-child(even) td { background: var(--linha-b); }
+
+/* ---------- linha de tópico ---------- */
+
+.assunto { line-height: 1.45; }
+
+/* a pastinha amarela, desenhada, sem imagem */
+.pasta {
+  display: inline-block;
+  width: 15px; height: 12px;
+  margin-right: 6px;
+  vertical-align: -1px;
+  border: 1px solid #7d6a1e;
+  border-radius: 1px 2px 2px 2px;
+  background: linear-gradient(#f7dd7c, #e3bf3d);
+}
+
+.pasta::before {
+  content: "";
+  display: block;
+  width: 6px; height: 2px;
+  margin: -3px 0 0 1px;
+  border: 1px solid #7d6a1e;
+  border-bottom: 0;
+  border-radius: 1px 1px 0 0;
+  background: #f7dd7c;
+}
+
+.titulo { font-size: 13px; font-weight: bold; }
+.resumo { display: block; margin-top: 2px; color: var(--tinta-2); font-size: 11px; }
+
+.marcas { display: block; margin-top: 5px; }
+
+.marca-item {
+  display: inline-block;
+  margin: 2px 3px 0 0;
+  padding: 0 4px;
+  border: 1px solid var(--moldura);
+  background: var(--botao);
+  color: var(--tinta-2);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.autor, .data, .num { white-space: nowrap; font-size: 11px; }
+.data, .num, th.data, th.num { text-align: center; }
+.data, .num { color: var(--tinta-2); }
+
+/* ---------- o post ---------- */
+
+.col-autor { width: 170px; }
+
+.perfil { width: 170px; text-align: center; font-size: 11px; color: var(--tinta-2); }
+.perfil .nome { display: block; font-size: 13px; font-weight: bold; color: var(--link); }
+.perfil .patente { display: block; margin-top: 1px; font-size: 10px; }
+
+.perfil .avatar {
+  display: block;
+  width: 64px; height: 64px;
+  margin: 8px auto;
+  border: 1px solid var(--moldura);
+  background: var(--botao);
+  color: var(--tinta-2);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 62px;
+}
+
+.perfil .stat { display: block; }
+
+.mensagem { font-size: 14px; }
+
+.cabecalho-msg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  padding-bottom: 5px;
+  margin-bottom: 9px;
+  border-bottom: 1px solid var(--moldura);
+  font-size: 11px;
+  color: var(--tinta-2);
+}
+
+.cabecalho-msg b { color: var(--tinta); }
+
+/* ficha do projeto, no lugar da assinatura */
+.ficha {
+  margin: 0 0 14px;
+  padding: 7px 9px;
+  border: 1px solid var(--moldura);
+  background: var(--pagina);
+  font-size: 11px;
+}
+
+.ficha dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; margin: 0; }
+.ficha dt { font-weight: bold; color: var(--tinta-2); white-space: nowrap; }
+.ficha dd { margin: 0; }
+
+/* ---------- corpo da mensagem ---------- */
+
+.corpo { line-height: 1.65; }
+
+.corpo h2 {
+  margin: 20px 0 7px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--moldura);
+  color: var(--cabeca);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+@media (prefers-color-scheme: dark) { .corpo h2 { color: var(--link); } }
+
+.corpo h3 { margin: 15px 0 4px; font-size: 12px; font-weight: bold; }
+.corpo p { margin: 0 0 11px; }
+.corpo ul, .corpo ol { margin: 0 0 11px; padding-left: 22px; }
+.corpo li { margin-bottom: 4px; }
+.corpo strong { font-weight: bold; }
+.corpo img { max-width: 100%; height: auto; border: 1px solid var(--moldura); }
+
+/* a caixa de citação, com a barrinha "Citar:" em cima */
+.corpo blockquote {
+  margin: 0 0 11px;
+  padding: 6px 9px;
+  border: 1px solid var(--moldura);
+  background: var(--linha-b);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--tinta-2);
+}
+
+.corpo blockquote::before {
+  content: "Citar:";
+  display: block;
+  margin: -6px -9px 6px;
+  padding: 2px 9px;
+  border-bottom: 1px solid var(--moldura);
+  background: var(--cat);
+  color: var(--tinta);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.corpo code {
+  padding: 0 2px;
+  background: var(--linha-b);
+  font-family: var(--mono);
+  font-size: 1em;
+  color: var(--tinta);
+  white-space: nowrap;
+}
+
+.corpo pre {
+  margin: 0 0 11px;
+  padding: 6px 9px;
+  overflow-x: auto;
+  border: 1px solid var(--moldura);
+  background: var(--linha-b);
+}
+
+.corpo pre::before {
+  content: "Código:";
+  display: block;
+  margin: -6px -9px 6px;
+  padding: 2px 9px;
+  border-bottom: 1px solid var(--moldura);
+  background: var(--cat);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.corpo pre code { padding: 0; background: none; white-space: pre; font-size: 12px; line-height: 1.6; }
+
+/* ---------- botões e paginação ---------- */
+
+.acoes { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+
+.botao {
+  padding: 3px 10px;
+  border: 1px solid var(--moldura);
+  border-top-color: #fff;
+  border-left-color: #fff;
+  background: var(--botao);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  .botao { border-top-color: #4d555d; border-left-color: #4d555d; }
+}
+
+.botao:hover { text-decoration: none; background: var(--linha-b); }
+
+.rodape-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  justify-content: space-between;
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--tinta-2);
+}
+
+.pe {
+  margin-top: 22px;
+  padding-top: 9px;
+  border-top: 1px solid var(--moldura);
+  font-size: 10px;
+  color: var(--tinta-2);
+  text-align: center;
+}
+
+/* ---------- estreito: a tabela larga não cabe, então ela deita ---------- */
+
+@media (max-width: 700px) {
+  body { font-size: 14px; }
+  .quadro { font-size: 13px; }
+  .quadro .esconde-estreito { display: none; }
+  .mensagem { font-size: 14px; }
+
+  .col-autor { width: auto; }
+
+  /* o post vira uma coluna: perfil vira faixa em cima da mensagem */
+  .quadro.post thead { display: none; }
+  .quadro.post tr, .quadro.post td { display: block; width: auto; }
+
+  .perfil {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 10px;
+    text-align: left;
+  }
+
+  .perfil .avatar { width: 34px; height: 34px; margin: 0; font-size: 14px; line-height: 32px; }
+  .perfil .nome { font-size: 12px; }
+}
+
+/* ---------- impressão ---------- */
+
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .menu, .acoes, .paginacao, .perfil .avatar { display: none; }
+  .quadro { border-spacing: 0; }
+  .quadro td, .quadro th { border: 1px solid #999; background: #fff; color: #000; }
+}

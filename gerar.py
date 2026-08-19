@@ -22,14 +22,10 @@ POSTS = RAIZ / "posts"
 MODELO = RAIZ / "modelo"
 SAIDA_POSTS = RAIZ / "blog"
 
-VERSAO = "1"  # cache buster de retro.css e retro.js
+VERSAO = "1"  # cache buster do forum.css
 
-MES_LED = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN",
-           "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
-MES_CURTO = ["jan", "fev", "mar", "abr", "maio", "jun",
-             "jul", "ago", "set", "out", "nov", "dez"]
-MES_LONGO = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
-             "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+MES_FORUM = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+             "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
 
 # o esqueleto que todo post tem que ter. "Como funciona" é opcional: prêmio e
 # artigo não têm como funcionar, projeto tem.
@@ -207,80 +203,35 @@ def ler_data(txt, arquivo):
         erro(arquivo, f"data inválida: {txt!r} (use AAAA-MM-DD)")
 
 
-def curta(d):
-    return f"{MES_CURTO[d.month - 1]} {d.year}"
+def data_forum(d):
+    """o formato que o phpBB imprimia: 15 Ago 2026."""
+    return f"{d.day:02d} {MES_FORUM[d.month - 1]} {d.year}"
 
 
-def longa(d):
-    return f"{d.day} de {MES_LONGO[d.month - 1]} de {d.year}"
-
-
-# ------------------------------------------------------------- time circuits
-
-def celula(cap, largura, valor):
-    """um mostrador: o fantasma dos segmentos apagados embaixo, o valor aceso em cima.
-    valor vazio deixa a célula escura de propósito, que é mais honesto do que chutar."""
-    aceso = html.escape(valor, quote=True) if valor else ""
-    return (
-        f'<span class="cel"><span class="cap">{cap}</span>'
-        f'<span class="led"><span class="off">{"8" * largura}</span>'
-        f'<span class="on">{aceso}</span></span></span>'
-    )
-
-
-def circuito(cor, rotulo, d, ids=""):
-    """post só tem data, não tem hora: hora e minuto ficam com os segmentos apagados.
-    o único mostrador com hora acesa é o PRESENT TIME, e quem acende é o retro.js."""
-    if d:
-        mes, dia, ano = MES_LED[d.month - 1], f"{d.day:02d}", str(d.year)
-    else:
-        mes = dia = ano = ""
-    celulas = [
-        celula("mês", 3, mes),
-        celula("dia", 2, dia),
-        celula("ano", 4, ano),
-        celula("hora", 2, ""),
-        celula("min", 2, ""),
-    ]
-    return (
-        f'    <div class="circuito" data-cor="{cor}"{ids}>\n'
-        f'      <span class="rotulo">{rotulo}</span>\n'
-        f'      <div class="mostrador">{"".join(celulas)}</div>\n'
-        f"    </div>"
-    )
-
-
-def bloco_circuitos(posts):
-    destino = posts[0]["data"] if posts else None
-    partida = posts[1]["data"] if len(posts) > 1 else None
-    linhas = [
-        '  <section class="circuitos" aria-label="Time circuits">',
-        circuito("dest", "destination time", destino, ids=' id="c-destino"'),
-        circuito("pres", "present time", None, ids=' id="c-presente"'),
-        circuito("part", "last time departed", partida, ids=' id="c-partida"'),
-        "  </section>",
-    ]
-    return "\n".join(linhas)
+def mes_ano(d):
+    return f"{MES_FORUM[d.month - 1]} {d.year}"
 
 
 # ------------------------------------------------------------------ montagem
 
-def tags(itens, classe=""):
-    c = f"tag {classe}".strip()
-    return "".join(f'<span class="{c}">{html.escape(str(i), quote=True)}</span>' for i in itens)
+def marcas(itens):
+    return "".join(
+        f'<span class="marca-item">{html.escape(str(i), quote=True)}</span>' for i in itens
+    )
 
 
-def linha_topico(p, numero):
-    lista_tags = tags(p["stack"][:5]) + tags(p["competencias"][:3], "comp")
-    return f"""    <a class="topico" href="/blog/{p['slug']}"
-       data-ev="abrir-topico" data-alvo="{p['slug']}" data-data="{p['data'].isoformat()}">
-      <span class="n">#{numero:02d}</span>
-      <span class="titulo">{html.escape(p['titulo'], quote=True)}</span>
-      <span class="resumo">{html.escape(p['sub'], quote=True)}</span>
-      <span class="quando">{curta(p['data'])}</span>
-      <span class="tags">{lista_tags}</span>
-      <span class="views" hidden></span>
-    </a>"""
+def linha_topico(p):
+    """uma linha da tabela do índice. sem coluna de respostas e sem 'última mensagem':
+    as duas gritam vazio ou abandono, que é o que não pode aparecer."""
+    return f"""      <tr>
+        <td class="assunto">
+          <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/{p['slug']}">{html.escape(p['titulo'], quote=True)}</a>
+          <span class="resumo">{html.escape(p['sub'], quote=True)}</span>
+          <span class="marcas">{marcas(p['stack'][:6])}</span>
+        </td>
+        <td class="autor esconde-estreito">joshazze</td>
+        <td class="data esconde-estreito">{data_forum(p['data'])}</td>
+      </tr>"""
 
 
 def bloco_links(p):
@@ -288,40 +239,34 @@ def bloco_links(p):
     if p.get("link"):
         u = url_segura(p["link"])
         rotulo = re.sub(r"^https?://(www\.)?", "", u).rstrip("/")
-        linhas.append(
-            f"        <div>\n          <dt>no ar</dt>\n"
-            f'          <dd><a href="{html.escape(u, quote=True)}" data-ev="link-projeto">'
-            f"{html.escape(rotulo, quote=True)}</a></dd>\n        </div>"
-        )
+        linhas.append(f'              <dt>No ar</dt><dd><a href="{html.escape(u, quote=True)}">'
+                      f"{html.escape(rotulo, quote=True)}</a></dd>")
     if p.get("repo"):
         u = url_segura(p["repo"])
         rotulo = re.sub(r"^https?://(www\.)?github\.com/", "", u).rstrip("/")
-        linhas.append(
-            f"        <div>\n          <dt>código</dt>\n"
-            f'          <dd><a href="{html.escape(u, quote=True)}" data-ev="link-repo">'
-            f"{html.escape(rotulo, quote=True)}</a></dd>\n        </div>"
-        )
+        linhas.append(f'              <dt>Código</dt><dd><a href="{html.escape(u, quote=True)}">'
+                      f"{html.escape(rotulo, quote=True)}</a></dd>")
     return "\n".join(linhas)
 
 
 def bloco_nav(posts, i):
-    """cronologia: o de cima é mais novo. 'anterior' anda pro passado."""
-    partes = []
+    """paginação de fórum. a lista desce do mais novo pro mais velho, então
+    'anterior' anda pro passado."""
+    esq = dir_ = ""
     if i + 1 < len(posts):
-        velho = posts[i + 1]
-        partes.append(
-            f'    <a href="/blog/{velho["slug"]}" data-ev="nav-anterior">◀ {curta(velho["data"])}'
-            f'<b>{html.escape(velho["titulo"], quote=True)}</b></a>'
-        )
+        v = posts[i + 1]
+        esq = (f'<a href="/blog/{v["slug"]}">&laquo; Tópico anterior: '
+               f'{html.escape(v["titulo"], quote=True)}</a>')
     if i - 1 >= 0:
-        novo = posts[i - 1]
-        partes.append(
-            f'    <a class="dir" href="/blog/{novo["slug"]}" data-ev="nav-proximo">'
-            f'{curta(novo["data"])} ▶<b>{html.escape(novo["titulo"], quote=True)}</b></a>'
-        )
-    if not partes:
+        n = posts[i - 1]
+        dir_ = (f'<a href="/blog/{n["slug"]}">Próximo tópico: '
+                f'{html.escape(n["titulo"], quote=True)} &raquo;</a>')
+    if not esq and not dir_:
         return ""
-    return '  <nav class="circuito-nav">\n' + "\n".join(partes) + "\n  </nav>"
+    return ('  <p class="rodape-info">\n'
+            f"    <span>{esq}</span>\n"
+            f"    <span>{dir_}</span>\n"
+            "  </p>")
 
 
 def preencher(modelo, campos):
@@ -394,9 +339,8 @@ def main():
 
     indice = preencher(modelo_indice, {
         "V": VERSAO,
-        "CONTAGEM": f"{total} registro" + ("s" if total != 1 else ""),
-        "CIRCUITOS": bloco_circuitos(posts),
-        "TOPICOS": "\n".join(linha_topico(p, total - i) for i, p in enumerate(posts)),
+        "CONTAGEM": f"{total} tópico" + ("s" if total != 1 else ""),
+        "TOPICOS": "\n".join(linha_topico(p) for p in posts),
     })
     (RAIZ / "blog.html").write_text(indice, encoding="utf-8")
 
@@ -417,9 +361,11 @@ def main():
             "TITULO": html.escape(p["titulo"], quote=True),
             "SUB": html.escape(p["sub"], quote=True),
             "DESC": html.escape(f"{p['titulo']}: {p['sub']}", quote=True),
-            "DATA_LONGA": longa(p["data"]),
-            "STACK": tags(p["stack"]),
-            "COMPETENCIAS": tags(p["competencias"], "comp"),
+            "DATA": data_forum(p["data"]),
+            "MEMBRO_DESDE": mes_ano(posts[-1]["data"]),
+            "TOTAL": str(total),
+            "STACK": marcas(p["stack"]),
+            "COMPETENCIAS": marcas(p["competencias"]),
             "LINKS": bloco_links(p),
             "CORPO": p["corpo"],
             "NAV": bloco_nav(posts, i),

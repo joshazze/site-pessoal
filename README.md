@@ -11,7 +11,7 @@ Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Googl
 - `modelo/` — os dois templates que o gerador preenche.
 - `gerar.py` — transforma `posts/*.md` em `blog.html`, `blog/*.html` e `sitemap.xml`.
 - `estilo.css` / `vivo.js` — identidade e movimento da home.
-- `retro.css` / `retro.js` — identidade e movimento do blog.
+- `forum.css` — identidade do fórum. Sem JavaScript: o blog é estático de verdade.
 
 ## Design
 
@@ -19,21 +19,20 @@ Distel. HTML e CSS puros, sem build e sem dependência além das fontes do Googl
 justificado com hifenização, seções numeradas, quadro com legenda e "Fonte:", referências ABNT.
 Segue `prefers-color-scheme`.
 
-**Blog (`oqojfr?`):** retro futurista de 1985, com o painel de time circuits do DeLorean como
-cabeçalho. Tema escuro fixo, porque é cena noturna. Neon e LED só em título, moldura, mostrador e
-acento; corpo de texto sempre em alto contraste, nunca em neon. Wordmark cromado em Alfa Slab One,
-corpo do post em Tinos para não sacrificar legibilidade.
+**Blog (`oqojfr?`):** fórum de 2003. Paleta e mobiliário do subSilver, o tema padrão do phpBB 2:
+tabela com espaçamento de 1px, barra de categoria, `th` azul `#006699`, linhas alternadas,
+Verdana no corpo e Courier New no código. Índice em tabela de tópicos; post com a coluna de perfil
+à esquerda (nome, patente, avatar, registrado em, mensagens) e a mensagem à direita. Citação e
+código vêm nas caixas com a barrinha "Citar:" e "Código:".
 
-Os três mostradores nunca falam de atualização, só de posição na cronologia:
+Zero animação e zero JavaScript. Fontes do sistema, nenhuma requisição externa.
 
-| Mostrador | O que mostra |
-|---|---|
-| `DESTINATION TIME` | data do post em foco |
-| `PRESENT TIME` | agora, contando sozinho |
-| `LAST TIME DEPARTED` | o post anterior na linha do tempo |
+Segue `prefers-color-scheme`: claro é o subSilver original, escuro mantém a mesma estrutura com as
+superfícies rebaixadas.
 
-A lista é cronológica com o mais recente no topo. Não existe "atualizado há X dias", nem contador
-de respostas, nem qualquer marca que sugira projeto abandonado.
+A lista é cronológica com o mais recente no topo. Não existe "atualizado há X dias", nem "última
+mensagem", nem contador de respostas, nem qualquer marca que sugira projeto abandonado. A única
+data que aparece é a do post.
 
 ## Escrever um post
 
@@ -77,7 +76,7 @@ git add posts blog.html blog sitemap.xml && git commit
 O HTML gerado **vai commitado**: é isso que mantém o Pages servindo arquivo cru, sem build.
 Apagar um `.md` e rodar o gerador remove a página órfã de `blog/`.
 
-## O que é vivo, não reativo
+## O que é vivo, não reativo (só na home)
 
 Coisas que acontecem sem ninguém tocar na tela:
 
@@ -87,10 +86,9 @@ Coisas que acontecem sem ninguém tocar na tela:
    é recalculado a cada trinta segundos.
 3. **Quadro que respira**: uma linha acende de cada vez, em ciclo. Qualquer toque cala o ciclo por
    12 s, porque quem interage manda.
-4. **Time circuits**: `PRESENT TIME` conta de segundo em segundo e `DESTINATION TIME` percorre o
-   arquivo sozinho, com a mesma regra dos 12 s.
 
-`prefers-reduced-motion: reduce` desliga o movimento decorativo e mantém o dado vivo.
+`prefers-reduced-motion: reduce` desliga o movimento decorativo e mantém o dado vivo. O fórum não
+tem nada disso: ele é estático por decisão.
 
 ## Deploy no Cloudflare Pages
 

@@ -10,6 +10,8 @@ link: https://atleticaibmecbh.com.br
 
 ## Contexto
 
+Uma observação antes: me afastei da atlética e hoje não acompanho mais o andamento do site. O texto abaixo descreve o projeto até a minha saída.
+
 Uma atlética universitária vende bastante coisa: camisa, caneca, ingresso de festa, kit de calouro. Na maioria delas a venda acontece por um post no Instagram com a foto do produto, um formulário para o pedido e uma planilha compartilhada em que alguém da diretoria anota quantas camisas M ainda restam.
 
 O arranjo aguenta até duas pessoas reservarem a última peça no mesmo minuto. Aí alguém precisa escrever para uma delas, pedir desculpas e cancelar o pedido, e a planilha continua sem saber por que aquilo aconteceu.

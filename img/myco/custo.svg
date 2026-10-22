@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220" role="img"><title>Custo de um ataque de dicionário com e sem iterações</title><style>
+text{font-family:Verdana,Geneva,Tahoma,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.ln{stroke:#c9c8c2}.lnf{fill:#c9c8c2}
+.s1{fill:#2a78d6}.s1s{stroke:#2a78d6}.s2{fill:#eb6834}.s2s{stroke:#eb6834}.s3{fill:#1baf7a}.s3s{stroke:#1baf7a}
+.box{fill:#f2f1ed;stroke:#c9c8c2}.b1{fill:#eaf1fb;stroke:#2a78d6}.b2{fill:#fcefe8;stroke:#eb6834}.b3{fill:#e7f6f0;stroke:#1baf7a}
+@media (prefers-color-scheme: dark){
+.bg{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.ln{stroke:#55544f}.lnf{fill:#55544f}
+.s1{fill:#3987e5}.s1s{stroke:#3987e5}.s2{fill:#d95926}.s2s{stroke:#d95926}.s3{fill:#199e70}.s3s{stroke:#199e70}
+.box{fill:#24241f;stroke:#55544f}.b1{fill:#1b2633;stroke:#3987e5}.b2{fill:#30211a;stroke:#d95926}.b3{fill:#172a23;stroke:#199e70}}
+</style><rect class="bg" width="760" height="220" rx="6"/><text x="20" y="30" class="t1" font-size="14" text-anchor="start" font-weight="bold">tempo para testar 1 milhão de senhas contra a base cifrada</text><text x="20" y="50" class="t2" font-size="11" text-anchor="start" font-weight="normal">medido num núcleo de um MacBook (PBKDF2-SHA256 do OpenSSL). uma GPU dedicada vai bem mais rápido.</text><text x="200" y="98" class="t2" font-size="12" text-anchor="end" font-weight="normal">1 iteração</text><path class="s1" d="M210,84 L210,84 Q212,84 212,86 L212,104 Q212,106 210,106 L210,106 Z"/><text x="220" y="100" class="t1" font-size="12" text-anchor="start" font-weight="normal">cerca de 1 segundo</text><text x="200" y="148" class="t2" font-size="12" text-anchor="end" font-weight="normal">250.000 iterações</text><path class="s2" d="M210,134 L597,134 Q600,134 600,137 L600,153 Q600,156 597,156 L210,156 Z"/><text x="610" y="150" class="t1" font-size="12" text-anchor="start" font-weight="normal">cerca de 4,8 horas</text><text x="20" y="200" class="t2" font-size="11.5" text-anchor="start" font-weight="normal">cada palpite passa de 1 µs para 17 ms: o ataque fica cerca de 17 mil vezes mais lento.</text></svg>

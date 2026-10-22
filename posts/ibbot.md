@@ -41,3 +41,4 @@ A lição mais difícil foi sobre o que a liga entrega ao membro. No fim do cicl
 - Liga cofundada em agosto de 2025 e dirigida desde então, com diretoria colegiada em três pilares, pensada para operar junto da liga de software.
 - Primeira leva de credenciais emitida em 10 de agosto de 2026: 7 certificados de conclusão de ciclo e 2 honrarias, no padrão verificável da IbTech, com identidade visual própria e no ar na mesma noite.
 - Três projetos de hardware especificados com orçamento e cronograma, somando cerca de R$ 10 mil em material, e uma nova linha de materiais avançados e dispositivos assistivos.
+- Instagram da liga: [@ibbotbh](https://www.instagram.com/ibbotbh).

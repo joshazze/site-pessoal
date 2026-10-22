@@ -18,6 +18,14 @@ A liga criou uma conta própria. Meu trabalho foi trazer o site para ela sem que
 
 Reconstruí o site sobre contas da liga. Páginas estáticas no Cloudflare Pages, conteúdo dinâmico no Supabase, custo zero.
 
+![Abertura do site da IbDesign no computador](/img/ibdesign/desktop.png)
+
+*A primeira tela de [ibdesign.org](https://ibdesign.org) no computador.*
+
+![Site da IbDesign no celular](/img/ibdesign/celular.png)
+
+*A mesma tela no celular.*
+
 Como o deploy antigo era pré-renderizado, o HTML servido já trazia a página pronta. Escrevi um script em Python que remove o runtime do Next, aponta CSS, fontes e imagens para arquivos locais e preserva classes e estilos, o que mantém a aparência idêntica. As interações que dependiam de React viraram cerca de 150 linhas de JavaScript puro: a abertura com contador, o menu do celular, a barra que se esconde ao rolar e a linha do tempo arrastável.
 
 Aproveitei para corrigir o que estava quebrado. Os dez links do menu apontavam todos para a página inicial, os botões de contato levavam a um email num domínio que nunca existiu, e faltavam `robots.txt`, `sitemap.xml` e uma página 404.

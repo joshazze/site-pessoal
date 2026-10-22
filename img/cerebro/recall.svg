@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 274" width="760" height="274" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="760" height="274" fill="#fcfcfb"/>
+<text x="30.00" y="36.00" font-size="12.0" fill="#0b0b0b" text-anchor="start" font-weight="600">bytes de recall injetados no início de cada sessão</text>
+<text x="30.00" y="54.00" font-size="11.0" fill="#8a8983" text-anchor="start" font-weight="400">o mesmo número em tokens à direita: é o que se paga em TODO turno da conversa</text>
+<rect x="210.00" y="74.00" width="360.00" height="26.00" rx="4.0" fill="#eb6834" fill-opacity="1.00"/>
+<text x="198.00" y="92.00" font-size="11.0" fill="#52514e" text-anchor="end" font-weight="400">despejo de conteúdo (antes)</text>
+<text x="580.00" y="92.00" font-size="11.0" fill="#0b0b0b" text-anchor="start" font-weight="600">426.1 KB  ·  ~109.071 tokens</text>
+<rect x="210.00" y="118.00" width="11.30" height="26.00" rx="4.0" fill="#2a78d6" fill-opacity="1.00"/>
+<text x="198.00" y="136.00" font-size="11.0" fill="#52514e" text-anchor="end" font-weight="400">índice, dia cheio</text>
+<text x="231.30" y="136.00" font-size="11.0" fill="#0b0b0b" text-anchor="start" font-weight="600">13.4 KB  ·  ~3.425 tokens</text>
+<rect x="210.00" y="162.00" width="3.63" height="26.00" rx="4.0" fill="#2a78d6" fill-opacity="1.00"/>
+<text x="198.00" y="180.00" font-size="11.0" fill="#52514e" text-anchor="end" font-weight="400">índice, dia calmo</text>
+<text x="223.63" y="180.00" font-size="11.0" fill="#0b0b0b" text-anchor="start" font-weight="600">4.3 KB  ·  ~1.100 tokens</text>
+<line x1="210.00" y1="64.00" x2="210.00" y2="188.00" stroke="#e6e5e1" stroke-width="1.50" stroke-opacity="1.00" stroke-linecap="round"/>
+<text x="30.00" y="252.00" font-size="11.0" fill="#8a8983" text-anchor="start" font-weight="400">corte de 99 vezes entre a primeira barra e a última.</text>
+</svg>

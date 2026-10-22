@@ -79,7 +79,11 @@
 <p>O exemplo aqui é o <strong>myco</strong>, um app de jardinagem que registra vasos, setores, adubação e compostagem. É público e simples, e a simplicidade ajuda: se o padrão funciona para um caderno de plantas, funciona para outros casos. O mesmo módulo de criptografia roda hoje em outro app pessoal meu, com dados mais sensíveis.</p>
 <h2>Como funciona</h2>
 <p>A senha nunca é armazenada e nunca vira a chave diretamente.</p>
+<p><img src="/img/myco/fluxo.svg" alt="Fluxo da senha ao dado guardado" loading="lazy"></p>
+<p><em>Da senha ao dado guardado.</em></p>
 <p>Ela passa por PBKDF2 com 250.000 iterações e SHA-256, junto de um sal aleatório gerado na criação da base, e o resultado é uma chave AES-GCM de 256 bits. As iterações encarecem cada palpite: quem conseguir a base cifrada precisa calcular 250 mil derivações por tentativa, e um ataque de dicionário deixa de ser viável.</p>
+<p><img src="/img/myco/custo.svg" alt="Tempo de ataque com e sem iterações" loading="lazy"></p>
+<p><em>Tempo para testar um milhão de senhas, medido num núcleo de um MacBook.</em></p>
 <p>Cada gravação é cifrada com AES-GCM e um vetor de inicialização novo, o que garante confidencialidade e integridade na mesma operação: se um byte for alterado no armazenamento, a decifragem falha em vez de devolver dados corrompidos sem aviso. Tudo usa a WebCrypto do navegador, sem biblioteca externa de criptografia, e o resultado fica guardado no IndexedDB.</p>
 <p>Há também um verificador curto, cifrado com a mesma chave, que serve para avisar &quot;senha incorreta&quot; logo na abertura.</p>
 <h2>O que aprendi</h2>

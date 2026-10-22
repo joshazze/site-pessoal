@@ -76,7 +76,11 @@
 <p>A questão central é de isolamento e persistência. Regras de estudo e de produção não deveriam estar ativas ao mesmo tempo, uma regra de voz precisa durar a conversa inteira, e uma palavra de segurança precisa funcionar como um estado do sistema, não como um pedido gentil.</p>
 <h2>O que eu fiz</h2>
 <p>Fernando Pessoa não usava pseudônimos. Usava heterônimos: autores completos e distintos, cada um com biografia, estética e visão de mundo próprias, convivendo na mesma pessoa. Caeiro era o mestre bucólico, Reis o classicista estoico, Campos o modernista intenso. Pessoa assinava por si.</p>
+<p><img src="/img/fernando-pessoa/pessoa-1915.jpg" alt="Fernando Pessoa por volta de 1915" loading="lazy"> <img src="/img/fernando-pessoa/pessoa-1929.jpg" alt="Fernando Pessoa no Abel Pereira, 1929" loading="lazy"></p>
+<p><em>Fernando Pessoa por volta de 1915 e no Abel Pereira, em 1929. Fotos: acervo da <a href="https://casafernandopessoa.pt/en/fernando-pessoa">Casa Fernando Pessoa</a>.</em></p>
 <p>Apliquei essa estrutura a um assistente. Em vez de um prompt único tentando dar conta de tudo, há um ortônimo (o assistente padrão) que aciona heterônimos: personas estreitas, cada uma dedicada a uma tarefa, com voz e regras próprias. O ortônimo escolhe qual chamar.</p>
+<p><img src="/img/fernando-pessoa/heteronimos.svg" alt="Marcus, Rogi e Stefano" loading="lazy"></p>
+<p><em>Os heterônimos que mais uso, com o gatilho e a camada de persistência de cada um.</em></p>
 <h2>Como funciona</h2>
 <p>A metáfora ajuda a explicar, mas a contribuição está na arquitetura de persistência, que tem três camadas:</p>
 <ul>
@@ -85,6 +89,8 @@
 <li><strong>Memória</strong>: um arquivo que dura entre sessões e volta quando o assunto aparece.</li>
 </ul>
 <p>A regra que organiza tudo é que <strong>o gatilho define a camada</strong>.</p>
+<p><img src="/img/fernando-pessoa/camadas-persona.svg" alt="As três camadas de persistência" loading="lazy"></p>
+<p><em>As três camadas de persistência de uma persona e a escala de tempo em que cada uma age.</em></p>
 <p>Uma persona chamada pelo nome precisa só da primeira camada, porque quem chama já fornece o contexto. Uma persona ambiente, que deve ficar ativa o tempo todo, precisa de um hook que a reforce a cada turno; sem isso ela se dilui em conversas longas e a voz muda sem que ninguém tenha pedido. Já uma persona de guarda, que existe para impedir uma ação, não pode depender de instrução. Ela precisa de um hook que intercepte a chamada da ferramenta e a recuse, porque uma persona escrita em texto ainda pode ser convencida.</p>
 <p>Os quatro heterônimos do repositório cobrem os três casos. O Marcus transforma material bruto em nota de vault sem perder informação e é chamado pelo nome. O Rogi cuida da escrita e usa as três camadas. O Stefano ensina sem resolver, com uma guarda que bloqueia a escrita do arquivo de exercício. O quarto é uma palavra de segurança.</p>
 <h2>O que aprendi</h2>

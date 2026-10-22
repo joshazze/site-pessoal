@@ -15,6 +15,10 @@ A IbTech é a liga de software do Ibmec BH. Sou diretor acadêmico na chapa unif
 
 É o certificado. Ele serve para o membro mostrar no LinkedIn e para o recrutador confiar no que está lendo. O certificado acadêmico mais comum, porém, é um PDF com assinatura escaneada, fácil de refazer em poucos minutos com outro nome. Todo mundo sabe.
 
+![Logo da IbTech](/img/liga-ibtech/ibtech.svg)
+
+*Logo da IbTech.*
+
 ## O que eu fiz
 
 Na formação, cuido das trilhas e da revisão das entregas. Cada trabalho aprovado vai para um repositório central da liga por branch e pull request, com revisão nominal, em vez de ficar perdido no Drive de quem fez.
@@ -45,3 +49,4 @@ A outra lição foi de operação: não criei fluxo de e-mail nem resgate indivi
 - Cada credencial tem URL própria, que é o que o botão "Mostrar credencial" do LinkedIn pede.
 - Nenhum custo de plataforma, contra uma alternativa comercial que exige CNPJ e mensalidade.
 - Código público em `joshazze/ibtech-credenciais`, com uma explicação didática de como a árvore de Merkle sustenta a prova.
+- Instagram da liga: [@ibtechbh](https://www.instagram.com/ibtechbh).

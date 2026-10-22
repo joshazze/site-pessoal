@@ -74,14 +74,24 @@
 <p>Um assistente de IA esquece tudo quando a sessão termina. No dia seguinte ele não sabe que decisão foi tomada, que erro já custou três horas de depuração, nem que você prefere não responder duas vezes a mesma pergunta.</p>
 <p>O caminho mais comum é escrever um arquivo de instruções. Funciona por algumas semanas, até o arquivo chegar a trinta mil bytes. Aí aparece o custo: o que entra no início da sessão é reenviado a cada turno, e você paga por aquele arquivo em todas as mensagens até fechar a janela.</p>
 <p>Foi o que aconteceu comigo. A primeira versão do meu cérebro carregava o conteúdo inteiro e custava 426 KB por sessão, em todo turno.</p>
+<p><img src="/img/cerebro/recall.svg" alt="Bytes injetados por sessão antes e depois" loading="lazy"></p>
+<p><em>Recall injetado no início de cada sessão: do despejo de conteúdo ao índice.</em></p>
 <h2>O que eu fiz</h2>
 <p>Troquei conteúdo por endereço.</p>
 <p>O acervo virou um vault de markdown organizado como grafo, com uma nota por assunto e wikilinks ligando o que se relaciona. O que entra na sessão é um índice com <strong>caminhos, não conteúdo</strong>: uma linha por arquivo dizendo do que ele trata e onde está. O assistente lê o índice, decide o que interessa para a conversa e abre apenas isso.</p>
 <p>A manutenção do grafo roda em shell antes do primeiro prompt: quem cita quem, quais notas acumularam backlinks e viraram centro, quanto custou a última sessão. Nenhum token é gasto nessa parte.</p>
+<p><img src="/img/cerebro/arquitetura.svg" alt="As cinco camadas do sistema" loading="lazy"></p>
+<p><em>As cinco camadas, do vault em disco ao agente. Só a de cima custa por token.</em></p>
 <h2>Como funciona</h2>
 <p>O índice é o coração do sistema e tem um orçamento. Cada linha precisa ser específica o bastante para o assistente decidir se abre o arquivo e curta o bastante para caber. Dá para medir isso pelo número de saltos entre a porta de entrada e a informação.</p>
 <p>Num vault de 183 notas em uso, o caminho médio entre duas notas quaisquer é de 2,70 saltos, e 97% do acervo fica a até dois saltos do índice. Na prática, abrir um arquivo quase sempre resolve, e abrir dois resolve sempre.</p>
+<p><img src="/img/cerebro/cobertura.svg" alt="Cobertura por número de saltos" loading="lazy"></p>
+<p><em>Notas alcançadas a partir do índice, por número de saltos.</em></p>
+<p><img src="/img/cerebro/mundo-pequeno.svg" alt="Agrupamento e caminho médio comparados a um grafo aleatório" loading="lazy"></p>
+<p><em>O vault comparado a um grafo aleatório com o mesmo número de notas e ligações.</em></p>
 <p>A manutenção também foi medida. O laço ingênuo, que procurava backlinks comparando cada nota com todas as outras, levava 1,9 segundo em 260 notas. A versão que lê só o corpo e indexa uma vez leva 20 milissegundos.</p>
+<p><img src="/img/cerebro/complexidade.svg" alt="Tempo de atualização dos backlinks" loading="lazy"></p>
+<p><em>Atualização completa dos backlinks: um grep por nota contra uma passada única em awk.</em></p>
 <p>Um instalador separado monta tudo em dez a quinze minutos. Você cola um link no assistente, ele faz cinco perguntas numa mensagem (onde fica o vault, seu nome, sua stack, se quer registro de gasto, se estuda), instala as camadas, verifica e explica o que fazer no dia seguinte.</p>
 <h2>O que aprendi</h2>
 <p>Memória de assistente é uma questão de orçamento mais do que de armazenamento.</p>

@@ -75,10 +75,16 @@
 <p>A máquina disponível é uma cortadora a laser com mesa de 1150 por 1000 milímetros. Erro de medida custa chapa.</p>
 <h2>O que eu fiz</h2>
 <p>Uma biblioteca em Python puro, sem dependências, em que cada peça é descrita num arquivo JSON com as medidas. O código gera os arquivos de corte em DXF, SVG e PDF, com cotas e uma tabela de medidas para conferência.</p>
+<p><img src="/img/laser/chapa.png" alt="Chapa de corte completa" loading="lazy"></p>
+<p><em>Chapa completa, com a base e as peças avulsas encaixadas.</em></p>
 <p>A biblioteca tem módulos para geometria de polígonos, compensação de kerf, juntas (dedos, encaixe em T com bolso de porca, meia-madeira, rabo de andorinha, dobradiça viva e porca cativa em sanduíche), um registro de materiais que diferencia valor medido de valor estimado, um relatório de aproveitamento da chapa e um validador.</p>
 <p>O validador é obrigatório. Nenhum arquivo vai para a máquina sem passar por <code>python3 -m laser validate</code>, que confere topologia, espessuras mínimas de ponte e se a peça cabe na mesa.</p>
+<p><img src="/img/laser/pinos-cotados.png" alt="Prancha cotada dos seis pinos" loading="lazy"></p>
+<p><em>Prancha cotada gerada junto com o arquivo de corte.</em></p>
 <h2>Como funciona</h2>
 <p>O laser remove uma faixa fina de material, o kerf, e por isso a trajetória precisa ser deslocada em metade dessa largura. O sentido depende do papel do contorno: um contorno externo é deslocado para fora, para a peça não sair menor. Um furo é deslocado para dentro, porque o laser já alarga o vazio sozinho.</p>
+<p><img src="/img/laser/base-3d.svg" alt="Vista isométrica da base" loading="lazy"></p>
+<p><em>A base em 3D, gerada da mesma especificação que produz o corte.</em></p>
 <p>Para calibrar, a biblioteca gera uma chapa de teste de 182 por 257 milímetros com pente de kerf, escada de folgas de 0,00 a 0,35 mm, bolsos para porcas M3, M4 e M5, pente de espessura, tiras de ponte e três padrões de dobradiça viva. Tudo vem rotulado. Corta-se uma vez, mede-se com paquímetro, e os valores medidos substituem os estimados no registro do material.</p>
 <h2>O que aprendi</h2>
 <p>Ao transformar o código solto em biblioteca, encontrei um erro de sinal na compensação de kerf. O contorno externo estava certo, mas os furos, rasgos e polígonos eram deslocados no sentido errado. Na prática, um furo de 3,2 mm para parafuso M3 sairia com 3,5 mm na chapa. O erro só não custou material porque a compensação estava desligada em todas as especificações.</p>

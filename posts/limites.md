@@ -20,6 +20,10 @@ Um app de barra de menus em SwiftUI, cujo ícone é um medidor com ponteiro que 
 
 A segunda função é o aviso de aba. Quando uma sessão termina ou pede permissão, o app toca um som e um sino balança na barra de menus, com o nome da conversa ao lado. Volto para a aba, ele some.
 
+![Painel do Limites aberto na barra de menus](/img/limites/screenshot.png)
+
+*O painel aberto, em modo de demonstração com dados fictícios.*
+
 ## Como funciona
 
 Os dados vêm das próprias ferramentas. Sem raspar página, sem chave de API. No Claude Code, o app roda `claude -p /usage` com flags que impedem o carregamento de hooks e servidores MCP; a consulta é local, com zero turnos e custo zero, e caiu de 2,3 para 1,4 segundo com essas flags. No Codex, ele abre o `codex app-server` e conversa por JSON-RPC até receber os limites.

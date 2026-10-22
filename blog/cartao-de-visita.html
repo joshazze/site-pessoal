@@ -76,6 +76,8 @@
 <p>Me interessou a restrição. Numa página que cabe em três arquivos, ficar sem framework quase não limita.</p>
 <h2>O que eu fiz</h2>
 <p>A página é um quarto de chalé em pixel art, visto de dentro, de frente para a parede.</p>
+<p><img src="/img/cartao-de-visita/dia.png" alt="A janela do quarto, tema de dia" loading="lazy"></p>
+<p><em>A janela, primeira seção da página.</em></p>
 <p>Cada seção é uma parte do quarto e guarda uma informação que num cartão comum seria um bloco de texto:</p>
 <ul>
 <li><strong>A janela</strong> mostra as montanhas e uma frase de apresentação que vai mudando.</li>
@@ -84,10 +86,18 @@
 <li><strong>A prateleira</strong> tem treze livros, um por marco, e o troféu.</li>
 <li><strong>A mesa de cabeceira</strong> tem luminária, um despertador com a hora real e o contato com botão de copiar.</li>
 </ul>
+<p><img src="/img/cartao-de-visita/mesa.png" alt="A mesa de estudos" loading="lazy"></p>
+<p><em>A mesa de estudos, com o sobre e as competências.</em></p>
+<p><img src="/img/cartao-de-visita/mural.png" alt="O mural de cortiça" loading="lazy"></p>
+<p><em>O mural de cortiça.</em></p>
+<p><img src="/img/cartao-de-visita/prateleira.png" alt="A prateleira com os treze livros" loading="lazy"></p>
+<p><em>A prateleira: um livro por marco.</em></p>
 <p>A estética é de jogo em pixel art, com cor chapada, sombra sólida e uma única fonte na página. O ponto de vista em primeira pessoa é o que sustenta a ideia: em vez de uma página sobre alguém, o visitante está no quarto dessa pessoa.</p>
 <h2>Como funciona</h2>
 <p>Três decisões técnicas.</p>
 <p>Os temas de dia e de noite trocam <strong>apenas variáveis CSS na raiz</strong>. Nenhuma regra é reescrita e nenhuma classe é adicionada aos elementos: o botão altera uma dúzia de variáveis e a página toda acompanha, sombras incluídas. A preferência fica no <code>localStorage</code>. Na primeira visita vale o tema do sistema.</p>
+<p><img src="/img/cartao-de-visita/noite.png" alt="A prateleira no tema noturno" loading="lazy"></p>
+<p><em>A mesma prateleira no tema noturno. Só as variáveis da raiz mudaram.</em></p>
 <p>A animação de entrada usa <code>IntersectionObserver</code> em vez de escutar a rolagem. Cada seção recebe a classe de visível uma vez, quando aparece na tela, e o observador deixa de acompanhá-la. Escutar <code>scroll</code> repetiria o mesmo cálculo centenas de vezes por segundo, um trabalho que o navegador já faz por conta própria e de forma mais eficiente.</p>
 <p>O modal é o <code>&lt;dialog&gt;</code> nativo com <code>showModal()</code>, que já traz o foco preso dentro dele, o fechamento pelo Esc e o fundo inerte. Feito à mão, isso costuma quebrar o teclado.</p>
 <h2>O que aprendi</h2>

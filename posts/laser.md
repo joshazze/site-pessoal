@@ -17,13 +17,25 @@ A máquina disponível é uma cortadora a laser com mesa de 1150 por 1000 milím
 
 Uma biblioteca em Python puro, sem dependências, em que cada peça é descrita num arquivo JSON com as medidas. O código gera os arquivos de corte em DXF, SVG e PDF, com cotas e uma tabela de medidas para conferência.
 
+![Chapa de corte completa](/img/laser/chapa.png)
+
+*Chapa completa, com a base e as peças avulsas encaixadas.*
+
 A biblioteca tem módulos para geometria de polígonos, compensação de kerf, juntas (dedos, encaixe em T com bolso de porca, meia-madeira, rabo de andorinha, dobradiça viva e porca cativa em sanduíche), um registro de materiais que diferencia valor medido de valor estimado, um relatório de aproveitamento da chapa e um validador.
 
 O validador é obrigatório. Nenhum arquivo vai para a máquina sem passar por `python3 -m laser validate`, que confere topologia, espessuras mínimas de ponte e se a peça cabe na mesa.
 
+![Prancha cotada dos seis pinos](/img/laser/pinos-cotados.png)
+
+*Prancha cotada gerada junto com o arquivo de corte.*
+
 ## Como funciona
 
 O laser remove uma faixa fina de material, o kerf, e por isso a trajetória precisa ser deslocada em metade dessa largura. O sentido depende do papel do contorno: um contorno externo é deslocado para fora, para a peça não sair menor. Um furo é deslocado para dentro, porque o laser já alarga o vazio sozinho.
+
+![Vista isométrica da base](/img/laser/base-3d.svg)
+
+*A base em 3D, gerada da mesma especificação que produz o corte.*
 
 Para calibrar, a biblioteca gera uma chapa de teste de 182 por 257 milímetros com pente de kerf, escada de folgas de 0,00 a 0,35 mm, bolsos para porcas M3, M4 e M5, pente de espessura, tiras de ponte e três padrões de dobradiça viva. Tudo vem rotulado. Corta-se uma vez, mede-se com paquímetro, e os valores medidos substituem os estimados no registro do material.
 

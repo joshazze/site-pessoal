@@ -5,6 +5,7 @@ sub: Um heterônimo para cada ferramenta: personas de IA que persistem e ativam 
 data: 2026-08-11
 stack: [Bash, hooks, Claude Code, Markdown]
 competencias: [arquitetura de agentes, design de sistema, escrita técnica]
+areas: [IA aplicada, Ferramentas de desenvolvedor, Código aberto]
 repo: https://github.com/joshazze/fernando-pessoa-agents
 ---
 

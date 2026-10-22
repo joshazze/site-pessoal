@@ -5,6 +5,7 @@ sub: 40 minutos para calouros de engenharia, com deck só de imagens e prática 
 data: 2026-08-23
 stack: [HTML, SVG, Chrome headless, Claude Code]
 competencias: [comunicação, didática, pesquisa de fontes, design de apresentação]
+areas: [IA aplicada, Educação, Liderança e ligas]
 ---
 
 ## Contexto

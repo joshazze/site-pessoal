@@ -5,6 +5,7 @@ sub: PWA para acompanhar o álbum, com OCR lendo o código da figurinha na foto
 data: 2026-05-20
 stack: [JavaScript, Capacitor, OCR, FastAPI, PostgreSQL, Caddy]
 competencias: [PWA, visão computacional aplicada, backend, iOS]
+areas: [Apps e PWA, Visão computacional, Infraestrutura e deploy, Código aberto]
 repo: https://github.com/joshazze/figurinhas-copa
 ---
 

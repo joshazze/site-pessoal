@@ -5,6 +5,7 @@ sub: Detector de texto gerado por IA que separa prova de estimativa
 data: 2026-10-22
 stack: [Python, stdlib, estatística, Unicode]
 competencias: [estatística aplicada, segurança, avaliação de modelos, PT-BR]
+areas: [IA aplicada, Dados e estatística, Segurança e privacidade, Pesquisa]
 ---
 
 ## Contexto

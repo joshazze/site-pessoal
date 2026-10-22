@@ -5,6 +5,7 @@ sub: Startup de orientação de carreira com IA, cofundada, vencedora e encerrad
 data: 2026-02-08
 stack: [LLM, assistente conversacional, prototipagem]
 competencias: [produto, validação com usuário, pitch, cofundação]
+areas: [IA aplicada, Produto, Competições e prêmios]
 ---
 
 ## Contexto

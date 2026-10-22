@@ -5,6 +5,7 @@ sub: App de barra de menus para macOS com os limites de uso do Claude Code e do 
 data: 2026-09-18
 stack: [Swift, SwiftUI, swift-testing, AppleScript, GitHub Actions]
 competencias: [macOS nativo, engenharia reversa, privacidade, ferramenta de desenvolvedor]
+areas: [Ferramentas de desenvolvedor, IA aplicada, Código aberto]
 repo: https://github.com/joshazze/limites
 ---
 

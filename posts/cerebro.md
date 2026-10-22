@@ -5,6 +5,7 @@ sub: Memória permanente para assistente de IA, com o custo de contexto medido
 data: 2026-08-09
 stack: [Bash, jq, Obsidian, Markdown]
 competencias: [arquitetura, análise de grafos, medição de desempenho, documentação]
+areas: [IA aplicada, Ferramentas de desenvolvedor, Dados e estatística, Código aberto]
 repo: https://github.com/joshazze/cerebro-claude
 ---
 

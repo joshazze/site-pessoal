@@ -5,6 +5,7 @@ sub: Diretoria acadêmica na chapa unificada: trilhas de formação, revisão da
 data: 2026-08-16
 stack: [Node.js, Ethereum, Open Badges 3.0, Blockcerts, SHA-256]
 competencias: [liderança, criptografia aplicada, revisão de código, processo]
+areas: [Liderança e ligas, Segurança e privacidade, Educação, Código aberto]
 link: https://www.ligastechibmec.com.br
 repo: https://github.com/joshazze/ibtech-credenciais
 ---

@@ -5,6 +5,7 @@ sub: Trilha diária de estudo no estilo Duolingo, com repetição espaçada por 
 data: 2026-10-22
 stack: [Python, stdlib, Caddy, Oracle Cloud, PWA]
 competencias: [produto, algoritmo de repetição espaçada, segurança web, infraestrutura]
+areas: [Web, Apps e PWA, Infraestrutura e deploy, Segurança e privacidade, Educação]
 ---
 
 ## Contexto

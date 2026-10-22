@@ -5,6 +5,7 @@ sub: Reconstrução do site da liga de design e arquitetura do Ibmec BH, em cont
 data: 2026-10-11
 stack: [HTML, CSS, JavaScript, Python, Supabase, Cloudflare Pages]
 competencias: [frontend, migração, performance, documentação]
+areas: [Web, Design, Infraestrutura e deploy, Liderança e ligas]
 link: https://ibdesign.org
 ---
 

@@ -5,6 +5,7 @@ sub: Cofundação e direção da liga de robótica do Ibmec BH
 data: 2026-08-17
 stack: [ESP32, INMP441, C++, eletrônica, fabricação]
 competencias: [liderança, hardware, gestão de projeto, orçamento]
+areas: [Hardware e fabricação, Liderança e ligas]
 link: https://www.ligastechibmec.com.br
 ---
 
@@ -13,6 +14,10 @@ link: https://www.ligastechibmec.com.br
 O Ibmec BH tinha bastante software: liga de software, projetos web, alunos escrevendo API. Faltavam projetos físicos, que se pudesse segurar com a mão.
 
 Cofundei a IbBot em agosto de 2025 para ocupar esse espaço e dirijo a liga desde então. Ela faz parte do mesmo ecossistema da IbTech, divide portal e infraestrutura, e tem um papel próprio: colocar alunos de engenharia diante de projetos com custo de material, prazo de fabricação e uma peça que precisa funcionar na bancada.
+
+![Logo da IbBot](/img/ibbot/ibbot.svg)
+
+*Logo da IbBot.*
 
 ## O que eu fiz
 

@@ -5,6 +5,7 @@ sub: Plugin do Obsidian que tira o atrito entre querer escrever e estar escreven
 data: 2026-08-14
 stack: [TypeScript, Obsidian API, esbuild]
 competencias: [produto, ferramenta de autor, design de interação]
+areas: [Ferramentas de desenvolvedor, Código aberto, Produto]
 repo: https://github.com/joshazze/obsidian-blank-page
 ---
 

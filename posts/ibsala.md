@@ -5,14 +5,19 @@ sub: Reserva e consulta de salas do Ibmec BH, no ar para os alunos
 data: 2026-08-15
 stack: [Flask, Docker, PostgreSQL, Supabase, Web Push, Cloudflare Pages]
 competencias: [backend, PWA, banco de dados, segurança, deploy, produto]
+areas: [Web, Apps e PWA, Infraestrutura e deploy, Segurança e privacidade, Produto]
 link: https://ibsala.com.br
 ---
 
 ## Contexto
 
-O Ibmec BH publica a ocupação das salas numa planilha que a coordenação atualiza ao longo do dia. Correta e ilegível. Para saber se a 204 está livre às 15h, é preciso abrir o arquivo, achar a aba do dia, cruzar o horário com a coluna da sala e esperar que nada tenha mudado nos últimos minutos. Na prática, a maioria desistia e ia procurar sala andando pelo prédio.
+O Ibmec BH publica a ocupação das salas numa planilha que a coordenação atualiza ao longo do dia. Correta e ilegível. Para saber se a 204 está livre às 15h, é preciso abrir o arquivo, achar a aba do dia, cruzar o horário com a coluna da sala e esperar que nada tenha mudado nos últimos minutos. A maioria desistia. Saía procurando sala pelo prédio.
 
-Comecei o `app-salas` em 6 de março de 2026 com um escopo pequeno: uma página que mostrasse quais salas estão livres agora. O restante veio de pedidos dos próprios alunos.
+Comecei o `app-salas` em 6 de março de 2026. Escopo pequeno: uma página com as salas livres agora. O restante veio de pedidos dos próprios alunos.
+
+![Tela inicial do ibsala](/img/ibsala/home.png)
+
+*A tela inicial de [ibsala.com.br](https://ibsala.com.br).*
 
 ## O que eu fiz
 
@@ -20,7 +25,7 @@ Duas versões completas. A segunda existe porque a primeira resolveu o problema 
 
 A primeira era Flask em contêiner numa VM da GCP, com Google Sheets como banco. Funcionava. Ganhou cadastro com Google OAuth, notificações por web push, painel administrativo, página de privacidade, exportação e exclusão da própria conta para atender à LGPD, além de uma suíte de 263 testes rodando em CI com `gitleaks` e `pip-audit`. O `pip-audit` encontrou 16 CVEs em dependências transitivas numa única rodada, e a partir daí o CI passou a bloquear merge com dependência vulnerável.
 
-Usar a planilha como banco, porém, tinha um custo crescente. Cada consulta era uma chamada de API com cota, cada escrita simultânea podia gerar conflito, e a captura da grade, agendada no GitHub Actions para 48 execuções por dia, rodava de 6 a 10 vezes. O Actions não garante horário, e lá um agendamento de meia em meia hora vira sugestão.
+Mas a planilha como banco cobrava juros. Cada consulta era uma chamada de API com cota, cada escrita simultânea podia gerar conflito, e a captura da grade, agendada no GitHub Actions para 48 execuções por dia, rodava de 6 a 10 vezes. O Actions não garante horário. Lá, agendamento é sugestão.
 
 Em 23 de julho comecei a reescrita: Postgres no Supabase, autenticação e funções de borda no mesmo lugar, frontend estático no Cloudflare Pages e a captura movida para `pg_cron` dentro do banco. A migração para produção aconteceu em 10 de agosto de 2026, com 70 alunos migrados e um email de recadastro enviado a todos.
 
@@ -28,9 +33,17 @@ Em 23 de julho comecei a reescrita: Postgres no Supabase, autenticação e funç
 
 A lista de salas deixou de depender do que o scraper encontra. Ela vem de um repertório fixo e versionado, com 58 salas oficiais, 22 apelidos conhecidos e 11 grafias que devem ser ignoradas. Grafia desconhecida não vira sala nova: vai para uma fila de quarentena, que eu reviso depois com calma, uma por uma.
 
+![Salas livres agora](/img/ibsala/salas-livres.png)
+
+*Salas livres no turno atual, separadas por prédio, com os botões para ver o próximo turno ou o resto do dia.*
+
 Ela veio de um bug. A planilha escreve pares de salas separados por barra, como `302/303`, e havia uma regra que dividia tudo o que tinha barra. Aí veio `114 LAB QUIMICA/FISICA`. A regra da barra rodava antes do repertório, dividia o nome como se fossem duas salas, e a 114 passou a aparecer como livre com aula acontecendo. Nem a quarentena pegou, porque para o código nada ali parecia estranho. Invertemos a ordem: sala oficial e apelido têm prioridade sobre a regra da barra.
 
-O aviso é um PWA instalável com web push, inclusive no iOS, onde há mais detalhes a cuidar. No iPhone o push só funciona com o app na tela de início, o `ServiceWorkerContainer` segura as mensagens do worker até alguém chamar `startMessages()`, e um clique simulado não aciona a vibração. Descobri cada um desses pontos testando num aparelho real. O simulador não mostrava nenhum deles.
+O aviso é um PWA instalável com web push, inclusive no iOS, onde há mais detalhes a cuidar. No iPhone o push só funciona com o app na tela de início, o `ServiceWorkerContainer` segura as mensagens do worker até alguém chamar `startMessages()`, e um clique simulado não aciona a vibração. Descobri cada um desses pontos testando num aparelho real, porque o simulador não mostrava nenhum deles.
+
+![ibsala no celular](/img/ibsala/celular.png)
+
+*No celular.*
 
 ## O que aprendi
 

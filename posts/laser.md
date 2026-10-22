@@ -5,6 +5,7 @@ sub: Peças de acrílico geradas por código, com um portão de validação ante
 data: 2026-09-19
 stack: [Python, DXF, SVG, PDF]
 competencias: [geometria computacional, fabricação digital, testes, desenho técnico]
+areas: [Hardware e fabricação, Ferramentas de desenvolvedor]
 ---
 
 ## Contexto

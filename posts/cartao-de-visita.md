@@ -5,6 +5,7 @@ sub: Um quarto de chalé pixelado em primeira pessoa, zero dependência
 data: 2026-05-03
 stack: [HTML5, CSS3, JavaScript, Vanilla]
 competencias: [frontend, acessibilidade, design de interação]
+areas: [Web, Design, Código aberto]
 repo: https://github.com/joshazze/ibtech-projeto01-joshua
 ---
 

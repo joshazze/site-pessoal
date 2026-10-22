@@ -5,6 +5,7 @@ sub: Um padrão de app pessoal que não tem servidor para vazar, com o myco como
 data: 2026-06-02
 stack: [WebCrypto, PBKDF2, AES-GCM, IndexedDB, Vite]
 competencias: [criptografia aplicada, privacidade por desenho, PWA]
+areas: [Web, Segurança e privacidade, Apps e PWA, Código aberto]
 repo: https://github.com/joshazze/myco
 ---
 

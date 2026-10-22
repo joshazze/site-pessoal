@@ -5,6 +5,7 @@ sub: PWA para acompanhar o álbum, com OCR lendo o código da figurinha na foto
 data: 2026-05-20
 stack: [JavaScript, Capacitor, OCR, FastAPI, PostgreSQL, Caddy]
 competencias: [PWA, visão computacional aplicada, backend, iOS]
+areas: [Apps e PWA, Visão computacional, Infraestrutura e deploy, Código aberto]
 repo: https://github.com/joshazze/figurinhas-copa
 ---
 
@@ -26,6 +27,10 @@ Por trás há um backend próprio: FastAPI em Python, PostgreSQL 16 e Caddy como
 
 O app fotografa o verso da figurinha, extrai o texto e compara o resultado com o dicionário de códigos oficiais usando comparação aproximada, já que o OCR erra.
 
+![Pipeline de reconhecimento](/img/figurinhas/pipeline.svg)
+
+*Do verso da figurinha ao código no álbum.*
+
 O que mais pesa no resultado é a normalização antes da comparação. Os códigos da Panini são letras seguidas de dígitos, sem separador, então qualquer espaço lido pelo reconhecedor vem do papel, da luz ou do ângulo e não carrega informação.
 
 ## O que aprendi
@@ -33,6 +38,10 @@ O que mais pesa no resultado é a normalização antes da comparação. Os códi
 O primeiro caso foi "COL 4", que não casava com "COL4".
 
 A foto estava nítida. O app respondia "não lido". Minha normalização juntava espaços múltiplos em um só, como se faz com texto comum. Aqui o espaço era ruído. A comparação entre "COL 4" e "COL4" ficava logo abaixo do limite de aceitação. A correção foi remover os espaços em vez de juntá-los. Ela vale para qualquer rótulo que seja um bloco contínuo, como SKU, placa de carro ou código de peça: quando o reconhecimento falha num caso fácil, a normalização é a primeira suspeita.
+
+![Normalização antes e depois](/img/figurinhas/normalizacao.svg)
+
+*A normalização antiga e a atual para o mesmo texto lido.*
 
 O segundo é sobre o limite do automático.
 

@@ -5,6 +5,7 @@ sub: App de barra de menus para macOS com os limites de uso do Claude Code e do 
 data: 2026-09-18
 stack: [Swift, SwiftUI, swift-testing, AppleScript, GitHub Actions]
 competencias: [macOS nativo, engenharia reversa, privacidade, ferramenta de desenvolvedor]
+areas: [Ferramentas de desenvolvedor, IA aplicada, Código aberto]
 repo: https://github.com/joshazze/limites
 ---
 
@@ -19,6 +20,10 @@ A ideia veio de um executável de Windows que chegou a mim por WhatsApp, um app 
 Um app de barra de menus em SwiftUI, cujo ícone é um medidor com ponteiro que mostra o maior uso entre as janelas de cinco horas das duas ferramentas. Ao clicar, abre um painel com cada janela, o percentual e o horário de renovação. As semanais ficam ali, sem mexer no ponteiro.
 
 A segunda função é o aviso de aba. Quando uma sessão termina ou pede permissão, o app toca um som e um sino balança na barra de menus, com o nome da conversa ao lado. Volto para a aba, ele some.
+
+![Painel do Limites aberto na barra de menus](/img/limites/screenshot.png)
+
+*O painel aberto, em modo de demonstração com dados fictícios.*
 
 ## Como funciona
 

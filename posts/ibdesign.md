@@ -5,6 +5,7 @@ sub: Reconstrução do site da liga de design e arquitetura do Ibmec BH, em cont
 data: 2026-10-11
 stack: [HTML, CSS, JavaScript, Python, Supabase, Cloudflare Pages]
 competencias: [frontend, migração, performance, documentação]
+areas: [Web, Design, Infraestrutura e deploy, Liderança e ligas]
 link: https://ibdesign.org
 ---
 
@@ -17,6 +18,14 @@ A liga criou uma conta própria. Meu trabalho foi trazer o site para ela sem que
 ## O que eu fiz
 
 Reconstruí o site sobre contas da liga. Páginas estáticas no Cloudflare Pages, conteúdo dinâmico no Supabase, custo zero.
+
+![Abertura do site da IbDesign no computador](/img/ibdesign/desktop.png)
+
+*A primeira tela de [ibdesign.org](https://ibdesign.org) no computador.*
+
+![Site da IbDesign no celular](/img/ibdesign/celular.png)
+
+*A mesma tela no celular.*
 
 Como o deploy antigo era pré-renderizado, o HTML servido já trazia a página pronta. Escrevi um script em Python que remove o runtime do Next, aponta CSS, fontes e imagens para arquivos locais e preserva classes e estilos, o que mantém a aparência idêntica. As interações que dependiam de React viraram cerca de 150 linhas de JavaScript puro: a abertura com contador, o menu do celular, a barra que se esconde ao rolar e a linha do tempo arrastável.
 

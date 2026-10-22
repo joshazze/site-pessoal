@@ -5,6 +5,7 @@ sub: Um quarto de chalé pixelado em primeira pessoa, zero dependência
 data: 2026-05-03
 stack: [HTML5, CSS3, JavaScript, Vanilla]
 competencias: [frontend, acessibilidade, design de interação]
+areas: [Web, Design, Código aberto]
 repo: https://github.com/joshazze/ibtech-projeto01-joshua
 ---
 
@@ -20,6 +21,10 @@ Me interessou a restrição. Numa página que cabe em três arquivos, ficar sem 
 
 A página é um quarto de chalé em pixel art, visto de dentro, de frente para a parede.
 
+![A janela do quarto, tema de dia](/img/cartao-de-visita/dia.png)
+
+*A janela, primeira seção da página.*
+
 Cada seção é uma parte do quarto e guarda uma informação que num cartão comum seria um bloco de texto:
 
 - **A janela** mostra as montanhas e uma frase de apresentação que vai mudando.
@@ -28,6 +33,18 @@ Cada seção é uma parte do quarto e guarda uma informação que num cartão co
 - **A prateleira** tem treze livros, um por marco, e o troféu.
 - **A mesa de cabeceira** tem luminária, um despertador com a hora real e o contato com botão de copiar.
 
+![A mesa de estudos](/img/cartao-de-visita/mesa.png)
+
+*A mesa de estudos, com o sobre e as competências.*
+
+![O mural de cortiça](/img/cartao-de-visita/mural.png)
+
+*O mural de cortiça.*
+
+![A prateleira com os treze livros](/img/cartao-de-visita/prateleira.png)
+
+*A prateleira: um livro por marco.*
+
 A estética é de jogo em pixel art, com cor chapada, sombra sólida e uma única fonte na página. O ponto de vista em primeira pessoa é o que sustenta a ideia: em vez de uma página sobre alguém, o visitante está no quarto dessa pessoa.
 
 ## Como funciona
@@ -35,6 +52,10 @@ A estética é de jogo em pixel art, com cor chapada, sombra sólida e uma únic
 Três decisões técnicas.
 
 Os temas de dia e de noite trocam **apenas variáveis CSS na raiz**. Nenhuma regra é reescrita e nenhuma classe é adicionada aos elementos: o botão altera uma dúzia de variáveis e a página toda acompanha, sombras incluídas. A preferência fica no `localStorage`. Na primeira visita vale o tema do sistema.
+
+![A prateleira no tema noturno](/img/cartao-de-visita/noite.png)
+
+*A mesma prateleira no tema noturno. Só as variáveis da raiz mudaram.*
 
 A animação de entrada usa `IntersectionObserver` em vez de escutar a rolagem. Cada seção recebe a classe de visível uma vez, quando aparece na tela, e o observador deixa de acompanhá-la. Escutar `scroll` repetiria o mesmo cálculo centenas de vezes por segundo, um trabalho que o navegador já faz por conta própria e de forma mais eficiente.
 

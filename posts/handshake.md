@@ -5,6 +5,7 @@ sub: Trilha diária de estudo no estilo Duolingo, com repetição espaçada por 
 data: 2026-10-22
 stack: [Python, stdlib, Caddy, Oracle Cloud, PWA]
 competencias: [produto, algoritmo de repetição espaçada, segurança web, infraestrutura]
+areas: [Web, Apps e PWA, Infraestrutura e deploy, Segurança e privacidade, Educação]
 ---
 
 ## Contexto
@@ -17,6 +18,10 @@ Eu queria uma trilha diária parecida com a do Duolingo. Vinte e cinco questões
 
 Um app web chamado Handshake, multiusuário e com espaço para mais de uma disciplina, em que cada dia tem uma lição de 25 questões e completá-la mantém acesa a chama que conta a sequência de dias.
 
+![Montagem da lição do dia](/img/handshake/licao.svg)
+
+*Como as 25 questões do dia são escolhidas.*
+
 O conteúdo de Redes começa num texto-base de 90 seções, uma para cada questão das listas da disciplina, com cerca de 14 mil palavras e a página da fonte citada em cada seção. As questões saem desse texto: 225 fatos, cada um com quatro formas diferentes de perguntar. Para os cálculos, como sub-rede, broadcast, faixa de hosts, CIDR e EUI-64, há nove geradores que criam questões novas a cada vez, com alternativas erradas tiradas de erros comuns.
 
 Quando erro, o app abre a seção do texto de onde a questão saiu.
@@ -25,9 +30,17 @@ Quando erro, o app abre a seção do texto de onde a questão saiu.
 
 A unidade de memória é o conceito. Cada conceito fica numa de seis caixas, revistas a cada 1, 2, 4, 8, 16 e 32 dias; quando dominado, passa a voltar a cada 60. Um erro devolve o conceito para a primeira caixa, e ele reaparece três questões depois e outra vez no fim da lição, sempre com outra variante.
 
+![Intervalos por caixa](/img/handshake/caixas.svg)
+
+*Intervalo até a próxima revisão, por caixa.*
+
 A lição junta primeiro os conceitos vencidos, depois os novos, na sequência da trilha, e por fim reforço dos mais fracos.
 
 O servidor é Python puro, sem framework, com os dados em arquivos. Roda numa VM gratuita da Oracle Cloud, com Caddy cuidando do HTTPS por Let's Encrypt. Segurança veio desde o início. O gabarito só chega ao navegador depois da resposta, a política de conteúdo é estrita, há proteção contra requisição forjada e uma trava contra tentativas repetidas de login.
+
+![Arquitetura do Handshake](/img/handshake/arquitetura.svg)
+
+*Arquitetura: um multiplexador na 443 separa o HTTPS do SSH.*
 
 ## O que aprendi
 

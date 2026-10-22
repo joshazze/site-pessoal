@@ -5,6 +5,7 @@ sub: Iniciação científica, coautoria com o Prof. Osmar Ventura Gomes
 data: 2026-08-18
 stack: [Python, pandas, ANOVA, Ollama, embeddings]
 competencias: [pesquisa, estatística, desenho experimental, escrita científica]
+areas: [IA aplicada, Dados e estatística, Pesquisa]
 ---
 
 ## Contexto

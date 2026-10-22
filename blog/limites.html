@@ -76,6 +76,8 @@
 <h2>O que eu fiz</h2>
 <p>Um app de barra de menus em SwiftUI, cujo ícone é um medidor com ponteiro que mostra o maior uso entre as janelas de cinco horas das duas ferramentas. Ao clicar, abre um painel com cada janela, o percentual e o horário de renovação. As semanais ficam ali, sem mexer no ponteiro.</p>
 <p>A segunda função é o aviso de aba. Quando uma sessão termina ou pede permissão, o app toca um som e um sino balança na barra de menus, com o nome da conversa ao lado. Volto para a aba, ele some.</p>
+<p><img src="/img/limites/screenshot.png" alt="Painel do Limites aberto na barra de menus" loading="lazy"></p>
+<p><em>O painel aberto, em modo de demonstração com dados fictícios.</em></p>
 <h2>Como funciona</h2>
 <p>Os dados vêm das próprias ferramentas. Sem raspar página, sem chave de API. No Claude Code, o app roda <code>claude -p /usage</code> com flags que impedem o carregamento de hooks e servidores MCP; a consulta é local, com zero turnos e custo zero, e caiu de 2,3 para 1,4 segundo com essas flags. No Codex, ele abre o <code>codex app-server</code> e conversa por JSON-RPC até receber os limites.</p>
 <p>O aviso usa hooks. Um pequeno executável dentro do app sobe a árvore de processos até achar o <code>claude</code> ou o <code>codex</code>, descobre o terminal da aba e descarta sessões sem tela. Para saber se já voltei à aba, o app olha o horário de acesso do terminal (o mesmo dado que o comando <code>w</code> usa para medir inatividade), que muda quando digito ou dou foco na janela. O executável roda em cerca de 10 milissegundos e não escreve nada na saída, então não acrescenta nada ao contexto da conversa.</p>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 160" width="760" height="160" role="img"><title>Normalização antes e depois</title><style>
+text{font-family:Verdana,Geneva,Tahoma,sans-serif}
+.bg{fill:#fcfcfb}.t1{fill:#0b0b0b}.t2{fill:#52514e}.ln{stroke:#c9c8c2}.lnf{fill:#c9c8c2}
+.s1{fill:#2a78d6}.s1s{stroke:#2a78d6}.s2{fill:#eb6834}.s2s{stroke:#eb6834}.s3{fill:#1baf7a}.s3s{stroke:#1baf7a}
+.box{fill:#f2f1ed;stroke:#c9c8c2}.b1{fill:#eaf1fb;stroke:#2a78d6}.b2{fill:#fcefe8;stroke:#eb6834}.b3{fill:#e7f6f0;stroke:#1baf7a}
+@media (prefers-color-scheme: dark){
+.bg{fill:#1a1a19}.t1{fill:#f0efec}.t2{fill:#c3c2b7}.ln{stroke:#55544f}.lnf{fill:#55544f}
+.s1{fill:#3987e5}.s1s{stroke:#3987e5}.s2{fill:#d95926}.s2s{stroke:#d95926}.s3{fill:#199e70}.s3s{stroke:#199e70}
+.box{fill:#24241f;stroke:#55544f}.b1{fill:#1b2633;stroke:#3987e5}.b2{fill:#30211a;stroke:#d95926}.b3{fill:#172a23;stroke:#199e70}}
+</style><rect class="bg" width="760" height="160" rx="6"/><text x="20" y="30" class="t1" font-size="14" text-anchor="start" font-weight="bold">por que o espaço tinha que sumir, não só encolher</text><text x="40" y="70" class="t2" font-size="11.5" text-anchor="start" font-weight="normal">lido pelo OCR</text><text x="260" y="70" class="t2" font-size="11.5" text-anchor="start" font-weight="normal">normalização antiga</text><text x="500" y="70" class="t2" font-size="11.5" text-anchor="start" font-weight="normal">normalização atual</text><text x="40" y="100" class="t1" font-size="15" font-family="Courier New,monospace">&quot;COL 4&quot;</text><text x="260" y="100" class="t1" font-size="15" font-family="Courier New,monospace">&quot;COL 4&quot;</text><text x="370" y="100" class="t2" font-size="11.5" text-anchor="start" font-weight="normal">não casa</text><text x="500" y="100" class="t1" font-size="15" font-family="Courier New,monospace">&quot;COL4&quot;</text><text x="590" y="100" class="t1" font-size="11.5" text-anchor="start" font-weight="bold">casa com COL4</text><text x="40" y="142" class="t2" font-size="11.5" text-anchor="start" font-weight="normal">código da Panini é bloco contínuo: todo espaço lido vem do papel, da luz ou do ângulo.</text></svg>

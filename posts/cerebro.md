@@ -5,6 +5,7 @@ sub: Memória permanente para assistente de IA, com o custo de contexto medido
 data: 2026-08-09
 stack: [Bash, jq, Obsidian, Markdown]
 competencias: [arquitetura, análise de grafos, medição de desempenho, documentação]
+areas: [IA aplicada, Ferramentas de desenvolvedor, Dados e estatística, Código aberto]
 repo: https://github.com/joshazze/cerebro-claude
 ---
 
@@ -16,6 +17,10 @@ O caminho mais comum é escrever um arquivo de instruções. Funciona por alguma
 
 Foi o que aconteceu comigo. A primeira versão do meu cérebro carregava o conteúdo inteiro e custava 426 KB por sessão, em todo turno.
 
+![Bytes injetados por sessão antes e depois](/img/cerebro/recall.svg)
+
+*Recall injetado no início de cada sessão: do despejo de conteúdo ao índice.*
+
 ## O que eu fiz
 
 Troquei conteúdo por endereço.
@@ -24,13 +29,29 @@ O acervo virou um vault de markdown organizado como grafo, com uma nota por assu
 
 A manutenção do grafo roda em shell antes do primeiro prompt: quem cita quem, quais notas acumularam backlinks e viraram centro, quanto custou a última sessão. Nenhum token é gasto nessa parte.
 
+![As cinco camadas do sistema](/img/cerebro/arquitetura.svg)
+
+*As cinco camadas, do vault em disco ao agente. Só a de cima custa por token.*
+
 ## Como funciona
 
 O índice é o coração do sistema e tem um orçamento. Cada linha precisa ser específica o bastante para o assistente decidir se abre o arquivo e curta o bastante para caber. Dá para medir isso pelo número de saltos entre a porta de entrada e a informação.
 
 Num vault de 183 notas em uso, o caminho médio entre duas notas quaisquer é de 2,70 saltos, e 97% do acervo fica a até dois saltos do índice. Na prática, abrir um arquivo quase sempre resolve, e abrir dois resolve sempre.
 
+![Cobertura por número de saltos](/img/cerebro/cobertura.svg)
+
+*Notas alcançadas a partir do índice, por número de saltos.*
+
+![Agrupamento e caminho médio comparados a um grafo aleatório](/img/cerebro/mundo-pequeno.svg)
+
+*O vault comparado a um grafo aleatório com o mesmo número de notas e ligações.*
+
 A manutenção também foi medida. O laço ingênuo, que procurava backlinks comparando cada nota com todas as outras, levava 1,9 segundo em 260 notas. A versão que lê só o corpo e indexa uma vez leva 20 milissegundos.
+
+![Tempo de atualização dos backlinks](/img/cerebro/complexidade.svg)
+
+*Atualização completa dos backlinks: um grep por nota contra uma passada única em awk.*
 
 Um instalador separado monta tudo em dez a quinze minutos. Você cola um link no assistente, ele faz cinco perguntas numa mensagem (onde fica o vault, seu nome, sua stack, se quer registro de gasto, se estuda), instala as camadas, verifica e explica o que fazer no dia seguinte.
 

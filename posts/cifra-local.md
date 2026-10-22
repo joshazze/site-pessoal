@@ -5,6 +5,7 @@ sub: Um padrão de app pessoal que não tem servidor para vazar, com o myco como
 data: 2026-06-02
 stack: [WebCrypto, PBKDF2, AES-GCM, IndexedDB, Vite]
 competencias: [criptografia aplicada, privacidade por desenho, PWA]
+areas: [Web, Segurança e privacidade, Apps e PWA, Código aberto]
 repo: https://github.com/joshazze/myco
 ---
 
@@ -26,7 +27,15 @@ O exemplo aqui é o **myco**, um app de jardinagem que registra vasos, setores, 
 
 A senha nunca é armazenada e nunca vira a chave diretamente.
 
+![Fluxo da senha ao dado guardado](/img/myco/fluxo.svg)
+
+*Da senha ao dado guardado.*
+
 Ela passa por PBKDF2 com 250.000 iterações e SHA-256, junto de um sal aleatório gerado na criação da base, e o resultado é uma chave AES-GCM de 256 bits. As iterações encarecem cada palpite: quem conseguir a base cifrada precisa calcular 250 mil derivações por tentativa, e um ataque de dicionário deixa de ser viável.
+
+![Tempo de ataque com e sem iterações](/img/myco/custo.svg)
+
+*Tempo para testar um milhão de senhas, medido num núcleo de um MacBook.*
 
 Cada gravação é cifrada com AES-GCM e um vetor de inicialização novo, o que garante confidencialidade e integridade na mesma operação: se um byte for alterado no armazenamento, a decifragem falha em vez de devolver dados corrompidos sem aviso. Tudo usa a WebCrypto do navegador, sem biblioteca externa de criptografia, e o resultado fica guardado no IndexedDB.
 

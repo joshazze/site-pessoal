@@ -5,6 +5,7 @@ sub: Detector de texto gerado por IA que separa prova de estimativa
 data: 2026-10-22
 stack: [Python, stdlib, estatística, Unicode]
 competencias: [estatística aplicada, segurança, avaliação de modelos, PT-BR]
+areas: [IA aplicada, Dados e estatística, Segurança e privacidade, Pesquisa]
 ---
 
 ## Contexto
@@ -17,11 +18,19 @@ Um tipo de evidência é a marca d'água: um sinal deixado de propósito no text
 
 Uma ferramenta de linha de comando que dá uma nota de 1 a 100 e diz de onde ela veio. Se encontrou marca d'água, a nota é rotulada como `prova` e fica entre 97 e 100. Se a nota vem só do estilo, o rótulo é `estimativa` e o teto é 96. Estilo nunca dá 100.
 
+![Escala da nota](/img/detector-ia/escala.svg)
+
+*Estimativa vai até 96. De 97 a 100, só com marca d'água encontrada.*
+
 Python puro. Roda em milissegundos.
 
 ## Como funciona
 
 São três camadas.
+
+![As três camadas](/img/detector-ia/camadas.svg)
+
+*As três camadas, da mais barata para a mais cara.*
 
 A primeira procura sinais escondidos em Unicode: caracteres de largura zero, seletores de variação usados para esconder bytes em emojis, caracteres de tag, controles bidirecionais e letras de alfabetos diferentes misturadas dentro da mesma palavra. Havendo mensagem escondida, o relatório a mostra. Usos legítimos são descartados antes, como o caractere que une emojis de família ou o que é obrigatório na escrita persa.
 
@@ -34,6 +43,10 @@ A terceira analisa o estilo com 67 características calibradas para o português
 Medi a ferramenta num corpus de 205 textos em português, em que os humanos vieram de revisões da Wikipédia anteriores a 2021, para garantir que fossem anteriores aos modelos de linguagem. Os textos de IA foram escritos sobre os mesmos temas, porque com temas diferentes o classificador aprende a separar assunto e não autoria.
 
 O resultado geral é bom. O ponto fraco também ficou claro: um texto de IA revisado para soar humano tirou nota 3. A análise de estilo sozinha não pega IA bem editada, e a próxima etapa é usar um modelo de linguagem pequeno, rodando localmente, para medir a probabilidade do texto.
+
+![Distribuição das notas por origem do texto](/img/detector-ia/distribuicao.svg)
+
+*Notas no corpus de teste, com os dois limiares de falso positivo.*
 
 Hoje ela também tem um modo de autoria, que em vez de dar só a nota aponta a linha de cada problema de estilo e sugere a correção. Os textos deste site passam por ela antes de serem publicados.
 

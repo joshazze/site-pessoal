@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect width="760" height="360" fill="#fcfcfb"/>
+<text x="34.00" y="44.00" font-size="12.0" fill="#0b0b0b" text-anchor="start" font-weight="600">agrupamento médio C</text>
+<rect x="80.00" y="141.85" width="74.00" height="148.15" rx="4.0" fill="#2a78d6" fill-opacity="1.00"/>
+<text x="117.00" y="131.85" font-size="13.0" fill="#0b0b0b" text-anchor="middle" font-weight="600">0.585</text>
+<text x="117.00" y="310.00" font-size="11.0" fill="#52514e" text-anchor="middle" font-weight="400">este vault</text>
+<rect x="194.00" y="282.35" width="74.00" height="7.65" rx="4.0" fill="#8a8983" fill-opacity="1.00"/>
+<text x="231.00" y="272.35" font-size="13.0" fill="#0b0b0b" text-anchor="middle" font-weight="600">0.030</text>
+<text x="231.00" y="310.00" font-size="11.0" fill="#52514e" text-anchor="middle" font-weight="400">aleatório</text>
+<line x1="66.00" y1="290.00" x2="282.00" y2="290.00" stroke="#e6e5e1" stroke-width="1.50" stroke-opacity="1.00" stroke-linecap="round"/>
+<text x="414.00" y="44.00" font-size="12.0" fill="#0b0b0b" text-anchor="start" font-weight="600">caminho médio L (saltos)</text>
+<rect x="460.00" y="158.63" width="74.00" height="131.37" rx="4.0" fill="#2a78d6" fill-opacity="1.00"/>
+<text x="497.00" y="148.63" font-size="13.0" fill="#0b0b0b" text-anchor="middle" font-weight="600">2.70</text>
+<text x="497.00" y="310.00" font-size="11.0" fill="#52514e" text-anchor="middle" font-weight="400">este vault</text>
+<rect x="574.00" y="141.85" width="74.00" height="148.15" rx="4.0" fill="#8a8983" fill-opacity="1.00"/>
+<text x="611.00" y="131.85" font-size="13.0" fill="#0b0b0b" text-anchor="middle" font-weight="600">3.05</text>
+<text x="611.00" y="310.00" font-size="11.0" fill="#52514e" text-anchor="middle" font-weight="400">aleatório</text>
+<line x1="446.00" y1="290.00" x2="662.00" y2="290.00" stroke="#e6e5e1" stroke-width="1.50" stroke-opacity="1.00" stroke-linecap="round"/>
+<text x="34.00" y="340.00" font-size="11.0" fill="#8a8983" text-anchor="start" font-weight="400">mesma quantidade de notas e de ligações nos dois casos. σ = (C/C_r)/(L/L_r) = 21.9</text>
+</svg>

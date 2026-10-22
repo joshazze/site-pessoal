@@ -5,6 +5,7 @@ sub: Um heterônimo para cada ferramenta: personas de IA que persistem e ativam 
 data: 2026-08-11
 stack: [Bash, hooks, Claude Code, Markdown]
 competencias: [arquitetura de agentes, design de sistema, escrita técnica]
+areas: [IA aplicada, Ferramentas de desenvolvedor, Código aberto]
 repo: https://github.com/joshazze/fernando-pessoa-agents
 ---
 
@@ -20,7 +21,15 @@ A questão central é de isolamento e persistência. Regras de estudo e de produ
 
 Fernando Pessoa não usava pseudônimos. Usava heterônimos: autores completos e distintos, cada um com biografia, estética e visão de mundo próprias, convivendo na mesma pessoa. Caeiro era o mestre bucólico, Reis o classicista estoico, Campos o modernista intenso. Pessoa assinava por si.
 
+![Fernando Pessoa por volta de 1915](/img/fernando-pessoa/pessoa-1915.jpg) ![Fernando Pessoa no Abel Pereira, 1929](/img/fernando-pessoa/pessoa-1929.jpg)
+
+*Fernando Pessoa por volta de 1915 e no Abel Pereira, em 1929. Fotos: acervo da [Casa Fernando Pessoa](https://casafernandopessoa.pt/en/fernando-pessoa).*
+
 Apliquei essa estrutura a um assistente. Em vez de um prompt único tentando dar conta de tudo, há um ortônimo (o assistente padrão) que aciona heterônimos: personas estreitas, cada uma dedicada a uma tarefa, com voz e regras próprias. O ortônimo escolhe qual chamar.
+
+![Marcus, Rogi e Stefano](/img/fernando-pessoa/heteronimos.svg)
+
+*Os heterônimos que mais uso, com o gatilho e a camada de persistência de cada um.*
 
 ## Como funciona
 
@@ -31,6 +40,10 @@ A metáfora ajuda a explicar, mas a contribuição está na arquitetura de persi
 - **Memória**: um arquivo que dura entre sessões e volta quando o assunto aparece.
 
 A regra que organiza tudo é que **o gatilho define a camada**.
+
+![As três camadas de persistência](/img/fernando-pessoa/camadas-persona.svg)
+
+*As três camadas de persistência de uma persona e a escala de tempo em que cada uma age.*
 
 Uma persona chamada pelo nome precisa só da primeira camada, porque quem chama já fornece o contexto. Uma persona ambiente, que deve ficar ativa o tempo todo, precisa de um hook que a reforce a cada turno; sem isso ela se dilui em conversas longas e a voz muda sem que ninguém tenha pedido. Já uma persona de guarda, que existe para impedir uma ação, não pode depender de instrução. Ela precisa de um hook que intercepte a chamada da ferramenta e a recuse, porque uma persona escrita em texto ainda pode ser convencida.
 

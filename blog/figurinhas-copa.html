@@ -79,10 +79,14 @@
 <p>Por trás há um backend próprio: FastAPI em Python, PostgreSQL 16 e Caddy como proxy reverso, que cuida do HTTPS sozinho via Let&#x27;s Encrypt. Ele guarda o catálogo oficial, as coleções e o histórico, para que o álbum não dependa do navegador de um aparelho.</p>
 <h2>Como funciona</h2>
 <p>O app fotografa o verso da figurinha, extrai o texto e compara o resultado com o dicionário de códigos oficiais usando comparação aproximada, já que o OCR erra.</p>
+<p><img src="/img/figurinhas/pipeline.svg" alt="Pipeline de reconhecimento" loading="lazy"></p>
+<p><em>Do verso da figurinha ao código no álbum.</em></p>
 <p>O que mais pesa no resultado é a normalização antes da comparação. Os códigos da Panini são letras seguidas de dígitos, sem separador, então qualquer espaço lido pelo reconhecedor vem do papel, da luz ou do ângulo e não carrega informação.</p>
 <h2>O que aprendi</h2>
 <p>O primeiro caso foi &quot;COL 4&quot;, que não casava com &quot;COL4&quot;.</p>
 <p>A foto estava nítida. O app respondia &quot;não lido&quot;. Minha normalização juntava espaços múltiplos em um só, como se faz com texto comum. Aqui o espaço era ruído. A comparação entre &quot;COL 4&quot; e &quot;COL4&quot; ficava logo abaixo do limite de aceitação. A correção foi remover os espaços em vez de juntá-los. Ela vale para qualquer rótulo que seja um bloco contínuo, como SKU, placa de carro ou código de peça: quando o reconhecimento falha num caso fácil, a normalização é a primeira suspeita.</p>
+<p><img src="/img/figurinhas/normalizacao.svg" alt="Normalização antes e depois" loading="lazy"></p>
+<p><em>A normalização antiga e a atual para o mesmo texto lido.</em></p>
 <p>O segundo é sobre o limite do automático.</p>
 <p>Uma rede de fast food distribui figurinhas promocionais com a mesma numeração das regulares. O reconhecimento escolhia entre as duas por pontuação de semelhança e às vezes acertava. Ao investigar os erros, descobri que o verso das duas é idêntico. Só a frente diferencia. Nenhum ajuste de limiar resolveria, porque a informação não está na imagem.</p>
 <p>Tirei esses códigos do dicionário do reconhecedor, o backend deixou de emiti-los automaticamente e a escolha passou a ser um botão no app, que a pessoa aperta olhando a frente da figurinha. Ensinar o sistema a não adivinhar deu mais trabalho do que ensinar a adivinhar, mas um palpite errado apresentado como certo custa mais do que uma pergunta ao usuário.</p>

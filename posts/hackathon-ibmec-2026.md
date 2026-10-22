@@ -5,6 +5,7 @@ sub: Hackathon Nacional Ibmec 2026, equipe Os Terríveis, etapa Belo Horizonte
 data: 2026-05-22
 stack: [Python, statsmodels, Prophet, scikit-learn, VAR, weasyprint]
 competencias: [econometria, análise de dados, pitch, trabalho em equipe]
+areas: [Dados e estatística, Competições e prêmios, Pesquisa]
 ---
 
 ## Contexto
@@ -21,7 +22,23 @@ O transmissor é o câmbio.
 
 A regressão de Okun contemporânea, que relaciona produto e desemprego, explica pouco no Brasil do período, com R² de 0,16, e isso poderia ser lido como falha do modelo. Para nós ele media no momento errado. O choque cambial leva de dois a quatro trimestres para chegar ao emprego e passa antes pelo balanço das empresas. Um VAR com doze defasagens capta o que a regressão contemporânea perde. O câmbio antecipa o desemprego com p = 0,0001 e a inflação com p = 0,005, e a decomposição da variância mostra a série 92,5% exógena. O teste de Chow não rejeita a estabilidade estrutural, então não há uma quebra em 2014 explicando o resultado.
 
+![Decomposição da variância do VAR](/img/hackathon/var_fevd.png)
+
+*Decomposição da variância em 12 meses: o câmbio se explica quase só por choques nele mesmo.*
+
 A parte micro usou 129 empresas listadas na B3, com demonstrações da CVM Dados Abertos. O câmbio não empobrece o país por igual. Redistribui. O ROE do varejo cai de 7,4% para 0,9%, enquanto o agroexportador ganha 18,9 pontos percentuais. Sobre esses dados rodamos K-Means para separar três regimes, validado por silhueta, e Prophet para prever 2024, com erro percentual médio de 8,9% no câmbio.
+
+![Resiliência por setor da B3](/img/hackathon/mapa_transmissao_setorial.png)
+
+*Quem resiste e quem sofre nos três choques, por setor da B3.*
+
+![Três regimes econômicos do K-Means](/img/hackathon/kmeans_clusters_timeline.png)
+
+*Os três regimes que o K-Means separou sem rótulo humano.*
+
+![Previsão do câmbio para 2024](/img/hackathon/q2_prophet_cambio_nominal_brl_usd.png)
+
+*Previsão do câmbio para 2024 com Prophet, contra o valor real.*
 
 ## O que aprendi
 
@@ -39,3 +56,4 @@ A segunda lição veio de um mentor, umas três horas antes do pitch, e apontou 
 - Cadeia da macro à micro sustentada por números: câmbio antecipando o desemprego (p = 0,0001) e ROE do varejo caindo de 7,4% para 0,9% no mesmo período.
 - 129 empresas da B3 processadas a partir da CVM Dados Abertos. Tínhamos acesso a um terminal financeiro pago e não foi preciso usá-lo: dados públicos resolveram e deixaram a análise reproduzível por qualquer banca.
 - Limitação declarada no texto: o câmbio real efetivo do Banco Central estava fora do ar, então usamos o nominal deflacionado pelo IPCA.
+- Gráficos produzidos pela equipe Os Terríveis para a entrega.

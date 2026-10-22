@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" font-family="Inter, Helvetica, Arial, sans-serif">
+  <rect width="900" height="520" fill="#fcfcfb"/>
+
+  <!-- camada 5 -->
+  <rect x="60" y="34" width="700" height="66" rx="6" fill="#2a78d6" fill-opacity="0.10" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="80" y="60" font-size="14" font-weight="600" fill="#0b0b0b">5 · Agente</text>
+  <text x="80" y="82" font-size="12" fill="#52514e">decide o que ler, escreve o que descobriu. É a única camada que custa por token.</text>
+  <text x="744" y="72" font-size="11" fill="#8a8983" text-anchor="end">modelo</text>
+
+  <!-- camada 4 -->
+  <rect x="60" y="120" width="700" height="66" rx="6" fill="#2a78d6" fill-opacity="0.06" stroke="#2a78d6" stroke-width="1.2"/>
+  <text x="80" y="146" font-size="14" font-weight="600" fill="#0b0b0b">4 · Contexto da sessão</text>
+  <text x="80" y="168" font-size="12" fill="#52514e">memória volátil, recontada a cada turno até a compactação. É o recurso escasso.</text>
+  <text x="744" y="158" font-size="11" fill="#8a8983" text-anchor="end">RAM</text>
+
+  <!-- camada 3 -->
+  <rect x="60" y="206" width="700" height="88" rx="6" fill="#eb6834" fill-opacity="0.08" stroke="#eb6834" stroke-width="1.2"/>
+  <text x="80" y="232" font-size="14" font-weight="600" fill="#0b0b0b">3 · Ganchos</text>
+  <text x="80" y="254" font-size="12" fill="#52514e">pontos de interceptação do runtime. Executam código, não intenção.</text>
+  <g font-size="11" fill="#0b0b0b">
+    <rect x="80" y="264" width="196" height="22" rx="4" fill="#fcfcfb" stroke="#eb6834" stroke-width="1"/>
+    <text x="90" y="279">SessionStart · uma vez</text>
+    <rect x="288" y="264" width="212" height="22" rx="4" fill="#fcfcfb" stroke="#eb6834" stroke-width="1"/>
+    <text x="298" y="279">UserPromptSubmit · por turno</text>
+    <rect x="512" y="264" width="212" height="22" rx="4" fill="#fcfcfb" stroke="#eb6834" stroke-width="1"/>
+    <text x="522" y="279">PreToolUse · por ação</text>
+  </g>
+
+  <!-- camada 2 -->
+  <rect x="60" y="314" width="700" height="88" rx="6" fill="#1baf7a" fill-opacity="0.08" stroke="#1baf7a" stroke-width="1.2"/>
+  <text x="80" y="340" font-size="14" font-weight="600" fill="#0b0b0b">2 · Shell</text>
+  <text x="80" y="362" font-size="12" fill="#52514e">tudo que não precisa de modelo. Custo em token: zero.</text>
+  <g font-size="11" fill="#0b0b0b">
+    <rect x="80" y="372" width="150" height="22" rx="4" fill="#fcfcfb" stroke="#1baf7a" stroke-width="1"/>
+    <text x="90" y="387">recall (índice)</text>
+    <rect x="242" y="372" width="150" height="22" rx="4" fill="#fcfcfb" stroke="#1baf7a" stroke-width="1"/>
+    <text x="252" y="387">backlinks</text>
+    <rect x="404" y="372" width="150" height="22" rx="4" fill="#fcfcfb" stroke="#1baf7a" stroke-width="1"/>
+    <text x="414" y="387">hubs</text>
+    <rect x="566" y="372" width="158" height="22" rx="4" fill="#fcfcfb" stroke="#1baf7a" stroke-width="1"/>
+    <text x="576" y="387">custo por sessão</text>
+  </g>
+
+  <!-- camada 1 -->
+  <rect x="60" y="422" width="700" height="66" rx="6" fill="#0b0b0b" fill-opacity="0.05" stroke="#8a8983" stroke-width="1.2"/>
+  <text x="80" y="448" font-size="14" font-weight="600" fill="#0b0b0b">1 · Vault</text>
+  <text x="80" y="470" font-size="12" fill="#52514e">markdown em disco, versionado em git. Legível por humano, sem banco de dados.</text>
+  <text x="744" y="460" font-size="11" fill="#8a8983" text-anchor="end">disco</text>
+
+  <!-- fluxos -->
+  <g stroke="#8a8983" stroke-width="1.6" fill="none" marker-end="url(#seta)">
+    <path d="M 46 455 L 46 250 L 54 250"/>
+    <path d="M 46 240 L 46 155 L 54 155"/>
+    <path d="M 46 145 L 46 70 L 54 70"/>
+    <path d="M 774 70 L 790 70 L 790 455 L 766 455"/>
+  </g>
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8983"/>
+    </marker>
+  </defs>
+  <text x="20" y="260" font-size="10" fill="#8a8983" transform="rotate(-90 20 260)" text-anchor="middle">leitura: puxa do disco</text>
+  <text x="880" y="260" font-size="10" fill="#8a8983" transform="rotate(-90 880 260)" text-anchor="middle">escrita: o agente grava</text>
+</svg>

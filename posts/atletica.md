@@ -5,6 +5,7 @@ sub: Site institucional, catálogo com reservas e gestão de estoque
 data: 2026-07-24
 stack: [Flask, Jinja, HTMX, PostgreSQL, Docker]
 competencias: [backend, produto, operação, entrega com prazo]
+areas: [Web, Infraestrutura e deploy, Produto]
 link: https://atleticaibmecbh.com.br
 ---
 

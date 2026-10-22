@@ -238,9 +238,9 @@ def linha_topico(p):
 
     data-busca e data-tags são o índice de busca da página: já vêm normalizados
     daqui, para o JS do cliente só comparar string."""
-    tudo = [p["titulo"], p["sub"], data_forum(p["data"])] + p["stack"] + p["competencias"]
+    tudo = [p["titulo"], p["sub"], data_forum(p["data"])] + p["areas"] + p["stack"] + p["competencias"]
     busca = html.escape(" ".join(sem_acento(t) for t in tudo), quote=True)
-    tags = html.escape("|".join(sem_acento(t) for t in p["stack"] + p["competencias"]), quote=True)
+    tags = html.escape("|".join(sem_acento(t) for t in p["areas"] + p["stack"] + p["competencias"]), quote=True)
     return f"""      <tr data-busca="{busca}" data-tags="{tags}">
         <td class="assunto">
           <span class="pasta" aria-hidden="true"></span><a class="titulo" href="/blog/{p['slug']}">{html.escape(p['titulo'], quote=True)}</a>
@@ -264,8 +264,10 @@ def bloco_filtro(posts):
             for t in vivos
         )
 
-    comp, pilha = opcoes("competencias"), opcoes("stack")
+    area, comp, pilha = opcoes("areas"), opcoes("competencias"), opcoes("stack")
     grupos = ""
+    if area:
+        grupos += f'\n          <optgroup label="Área">{area}</optgroup>'
     if comp:
         grupos += f'\n          <optgroup label="Competência">{comp}</optgroup>'
     if pilha:
@@ -367,6 +369,7 @@ def main():
             "titulo": meta["titulo"],
             "sub": meta["sub"],
             "data": ler_data(meta["data"], nome),
+            "areas": meta.get("areas", []),
             "stack": meta.get("stack", []),
             "competencias": meta.get("competencias", []),
             "link": meta.get("link", ""),

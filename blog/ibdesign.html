@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Site da IbDesign</title>
+<meta name="description" content="Site da IbDesign: Reconstrução do site da liga de design e arquitetura do Ibmec BH, em contas da própria liga">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Site da IbDesign :: oqojfr?">
+<meta property="og:description" content="Site da IbDesign: Reconstrução do site da liga de design e arquitetura do Ibmec BH, em contas da própria liga">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/ibdesign">
+<link rel="canonical" href="https://jadistel.com/blog/ibdesign">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Site da IbDesign</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 19</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>11 Out 2026</b></span>
+            <span>Assunto: <b>Site da IbDesign</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Reconstrução do site da liga de design e arquitetura do Ibmec BH, em contas da própria liga</dd>
+              <dt>Stack</dt><dd><span class="marca-item">HTML</span><span class="marca-item">CSS</span><span class="marca-item">JavaScript</span><span class="marca-item">Python</span><span class="marca-item">Supabase</span><span class="marca-item">Cloudflare Pages</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">frontend</span><span class="marca-item">migração</span><span class="marca-item">performance</span><span class="marca-item">documentação</span></dd>
+              <dt>No ar</dt><dd><a href="https://ibdesign.org">ibdesign.org</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>A IbDesign é a liga de design e arquitetura do Ibmec BH. Seu primeiro site foi feito em Next.js e publicado na conta pessoal de quem o desenvolveu, numa plataforma de hospedagem. Com o tempo, o acesso a essa conta se perdeu. O site seguia no ar, intocável: ninguém conseguia corrigir um texto, publicar uma mudança ou apontar um domínio.</p>
+<p>A liga criou uma conta própria. Meu trabalho foi trazer o site para ela sem que o visitante percebesse.</p>
+<h2>O que eu fiz</h2>
+<p>Reconstruí o site sobre contas da liga. Páginas estáticas no Cloudflare Pages, conteúdo dinâmico no Supabase, custo zero.</p>
+<p>Como o deploy antigo era pré-renderizado, o HTML servido já trazia a página pronta. Escrevi um script em Python que remove o runtime do Next, aponta CSS, fontes e imagens para arquivos locais e preserva classes e estilos, o que mantém a aparência idêntica. As interações que dependiam de React viraram cerca de 150 linhas de JavaScript puro: a abertura com contador, o menu do celular, a barra que se esconde ao rolar e a linha do tempo arrastável.</p>
+<p>Aproveitei para corrigir o que estava quebrado. Os dez links do menu apontavam todos para a página inicial, os botões de contato levavam a um email num domínio que nunca existiu, e faltavam <code>robots.txt</code>, <code>sitemap.xml</code> e uma página 404.</p>
+<h2>Como funciona</h2>
+<p>O conteúdo que muda com frequência (projetos, linha do tempo, vivências e integrantes) fica em quatro tabelas no Supabase, com leitura pública e escrita restrita. Mas o HTML já sai preenchido. Se o banco ficar fora do ar ou for bloqueado na rede da faculdade, o site continua completo, e o script só atualiza o que estiver diferente.</p>
+<p>Depois da migração vieram rodadas de design: as manchas de cor no fundo se movem em velocidades diferentes conforme o tamanho, e a linha do tempo fica presa no topo enquanto o scroll percorre os nove marcos. Com a logo nova, o site inteiro passou a usar um laranja só.</p>
+<p>Escrevi também um manual de posse, guardado no repositório e no Drive da liga, explicando as contas, como mudar conteúdo sem programar, como publicar e como passar o site para a próxima diretoria.</p>
+<h2>O que aprendi</h2>
+<p>A linha do tempo presa ao topo não funcionava. O <code>position: sticky</code> depende de qual elemento faz a rolagem, e um <code>overflow-x: hidden</code> no <code>html</code> e no <code>body</code> transformava a página num contêiner de rolagem próprio, o que anulava o efeito. Trocar <code>hidden</code> por <code>clip</code> resolveu, porque <code>clip</code> corta o conteúdo sem criar esse contêiner.</p>
+<p>Também aprendi a medir animação. A bancada de testes usa o Chrome sem interface e precisa desligar o cache explicitamente. Senão, mede a versão velha.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Site no ar em <code>ibdesign.org</code> desde 14 de setembro de 2026, em contas da própria liga, com custo zero.</li>
+<li>Imagens convertidas para WebP, de 9,0 MB para 2,1 MB.</li>
+<li>Página de projeto com similaridade estrutural de 0,977 em relação à original, conferida por imagem.</li>
+<li>Site completo mesmo com JavaScript desligado, e verificador automático conferindo rotas, imagens, cabeçalhos de segurança e as quatro tabelas.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20ibdesign">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/laser">&laquo; Tópico anterior: Biblioteca de corte a laser</a></span>
+    <span><a href="/blog/detector-ia">Próximo tópico: detector-ia &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

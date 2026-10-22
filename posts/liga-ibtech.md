@@ -11,39 +11,37 @@ repo: https://github.com/joshazze/ibtech-credenciais
 
 ## Contexto
 
-A IbTech é a liga de software do Ibmec BH. Eu sou diretor acadêmico na alta cúpula da chapa unificada, e o trabalho tem três frentes que não se parecem: montar as trilhas de formação, revisar o que os membros entregam, e resolver o problema chato que toda liga acadêmica tem no fim do ciclo.
+A IbTech é a liga de software do Ibmec BH. Sou diretor acadêmico na chapa unificada, e o trabalho tem três frentes bem diferentes: montar as trilhas de formação, revisar as entregas dos membros e resolver uma questão que toda liga acadêmica enfrenta no fim do ciclo.
 
-O problema chato é o certificado. Ele existe para o membro colocar no LinkedIn e para o recrutador acreditar. Só que o certificado acadêmico brasileiro típico é um PDF com uma assinatura escaneada, e a única coisa que ele prova é que alguém tem Canva. Qualquer pessoa refaz o seu em dez minutos, com o nome trocado. A liga sabe disso, o membro sabe disso, e o recrutador também.
+É o certificado. Ele serve para o membro mostrar no LinkedIn e para o recrutador confiar no que está lendo. O certificado acadêmico mais comum, porém, é um PDF com assinatura escaneada, fácil de refazer em poucos minutos com outro nome. Todo mundo sabe.
 
 ## O que eu fiz
 
-Do lado da formação, as trilhas e a revisão das entregas. Cada trabalho aprovado vai para um repositório central da liga por branch e pull request, com revisão nominal, e não some no Drive de quem fez.
+Na formação, cuido das trilhas e da revisão das entregas. Cada trabalho aprovado vai para um repositório central da liga por branch e pull request, com revisão nominal, em vez de ficar perdido no Drive de quem fez.
 
-Do lado das credenciais, construí um emissor próprio. Cada certificado vira um JSON no padrão Open Badges 3.0, no formato Blockcerts. Calcula-se o SHA-256 de cada um, monta-se uma árvore de Merkle do lote inteiro, e só a raiz vai para a blockchain, numa única transação. Verificar é recalcular o hash do certificado, subir a árvore até a raiz e conferir se ela bate com a que está registrada na rede.
+Nas credenciais, construí um emissor próprio. Cada certificado é um JSON em Open Badges 3.0. O sistema calcula o SHA-256 de cada um, monta uma árvore de Merkle com o lote inteiro e registra apenas a raiz na blockchain, numa única transação. Para verificar, basta recalcular o hash do certificado, subir pela árvore até a raiz e conferir se ela corresponde à registrada na rede.
 
-O detalhe que faz isso valer a pena é o custo. Trinta e dois certificados poderiam ser trinta e duas transações. Com a árvore de Merkle são trinta e duas provas e uma transação só, e ainda assim adulterar qualquer nome quebra a raiz.
+O ganho está no custo. Trinta e dois certificados poderiam exigir trinta e duas transações. Com a árvore de Merkle, são trinta e duas provas e uma transação, e alterar qualquer nome continua quebrando a raiz.
 
 ## Como funciona
 
-O pipeline é Node enxuto, três comandos: `build` gera os JSON, `anchor` monta a árvore e grava a raiz, `verify` refaz a conta. Não usei a tooling oficial do Blockcerts porque ela é Python e não roda na versão que eu tenho instalada, e reescrever o essencial em Node saiu mais rápido que resolver a incompatibilidade.
+O pipeline é um Node enxuto com três comandos: `build` gera os JSON, `anchor` monta a árvore e grava a raiz, `verify` refaz a conta. Não usei a ferramenta oficial do Blockcerts porque ela é em Python e não roda na versão que tenho instalada, e reescrever o essencial em Node foi mais rápido do que resolver a incompatibilidade.
 
-A rede é Ethereum Sepolia, escolha feita pelo torneirinha: o faucet do Google Cloud oferece Sepolia e não oferece as alternativas. O código é agnóstico de rede, o RPC vive em variável de ambiente, e trocar de rede é trocar uma linha.
+A rede é a Ethereum Sepolia, escolhida porque o faucet do Google Cloud oferece Sepolia e não as alternativas. O código não depende da rede: o RPC fica numa variável de ambiente, e trocar de rede é mudar uma linha.
 
-Também descartei a plataforma comercial brasileira de badges. Ela cobra, exige CNPJ, e o que ela mostra ao recrutador no fim é um hash impresso na tela. A nossa não custa plataforma, não exige personalidade jurídica e verifica ao vivo, refazendo a criptografia no navegador de quem está olhando.
+Também descartei a plataforma comercial brasileira de badges, que é paga, exige CNPJ e, depois de tudo isso, mostra ao recrutador apenas um hash impresso na tela, sem refazer conta nenhuma. A nossa não tem custo de plataforma, não exige pessoa jurídica e faz a verificação ao vivo, recalculando a criptografia no navegador de quem está conferindo.
 
 ## O que aprendi
 
-Nenhum recrutador vai abrir um verificador. Essa foi a lição que me obrigou a jogar fora a primeira versão da página.
+Recrutador não abre verificador. Foi isso que me levou a refazer a primeira versão da página.
 
-A primeira versão era honesta e feia: um formulário, um campo de id, um "válido" em verde. Tecnicamente completa, e ninguém ia clicar duas vezes. A segunda versão trata a verificação como cerimônia. O certificado aparece emoldurado, a conferência acontece na frente de quem está olhando, com o painel mostrando o que está sendo recalculado, e no fim tem QR e exportação em PDF. O design reproduz o certificado oficial da liga, com o logo extraído do PDF original, para que a página não pareça um sistema de terceiro.
+A primeira versão era correta e sem graça: um formulário, um campo de identificador e um "válido" em verde. Ninguém voltaria. A segunda apresenta a verificação como parte da experiência. O certificado aparece emoldurado, a conferência acontece na tela, com um painel mostrando o que está sendo recalculado, e no final há QR code e exportação em PDF. O design reproduz o certificado oficial da liga, com o logo extraído do PDF original, para que a página não pareça um sistema de terceiros. A criptografia é a mesma nas duas versões. A diferença é que a segunda é vista.
 
-A criptografia é a mesma nas duas versões. A diferença é que a segunda é vista.
-
-A outra lição foi de operação, não de código: não montei fluxo de e-mail e claim individual. Gera-se o lote inteiro de uma vez e avisa-se cada pessoa com o link pronto. Esperar trinta e duas pessoas clicarem em "reivindicar minha credencial" é a forma mais confiável de emitir doze.
+A outra lição foi de operação: não criei fluxo de e-mail nem resgate individual: o lote inteiro é gerado de uma vez e cada pessoa recebe o link pronto. Se cada membro precisasse entrar e clicar em "reivindicar minha credencial", boa parte das trinta e duas ficaria sem resgate.
 
 ## Resultados
 
 - 32 certificados emitidos e ancorados numa única transação, com verificação criptográfica ao vivo.
-- Cada credencial tem URL própria, que é exatamente o que o botão "Mostrar credencial" do LinkedIn pede.
-- Custo de plataforma zero, contra uma alternativa comercial que exige CNPJ e mensalidade.
-- O código é público em `joshazze/ibtech-credenciais`, com uma explicação didática de como a árvore de Merkle sustenta a prova.
+- Cada credencial tem URL própria, que é o que o botão "Mostrar credencial" do LinkedIn pede.
+- Nenhum custo de plataforma, contra uma alternativa comercial que exige CNPJ e mensalidade.
+- Código público em `joshazze/ibtech-credenciais`, com uma explicação didática de como a árvore de Merkle sustenta a prova.

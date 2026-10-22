@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Palestra de IA aplicada</title>
+<meta name="description" content="Palestra de IA aplicada: 40 minutos para calouros de engenharia, com deck só de imagens e prática ao vivo no terminal">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Palestra de IA aplicada :: oqojfr?">
+<meta property="og:description" content="Palestra de IA aplicada: 40 minutos para calouros de engenharia, com deck só de imagens e prática ao vivo no terminal">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/palestra-ia">
+<link rel="canonical" href="https://jadistel.com/blog/palestra-ia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Palestra de IA aplicada</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 19</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>23 Ago 2026</b></span>
+            <span>Assunto: <b>Palestra de IA aplicada</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>40 minutos para calouros de engenharia, com deck só de imagens e prática ao vivo no terminal</dd>
+              <dt>Stack</dt><dd><span class="marca-item">HTML</span><span class="marca-item">SVG</span><span class="marca-item">Chrome headless</span><span class="marca-item">Claude Code</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">comunicação</span><span class="marca-item">didática</span><span class="marca-item">pesquisa de fontes</span><span class="marca-item">design de apresentação</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Em 20 de agosto de 2026 dei uma palestra de 40 minutos sobre IA aplicada para calouros de engenharia e membros das ligas IbTech e IbBot. Boa parte da plateia já usava ferramentas de IA, mas tinha pouca noção de como elas funcionam e do que é possível construir com elas.</p>
+<p>Eu queria uma ideia central que fosse simples sem ser simplista. Escolhi esta: um modelo de linguagem é, em escala industrial, o experimento que Claude Shannon fez em 1948 com papel e lápis. A pergunta continua a mesma desde então, qual é o próximo pedaço de texto.</p>
+<h2>O que eu fiz</h2>
+<p>Dez minutos de história, vinte e seis de terminal, quatro de perguntas.</p>
+<p>A parte histórica tem 16 slides sem texto, com fotos de Shannon, Turing, Asimov, o Colossus, o ENIAC e suas programadoras, McCarthy, Minsky, o Deep Blue e Hinton, além de páginas renderizadas dos artigos originais de Turing e Shannon. O conteúdo vem da fala. Para não depender de memória, preparei um guia de narração de cinco páginas, com a frase a dizer em cada foto, e uma cola de duas páginas com o relógio minuto a minuto.</p>
+<p>A prática tinha cinco demonstrações. Primeiro, um sistema de memória para o assistente. Depois, a criação de um agente ao vivo, para mostrar que ele é basicamente um arquivo de texto. Uma conversa em que vários agentes discordam entre si. Um desenho para corte a laser. E, por último, uma tarefa sugerida pela própria plateia, a única parte que ninguém poderia dizer que foi ensaiada.</p>
+<h2>Como funciona</h2>
+<p>O deck é um único arquivo HTML, gerado por um script que percorre a pasta de imagens, embute todas em base64 e produz um arquivo que roda sem internet, num projetor qualquer, sem depender do Wi-Fi do auditório. Cada foto aparece inteira sobre um fundo desfocado dela mesma, para caber em qualquer proporção de tela.</p>
+<p>O slide sobre modelos de difusão não usa nenhuma imagem externa. Ele mostra, em cinco quadros, ruído se transformando em imagem, feito só com filtros SVG.</p>
+<p>O penúltimo slide tem dois QR codes para os repositórios que mostrei. Antes da palestra, conferi os dois lendo cada código com o leitor de imagem do sistema. No final voltei para esse slide e o deixei na tela durante as perguntas.</p>
+<h2>O que aprendi</h2>
+<p>Conferi cada data e cada número na fonte. Fiz isso porque, meses antes, uma auditoria no meu artigo de iniciação científica encontrou uma referência que não existia. Para a palestra, montei um dossiê de 14 páginas com as fontes de cada número, vinte perguntas difíceis com resposta e dez mitos comuns sobre IA que eu não deveria repetir.</p>
+<p>As fotos também exigiram cuidado. Seis delas têm licença Creative Commons e exigem atribuição, então todas as imagens levam crédito no canto do slide, mesmo as de domínio público.</p>
+<p>Também aprendi a cortar. Antes da versão final houve uma de 33 slides teóricos e outra de 13 com tópicos escritos. Tirei o texto da tela. Assim a atenção fica em quem fala.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Palestra de 40 minutos dada em 20 de agosto de 2026 para calouros de engenharia e membros de duas ligas.</li>
+<li>Deck de 16 slides num único HTML que funciona sem internet, mais um guia de narração de 5 páginas, uma cola de 2 páginas e um dossiê de 14 páginas.</li>
+<li>Todos os números com fonte conferida, entre eles o AlexNet a 15,3% de erro contra 26,2% do segundo colocado em 2012 e o ChatGPT chegando a 1 milhão de usuários em 5 dias.</li>
+<li>Material reaproveitável: atualizar o deck é editar um modelo e rodar um script.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20palestra-ia">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/artigo-ic">&laquo; Tópico anterior: Viés linguístico em material didático gerado por LLM</a></span>
+    <span><a href="/blog/limites">Próximo tópico: Limites &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

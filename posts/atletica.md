@@ -10,39 +10,35 @@ link: https://atleticaibmecbh.com.br
 
 ## Contexto
 
-Atlética universitária vende. Camisa, caneca, ingresso de festa, kit de calouro. E vende do jeito que dá: um post no Instagram com a foto do produto, um formulário para o pedido, e uma planilha compartilhada onde alguém da diretoria tenta lembrar quantas camisas tamanho M ainda existem.
+Uma atlética universitária vende bastante coisa: camisa, caneca, ingresso de festa, kit de calouro. Na maioria delas a venda acontece por um post no Instagram com a foto do produto, um formulário para o pedido e uma planilha compartilhada em que alguém da diretoria anota quantas camisas M ainda restam.
 
-Isso funciona até o dia em que duas pessoas reservam a última peça ao mesmo tempo. Aí o problema deixa de ser de software e vira de constrangimento, porque alguém precisa mandar mensagem cancelando.
+O arranjo aguenta até duas pessoas reservarem a última peça no mesmo minuto. Aí alguém precisa escrever para uma delas, pedir desculpas e cancelar o pedido, e a planilha continua sem saber por que aquilo aconteceu.
 
 ## O que eu fiz
 
-Um site que faz as três coisas de uma vez: a página institucional que apresenta a atlética, o catálogo em que o aluno reserva, e o painel em que a diretoria administra o que existe em estoque.
+Um site com três partes. A página institucional da atlética, o catálogo em que o aluno reserva e o painel em que a diretoria cuida do estoque.
 
-A pilha é deliberadamente sem graça. Flask com Jinja para as páginas, HTMX para as partes que precisam responder sem recarregar, PostgreSQL para os dados, tudo em Docker. Sem framework de frontend, sem processo de build de JavaScript, sem camada de API separada do servidor que renderiza.
+A pilha é simples de propósito: Flask com Jinja para as páginas, HTMX para as partes que respondem sem recarregar, PostgreSQL para os dados e tudo em Docker. Sem framework de frontend. Sem build.
 
 ## Como funciona
 
-HTMX é a escolha que carrega o projeto, e ela merece explicação porque é contraintuitiva em 2026.
+O HTMX é a escolha central.
 
-Um catálogo com reserva precisa de umas cinco interações que não podem recarregar a página: mudar o tamanho selecionado, atualizar a quantidade, ver o preço mudar, reservar sem perder a rolagem. A resposta padrão hoje é montar um frontend em React ou Svelte, o que traz junto uma API para servir aquele frontend, um build, e a duplicação do modelo de dados nos dois lados.
+Um catálogo com reserva tem umas cinco interações que não deveriam recarregar a página: trocar o tamanho, mudar a quantidade, ver o preço atualizar, reservar sem perder a posição da rolagem. O caminho mais comum hoje seria um frontend em React ou Svelte, o que traz uma API para alimentá-lo, um passo de build e o modelo de dados duplicado nos dois lados.
 
-Com HTMX o servidor continua devolvendo HTML e o navegador troca só o pedaço que mudou. O modelo de dados vive num lugar só, o Jinja que já renderiza a página também renderiza o fragmento, e não existe passo de build para quebrar. Para um catálogo de dezenas de itens mantido por uma diretoria que troca todo ano, isso é o que decide se o sistema sobrevive à formatura de quem escreveu.
+Com HTMX o servidor continua devolvendo HTML e o navegador troca apenas o trecho que mudou, de modo que o modelo de dados fica num lugar só e o mesmo template Jinja que monta a página inteira também monta o fragmento. Para um catálogo de dezenas de itens, mantido por uma diretoria que muda todo ano, isso pesa mais do que qualquer ganho de interface: o sistema precisa continuar compreensível depois que quem o escreveu se formar.
 
 ## O que aprendi
 
-O usuário mandou um print e escreveu "GRID CARALHO".
+Pouco depois de eu mudar a grade de produtos para três por três, um usuário mandou um print com o layout antigo. Estranhei. Eu tinha feito o deploy, conferido na minha máquina, e o CSS no servidor já era o novo.
 
-Eu tinha acabado de mudar a grade de produtos para três por três, deployado, conferido na máquina, e estava tudo certo. O CSS no servidor era o novo. E o navegador dele insistia em mostrar o layout antigo.
+O template carregava a folha de estilo com um `?v=` fixo, escrito à mão, e eu alterei o CSS sem mexer nesse número. Para o navegador dele o endereço era o mesmo do dia anterior, então não havia motivo para baixar o arquivo de novo. O servidor estava certo e a tela, errada. Toda verificação feita do meu lado dava certo.
 
-O template linka o CSS com um `?v=` fixo, escrito à mão, e eu tinha alterado a folha de estilo sem tocar naquele número. Do ponto de vista do navegador, o endereço era idêntico ao de ontem, então não havia motivo nenhum para baixar de novo. O arquivo estava correto no servidor e errado na tela, que é a pior combinação possível para depurar, porque tudo o que você verifica dá certo.
-
-A lição não é sobre cache, é sobre onde a verificação termina. Eu tinha conferido o deploy e chamado aquilo de pronto. Deploy conferido no servidor não é mudança entregue: entregue é o que aparece na tela de quem usa, num navegador que já esteve ali antes. Desde então, mexer em CSS e bumpar a versão do asset é uma edição só, nunca duas.
-
-E o print continua sendo o relatório de bug mais eficiente que eu já recebi.
+Desde então, para mim, entregue é o que aparece na tela de quem usa, num navegador que já visitou o site antes. Mexer no CSS e subir a versão virou uma edição só.
 
 ## Resultados
 
-- Site institucional, catálogo com reservas e painel de estoque no ar em `atleticaibmecbh.com.br`, servindo o corpo discente do Ibmec BH.
-- Reserva com controle de estoque no banco, o que elimina a dupla reserva do mesmo item que a planilha compartilhada permitia.
-- Zero dependência de frontend e zero passo de build, com o mesmo template servindo página completa e fragmento.
-- Roda em contêiner na mesma máquina que hospeda outros dois sistemas das entidades acadêmicas, dividindo custo de infraestrutura.
+- Site institucional, catálogo com reservas e painel de estoque no ar em `atleticaibmecbh.com.br`, atendendo os alunos do Ibmec BH.
+- Reserva com controle de estoque no banco, o que acaba com a dupla reserva do mesmo item que a planilha permitia.
+- Nenhuma dependência de frontend e nenhum passo de build, com o mesmo template servindo a página completa e o fragmento.
+- Roda em contêiner na mesma máquina de outros dois sistemas de entidades acadêmicas, dividindo o custo de infraestrutura.

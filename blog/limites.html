@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Limites</title>
+<meta name="description" content="Limites: App de barra de menus para macOS com os limites de uso do Claude Code e do Codex">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Limites :: oqojfr?">
+<meta property="og:description" content="Limites: App de barra de menus para macOS com os limites de uso do Claude Code e do Codex">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/limites">
+<link rel="canonical" href="https://jadistel.com/blog/limites">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Limites</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 19</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>18 Set 2026</b></span>
+            <span>Assunto: <b>Limites</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>App de barra de menus para macOS com os limites de uso do Claude Code e do Codex</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Swift</span><span class="marca-item">SwiftUI</span><span class="marca-item">swift-testing</span><span class="marca-item">AppleScript</span><span class="marca-item">GitHub Actions</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">macOS nativo</span><span class="marca-item">engenharia reversa</span><span class="marca-item">privacidade</span><span class="marca-item">ferramenta de desenvolvedor</span></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/limites">joshazze/limites</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Uso o Claude Code e o Codex todos os dias, e os dois têm janelas de uso: uma de cinco horas e outra semanal. Para saber quanto restava, eu abria cada uma. Com várias abas de terminal abertas, também perdia o momento em que uma delas terminava uma tarefa ou esperava minha resposta.</p>
+<p>A ideia veio de um executável de Windows que chegou a mim por WhatsApp, um app chamado &quot;AI Limits&quot;. Não uso Windows, e binário de origem desconhecida eu não rodo. Li as strings do arquivo para entender o que ele fazia e escrevi do zero, em Swift, uma versão nativa para o Mac que faz a mesma coisa e mais um pouco.</p>
+<h2>O que eu fiz</h2>
+<p>Um app de barra de menus em SwiftUI, cujo ícone é um medidor com ponteiro que mostra o maior uso entre as janelas de cinco horas das duas ferramentas. Ao clicar, abre um painel com cada janela, o percentual e o horário de renovação. As semanais ficam ali, sem mexer no ponteiro.</p>
+<p>A segunda função é o aviso de aba. Quando uma sessão termina ou pede permissão, o app toca um som e um sino balança na barra de menus, com o nome da conversa ao lado. Volto para a aba, ele some.</p>
+<h2>Como funciona</h2>
+<p>Os dados vêm das próprias ferramentas. Sem raspar página, sem chave de API. No Claude Code, o app roda <code>claude -p /usage</code> com flags que impedem o carregamento de hooks e servidores MCP; a consulta é local, com zero turnos e custo zero, e caiu de 2,3 para 1,4 segundo com essas flags. No Codex, ele abre o <code>codex app-server</code> e conversa por JSON-RPC até receber os limites.</p>
+<p>O aviso usa hooks. Um pequeno executável dentro do app sobe a árvore de processos até achar o <code>claude</code> ou o <code>codex</code>, descobre o terminal da aba e descarta sessões sem tela. Para saber se já voltei à aba, o app olha o horário de acesso do terminal (o mesmo dado que o comando <code>w</code> usa para medir inatividade), que muda quando digito ou dou foco na janela. O executável roda em cerca de 10 milissegundos e não escreve nada na saída, então não acrescenta nada ao contexto da conversa.</p>
+<h2>O que aprendi</h2>
+<p>Publicar exige cuidado com o que vai junto.</p>
+<p>O app nasceu cheio de detalhes meus: identificador de pacote com meu nome, fuso horário de São Paulo nos testes, interface só em português. Antes do primeiro push, troquei o identificador por <code>io.github.joshazze.limites</code>, passei os textos para inglês com a tradução em português num arquivo separado, mudei o fuso dos testes para Nova York e criei um modo de demonstração com dados fictícios para gerar o screenshot. O commit saiu com email anônimo. Por fim, rodei uma varredura com uma lista de 116 termos pessoais, guardada fora do repositório, e ela só encontrou falsos positivos.</p>
+<p>A tradução ganhou teste: um script extrai as chaves direto do compilador e falha se alguma estiver faltando ou sobrando, e confirmei que ele funciona quebrando o arquivo de propósito.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Repositório público sob licença MIT, com CI no macOS 15 verde desde o primeiro push.</li>
+<li>11 testes em swift-testing, cobrindo o parser do <code>/usage</code>, fusos, virada de ano, o retorno do Codex e a escolha do maior percentual.</li>
+<li>58 textos de interface traduzidos, com checagem automática de chaves.</li>
+<li>Consulta de uso sem gasto de tokens e aviso de aba em cerca de 10 ms, sem nada entrando no contexto da conversa.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20limites">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/palestra-ia">&laquo; Tópico anterior: Palestra de IA aplicada</a></span>
+    <span><a href="/blog/laser">Próximo tópico: Biblioteca de corte a laser &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

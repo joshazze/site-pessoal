@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Handshake</title>
+<meta name="description" content="Handshake: Trilha diária de estudo no estilo Duolingo, com repetição espaçada por conceito">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Handshake :: oqojfr?">
+<meta property="og:description" content="Handshake: Trilha diária de estudo no estilo Duolingo, com repetição espaçada por conceito">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/handshake">
+<link rel="canonical" href="https://jadistel.com/blog/handshake">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Handshake</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 19</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>22 Out 2026</b></span>
+            <span>Assunto: <b>Handshake</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Trilha diária de estudo no estilo Duolingo, com repetição espaçada por conceito</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Python</span><span class="marca-item">stdlib</span><span class="marca-item">Caddy</span><span class="marca-item">Oracle Cloud</span><span class="marca-item">PWA</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">produto</span><span class="marca-item">algoritmo de repetição espaçada</span><span class="marca-item">segurança web</span><span class="marca-item">infraestrutura</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Redes de Computadores é uma disciplina com muito conteúdo para memorizar e muito cálculo para treinar: camadas, protocolos, sub-redes, endereçamento IPv6. Reler slides na véspera rende pouco. Rever um pouco por dia rende mais.</p>
+<p>Eu queria uma trilha diária parecida com a do Duolingo. Vinte e cinco questões por dia, explicação depois de cada resposta, certa ou errada, e o que eu errasse voltando com mais frequência até ficar firme. Só questões fechadas. Nunca a mesma duas vezes do mesmo jeito.</p>
+<h2>O que eu fiz</h2>
+<p>Um app web chamado Handshake, multiusuário e com espaço para mais de uma disciplina, em que cada dia tem uma lição de 25 questões e completá-la mantém acesa a chama que conta a sequência de dias.</p>
+<p>O conteúdo de Redes começa num texto-base de 90 seções, uma para cada questão das listas da disciplina, com cerca de 14 mil palavras e a página da fonte citada em cada seção. As questões saem desse texto: 225 fatos, cada um com quatro formas diferentes de perguntar. Para os cálculos, como sub-rede, broadcast, faixa de hosts, CIDR e EUI-64, há nove geradores que criam questões novas a cada vez, com alternativas erradas tiradas de erros comuns.</p>
+<p>Quando erro, o app abre a seção do texto de onde a questão saiu.</p>
+<h2>Como funciona</h2>
+<p>A unidade de memória é o conceito. Cada conceito fica numa de seis caixas, revistas a cada 1, 2, 4, 8, 16 e 32 dias; quando dominado, passa a voltar a cada 60. Um erro devolve o conceito para a primeira caixa, e ele reaparece três questões depois e outra vez no fim da lição, sempre com outra variante.</p>
+<p>A lição junta primeiro os conceitos vencidos, depois os novos, na sequência da trilha, e por fim reforço dos mais fracos.</p>
+<p>O servidor é Python puro, sem framework, com os dados em arquivos. Roda numa VM gratuita da Oracle Cloud, com Caddy cuidando do HTTPS por Let&#x27;s Encrypt. Segurança veio desde o início. O gabarito só chega ao navegador depois da resposta, a política de conteúdo é estrita, há proteção contra requisição forjada e uma trava contra tentativas repetidas de login.</p>
+<h2>O que aprendi</h2>
+<p>Custo zero era exigência. A primeira versão foi desenhada para serviços gratuitos da AWS, com Lambda e DynamoDB em capacidade provisionada mínima, porque a capacidade sob demanda gera cobrança. Acabei migrando para uma VM da Oracle no plano sempre gratuito, que é mais simples de operar para um app desse tamanho.</p>
+<p>A VM trouxe uma restrição: a porta 443 já era usada como porta alternativa de SSH, porque a rede da faculdade bloqueia a porta 22. A solução foi colocar na 443 um multiplexador que separa conexões TLS de conexões SSH e encaminha cada uma para o serviço certo. Há um efeito colateral, documentado. Atrás do multiplexador, o app vê todo cliente como vindo do próprio servidor, então a trava de login por IP passa a valer para todos de uma vez, enquanto a trava por usuário continua funcionando normalmente.</p>
+<h2>Resultados</h2>
+<ul>
+<li>No ar com HTTPS e certificado renovado automaticamente.</li>
+<li>225 fatos com quatro variantes cada e 9 geradores de cálculo, cobrindo as 90 seções do texto-base.</li>
+<li>Repetição espaçada em seis caixas, de 1 a 32 dias, mais a de 60 para o que já foi dominado.</li>
+<li>20 testes automáticos, e o motor de revisão conferido em três fusos horários diferentes.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20handshake">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/detector-ia">&laquo; Tópico anterior: detector-ia</a></span>
+    <span></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

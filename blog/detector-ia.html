@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: detector-ia</title>
+<meta name="description" content="detector-ia: Detector de texto gerado por IA que separa prova de estimativa">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="detector-ia :: oqojfr?">
+<meta property="og:description" content="detector-ia: Detector de texto gerado por IA que separa prova de estimativa">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/detector-ia">
+<link rel="canonical" href="https://jadistel.com/blog/detector-ia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » detector-ia</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 19</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>22 Out 2026</b></span>
+            <span>Assunto: <b>detector-ia</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Detector de texto gerado por IA que separa prova de estimativa</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Python</span><span class="marca-item">stdlib</span><span class="marca-item">estatística</span><span class="marca-item">Unicode</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">estatística aplicada</span><span class="marca-item">segurança</span><span class="marca-item">avaliação de modelos</span><span class="marca-item">PT-BR</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Os detectores de texto de IA mais conhecidos, como GPTZero e ZeroGPT, entregam uma porcentagem só, que mistura dois tipos de evidência bem diferentes sem dizer qual pesou mais. É assim que estudantes que escreveram o próprio texto acabam acusados de cola.</p>
+<p>Um tipo de evidência é a marca d&#x27;água: um sinal deixado de propósito no texto no momento da geração. Encontrá-la é prova. O outro é estatística de estilo, como ritmo das frases, vocabulário e pontuação. Estilo sugere, mas não prova autoria, porque há pessoas que escrevem de forma regular e há IA que escreve de forma irregular.</p>
+<h2>O que eu fiz</h2>
+<p>Uma ferramenta de linha de comando que dá uma nota de 1 a 100 e diz de onde ela veio. Se encontrou marca d&#x27;água, a nota é rotulada como <code>prova</code> e fica entre 97 e 100. Se a nota vem só do estilo, o rótulo é <code>estimativa</code> e o teto é 96. Estilo nunca dá 100.</p>
+<p>Python puro. Roda em milissegundos.</p>
+<h2>Como funciona</h2>
+<p>São três camadas.</p>
+<p>A primeira procura sinais escondidos em Unicode: caracteres de largura zero, seletores de variação usados para esconder bytes em emojis, caracteres de tag, controles bidirecionais e letras de alfabetos diferentes misturadas dentro da mesma palavra. Havendo mensagem escondida, o relatório a mostra. Usos legítimos são descartados antes, como o caractere que une emojis de família ou o que é obrigatório na escrita persa.</p>
+<p>A segunda testa as marcas d&#x27;água estatísticas publicadas na literatura: a green list de Kirchenbauer, o esquema de Aaronson e o SynthID-Text, que a DeepMind abriu em 2024. Cada teste devolve um p-valor exato e é comparado com o mesmo teste rodado com chaves falsas no mesmo texto. Esses três esquemas têm um limite que nenhum detector contorna. Só funcionam com a chave.</p>
+<p>A terceira analisa o estilo com 67 características calibradas para o português do Brasil, como variação no tamanho das frases, conectivos no início de frase, enumerações em três e tipo de aspas.</p>
+<h2>O que aprendi</h2>
+<p>Medi a ferramenta num corpus de 205 textos em português, em que os humanos vieram de revisões da Wikipédia anteriores a 2021, para garantir que fossem anteriores aos modelos de linguagem. Os textos de IA foram escritos sobre os mesmos temas, porque com temas diferentes o classificador aprende a separar assunto e não autoria.</p>
+<p>O resultado geral é bom. O ponto fraco também ficou claro: um texto de IA revisado para soar humano tirou nota 3. A análise de estilo sozinha não pega IA bem editada, e a próxima etapa é usar um modelo de linguagem pequeno, rodando localmente, para medir a probabilidade do texto.</p>
+<p>Hoje ela também tem um modo de autoria, que em vez de dar só a nota aponta a linha de cada problema de estilo e sugere a correção. Os textos deste site passam por ela antes de serem publicados.</p>
+<h2>Resultados</h2>
+<ul>
+<li>AUC de 0,964 no corpus completo e de 0,891 em textos de 100 palavras.</li>
+<li>Com falso positivo travado em 5%, a sensibilidade é de 76%; com falso positivo em 1%, cai para 29%.</li>
+<li>45 testes automáticos e zero dependências externas.</li>
+<li>Limitação declarada: todos os textos de IA do corpus vieram do mesmo modelo, então esses números tendem a ser otimistas.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20detector-ia">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/ibdesign">&laquo; Tópico anterior: Site da IbDesign</a></span>
+    <span><a href="/blog/handshake">Próximo tópico: Handshake &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -50,7 +50,7 @@
           <span class="patente">Administrador</span>
           <span class="avatar" aria-hidden="true">JD</span>
           <span class="stat">Registrado em: Fev 2026</span>
-          <span class="stat">Mensagens: 13</span>
+          <span class="stat">Mensagens: 19</span>
           <span class="stat">Localização: Belo Horizonte</span>
         </td>
         <td class="mensagem">
@@ -71,29 +71,28 @@
 
           <div class="corpo">
 <h2>Contexto</h2>
-<p>Todo app pessoal começa igual: você quer registrar uma coisa sua, num lugar que seja seu. Plantas, treinos, gastos, o que for.</p>
-<p>E aí vem a pergunta chata. Onde isso mora? A resposta padrão é um banco no servidor, com login e senha, o que significa que agora existe um servidor com os seus dados dentro, e você virou responsável por ele. Backup, atualização de dependência, um dia um vazamento. Para um app que só você usa, isso é uma responsabilidade enorme em troca de nada.</p>
-<p>A outra resposta padrão é guardar tudo em claro no navegador, o que resolve o servidor e cria outro problema: qualquer script na página, qualquer extensão, qualquer pessoa com o aparelho na mão lê tudo.</p>
+<p>Todo app pessoal começa do mesmo jeito: você quer registrar algo seu, num lugar seu. Plantas, treinos, gastos.</p>
+<p>Onde isso mora? A resposta habitual é um banco num servidor, com login e senha, o que cria um servidor com os seus dados dentro e faz de você o responsável pelo backup, pela atualização de dependências e, um dia, por um vazamento. Para um app de uma pessoa só, é muita responsabilidade para pouco ganho.</p>
+<p>A outra resposta é guardar tudo em texto puro no navegador. Some o servidor. Mas qualquer script na página, extensão ou pessoa com o aparelho na mão lê tudo.</p>
 <h2>O que eu fiz</h2>
-<p>Um padrão que eu usei em mais de um app: os dados nascem cifrados no aparelho e nunca saem dele em claro. Não existe conta, não existe servidor, e não existe nada meu para vazar, porque eu não tenho nada.</p>
-<p>O caso nomeado aqui é o <strong>myco</strong>, um app de jardinagem que guarda vasos, setores, adubação e compostagem. É público, é bobo, e é justamente por ser bobo que serve de exemplo: se o padrão vale a pena para um caderno de plantas, ele vale para qualquer coisa. O mesmo módulo de criptografia roda hoje em outro app pessoal meu, com dados bem menos triviais.</p>
+<p>Um padrão que usei em mais de um app: os dados são cifrados no próprio aparelho e nunca saem dele em texto puro. Não há conta nem servidor, e por isso não há nada do meu lado que possa vazar.</p>
+<p>O exemplo aqui é o <strong>myco</strong>, um app de jardinagem que registra vasos, setores, adubação e compostagem. É público e simples, e a simplicidade ajuda: se o padrão funciona para um caderno de plantas, funciona para outros casos. O mesmo módulo de criptografia roda hoje em outro app pessoal meu, com dados mais sensíveis.</p>
 <h2>Como funciona</h2>
-<p>A senha nunca é guardada e nunca vira chave diretamente.</p>
-<p>Ela passa por PBKDF2 com 250.000 iterações e SHA-256, junto com um sal aleatório gerado na criação da base, e o que sai é uma chave AES-GCM de 256 bits. As iterações existem para tornar cara a tentativa de adivinhação: quem capturar a base cifrada precisa pagar 250 mil derivações por palpite, o que transforma um ataque de dicionário de minutos em algo impraticável.</p>
-<p>Cada gravação é cifrada com AES-GCM e um vetor de inicialização novo, o que dá confidencialidade e integridade na mesma operação: um byte alterado no armazenamento faz a decifragem falhar em vez de devolver lixo silenciosamente. Tudo roda pela WebCrypto do próprio navegador, sem biblioteca de criptografia de terceiro, e o resultado cifrado descansa em IndexedDB.</p>
-<p>Existe um verificador curto gravado junto, cifrado com a mesma chave. Ele serve para dizer &quot;senha errada&quot; na hora de destravar, em vez de tentar decifrar a base inteira e falhar de um jeito confuso.</p>
+<p>A senha nunca é armazenada e nunca vira a chave diretamente.</p>
+<p>Ela passa por PBKDF2 com 250.000 iterações e SHA-256, junto de um sal aleatório gerado na criação da base, e o resultado é uma chave AES-GCM de 256 bits. As iterações encarecem cada palpite: quem conseguir a base cifrada precisa calcular 250 mil derivações por tentativa, e um ataque de dicionário deixa de ser viável.</p>
+<p>Cada gravação é cifrada com AES-GCM e um vetor de inicialização novo, o que garante confidencialidade e integridade na mesma operação: se um byte for alterado no armazenamento, a decifragem falha em vez de devolver dados corrompidos sem aviso. Tudo usa a WebCrypto do navegador, sem biblioteca externa de criptografia, e o resultado fica guardado no IndexedDB.</p>
+<p>Há também um verificador curto, cifrado com a mesma chave, que serve para avisar &quot;senha incorreta&quot; logo na abertura.</p>
 <h2>O que aprendi</h2>
-<p>O backup é onde o desenho todo quase morreu.</p>
-<p>Sem servidor, não existe recuperar senha. Se a pessoa esquece, os dados acabaram, e isso não é bug, é a consequência direta da promessa. Foi a parte mais difícil de aceitar, e a que quase me fez colocar um servidor de volta só para ter um &quot;esqueci minha senha&quot; que funciona.</p>
-<p>A saída foi exportar a base cifrada como arquivo, que a pessoa guarda onde quiser. O arquivo é inútil sem a senha, então pode viver no Drive, no e-mail, num pendrive, sem que nada disso vire superfície de ataque. E aí o modelo fica honesto de verdade: o app não protege você de esquecer a senha, e diz isso na cara, em vez de fingir que existe uma porta dos fundos que na prática é a porta da frente de qualquer atacante.</p>
-<p>Segurança que depende de o usuário não errar é teatro. Segurança que declara o que não faz é engenharia.</p>
+<p>O backup foi a parte mais difícil.</p>
+<p>Sem servidor, não há recuperação de senha. Esqueceu, perdeu. É consequência direta da promessa do app. Foi o que mais demorei a aceitar, e cheguei a considerar um servidor só para oferecer um &quot;esqueci minha senha&quot;.</p>
+<p>A solução foi exportar a base cifrada como arquivo, que a pessoa guarda onde preferir. Sem a senha ele não serve para nada. O app deixa claro que não protege contra o esquecimento da senha, em vez de manter uma porta dos fundos que também estaria disponível para um atacante. Prefiro um sistema que declara seus limites a um que depende de o usuário nunca errar.</p>
 <h2>Resultados</h2>
 <ul>
-<li>Padrão em produção em dois apps pessoais, com o mesmo módulo de criptografia compartilhado entre eles.</li>
-<li>PBKDF2 com 250.000 iterações e SHA-256 derivando chave AES-GCM de 256 bits, tudo pela WebCrypto nativa, sem dependência de biblioteca externa de criptografia.</li>
-<li>Zero servidor e zero conta: nenhum dado do usuário existe fora do aparelho dele.</li>
-<li>Exportação da base cifrada como caminho de backup, guardável em qualquer lugar sem virar risco.</li>
-<li>O caso nomeado, <code>myco</code>, é público sob licença aberta, instalável como app e com o código de cifra em um arquivo só, legível de uma sentada.</li>
+<li>Padrão em produção em dois apps pessoais, que compartilham o mesmo módulo de criptografia.</li>
+<li>PBKDF2 com 250.000 iterações e SHA-256 derivando chave AES-GCM de 256 bits, tudo pela WebCrypto nativa, sem biblioteca externa de criptografia.</li>
+<li>Nenhum servidor e nenhuma conta: os dados do usuário existem apenas no aparelho dele.</li>
+<li>Exportação da base cifrada como backup, que pode ser guardada em qualquer lugar sem virar risco.</li>
+<li>O <code>myco</code> é público, sob licença aberta, instalável como app e com o código de cifra num único arquivo, fácil de ler.</li>
 </ul>
           </div>
 

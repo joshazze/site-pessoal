@@ -23,7 +23,15 @@ Um plugin com uma única função: com um clique, a nota já existe com nome, pa
 
 Um clique com o botão direito na pasta `Física` cria `Física 2026-07-26.md` dentro dela. A mesma ação está na barra lateral, num comando que aceita atalho de teclado e numa URI (`obsidian://blank-page?vault=...&profile=...`), o que permite a um atalho global do sistema abrir o Obsidian já numa nota nova, mesmo com o app fechado.
 
+![Menu da pasta com os perfis do Blank Page](/img/blank-page/menu-pasta.png)
+
+*Os perfis aparecem no menu da pasta. Cofre de demonstração, com notas fictícias.*
+
 Tudo é configurado por perfil, para que o plugin se adapte ao fluxo de quem usa: pasta de destino, padrão de nome com marcadores, template curto e uma agenda opcional no formato `mon 08:00-11:40 > Courses/Data Engineering`, que ativa sozinho o perfil da disciplina no horário da aula.
+
+![Nota criada pelo perfil Class notes](/img/blank-page/nota-criada.png)
+
+*Um clique depois: a nota já tem nome, pasta e propriedades.*
 
 ## Como funciona
 

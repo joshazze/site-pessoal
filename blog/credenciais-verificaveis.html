@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Certificados verificáveis para o LinkedIn</title>
+<meta name="description" content="Certificados verificáveis para o LinkedIn: Emissor de credenciais em Open Badges 3.0 com a prova gravada na blockchain, uma transação por lote">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Certificados verificáveis para o LinkedIn :: oqojfr?">
+<meta property="og:description" content="Certificados verificáveis para o LinkedIn: Emissor de credenciais em Open Badges 3.0 com a prova gravada na blockchain, uma transação por lote">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/credenciais-verificaveis">
+<link rel="canonical" href="https://jadistel.com/blog/credenciais-verificaveis">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Certificados verificáveis para o LinkedIn</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 20</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>14 Ago 2026</b></span>
+            <span>Assunto: <b>Certificados verificáveis para o LinkedIn</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Emissor de credenciais em Open Badges 3.0 com a prova gravada na blockchain, uma transação por lote</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Node.js</span><span class="marca-item">Ethereum</span><span class="marca-item">Open Badges 3.0</span><span class="marca-item">Blockcerts</span><span class="marca-item">SHA-256</span><span class="marca-item">árvore de Merkle</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">criptografia aplicada</span><span class="marca-item">design de produto</span><span class="marca-item">processo</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O certificado de curso, liga ou evento quase sempre é um PDF com assinatura escaneada. Trocar o nome leva dois minutos num editor de imagem. Quem recebe sabe. O recrutador também.</p>
+<p>O LinkedIn tem um campo para isso, &quot;Licenças e certificados&quot;, com um botão &quot;Mostrar credencial&quot; que só pede uma URL. Ele não confere nada: se a URL abre um PDF, a prova continua sendo um PDF, com todos os problemas do parágrafo anterior.</p>
+<p>Eu queria que a URL levasse a uma página que provasse sozinha que aquele documento é o que foi emitido, sem depender de ninguém responder um e-mail.</p>
+<h2>O que eu fiz</h2>
+<p>Construí um emissor próprio. Cada certificado é um JSON no padrão Open Badges 3.0, com campos separados para quem recebeu, o que foi reconhecido, quem emitiu, quando e por quais critérios. O sistema calcula o SHA-256 de cada JSON, monta uma árvore de Merkle com o lote inteiro e grava só a raiz na blockchain, numa transação.</p>
+<p>Para conferir, a página recalcula o hash do certificado no navegador de quem está olhando, sobe pela árvore até a raiz e compara com a raiz registrada na rede. Uma vírgula a mais e a conta não fecha.</p>
+<p>Cada credencial ganha uma URL própria, que é exatamente o que o botão do LinkedIn pede.</p>
+<h2>Como funciona</h2>
+<p>O pipeline é Node, em três comandos: <code>build</code> gera os JSON, <code>anchor</code> monta a árvore e grava a raiz, <code>verify</code> refaz a conta inteira. Por que não a ferramenta oficial do Blockcerts? Ela é em Python e não roda na versão que tenho instalada, e reescrever o essencial em Node saiu mais rápido do que brigar com a incompatibilidade.</p>
+<p>Quem segura o custo é a árvore de Merkle. Trinta e dois certificados seriam trinta e duas transações. Com a árvore, viram trinta e duas provas curtas e uma transação só.</p>
+<p>A rede hoje é a Ethereum Sepolia, porque o faucet do Google Cloud oferece Sepolia. O código não depende dela: o RPC fica numa variável de ambiente, e trocar de rede é mudar uma linha.</p>
+<p>Descartei a plataforma comercial brasileira de badges. Ela cobra, exige CNPJ e, no fim, mostra ao recrutador um hash impresso na tela sem refazer conta nenhuma.</p>
+<h2>O que aprendi</h2>
+<p>Recrutador não abre verificador. A primeira versão da página era correta e sem graça: um campo de identificador e um &quot;válido&quot; em verde. Refiz. Na segunda, o certificado aparece emoldurado, a conferência acontece na tela com um painel mostrando o que está sendo recalculado, e no fim há QR code e exportação em PDF. Criptografia idêntica nas duas.</p>
+<p>Fluxo de resgate individual também não funciona. Se cada pessoa precisa entrar e clicar em &quot;reivindicar minha credencial&quot;, metade não clica. O lote sai inteiro de uma vez e cada um recebe o link pronto. Para as emissões maiores, juntei todos os links num PDF só, com o passo a passo do LinkedIn na primeira página, para mandar uma vez no grupo.</p>
+<p>Por último: o documento só vale o que os registros sustentam. Numa das levas, a primeira ideia era atestar frequência, mas não havia chamada registrada. Então o certificado passou a atestar conclusão e carga horária, que era o que dava para provar.</p>
+<h2>Resultados</h2>
+<ul>
+<li>32 certificados ancorados numa única transação, verificados ao vivo no navegador.</li>
+<li>Mais 36 credenciais publicadas no mesmo modelo de página, com o banco conferido campo a campo contra o que cada página serve: zero divergência.</li>
+<li>Um único PDF com os 36 links clicáveis no lugar de 36 mensagens.</li>
+<li>Custo de plataforma zero, contra uma alternativa que exige CNPJ e mensalidade.</li>
+<li>Próximo passo: levar a âncora para a Polygon, onde um lote custa centavos e a emissão deixa de ser em rede de teste.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20credenciais-verificaveis">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/blank-page">&laquo; Tópico anterior: Blank Page</a></span>
+    <span><a href="/blog/ibsala">Próximo tópico: ibsala &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

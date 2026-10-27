@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Ibby: chassi de um carrinho de seis rodas</title>
+<meta name="description" content="Ibby: chassi de um carrinho de seis rodas: Modelagem 3D da base, dos encaixes e do suporte da eletrônica, a partir das peças de corte a laser">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Ibby: chassi de um carrinho de seis rodas :: oqojfr?">
+<meta property="og:description" content="Ibby: chassi de um carrinho de seis rodas: Modelagem 3D da base, dos encaixes e do suporte da eletrônica, a partir das peças de corte a laser">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/ibby">
+<link rel="canonical" href="https://jadistel.com/blog/ibby">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Ibby: chassi de um carrinho de seis rodas</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 22</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>23 Out 2026</b></span>
+            <span>Assunto: <b>Ibby: chassi de um carrinho de seis rodas</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Modelagem 3D da base, dos encaixes e do suporte da eletrônica, a partir das peças de corte a laser</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Python</span><span class="marca-item">CadQuery</span><span class="marca-item">OpenCascade</span><span class="marca-item">Three.js</span><span class="marca-item">CAD</span><span class="marca-item">corte a laser</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">modelagem 3D</span><span class="marca-item">projeto mecânico</span><span class="marca-item">fabricação digital</span><span class="marca-item">desenho técnico</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O Ibby é um carrinho de seis rodas da liga de robótica IbBot. O projeto prevê controle pelo celular, por uma rede WiFi criada pelo próprio carrinho. Trabalhei no chassi de acrílico: a base, os pinos que prendem os motores e o suporte da placa Mega +WiFi.</p>
+<p><img src="/img/ibby/montagem-frente.png" alt="Chassi do Ibby em vista isométrica, com base azul clara, seis pinos altos azuis e suporte da Mega em bege" loading="lazy"></p>
+<p><em>Montagem das 17 peças de acrílico. As cores distinguem os componentes; motores, rodas, placas e bateria ainda não fazem parte deste modelo.</em></p>
+<h2>O que eu fiz</h2>
+<p>Modelei o conjunto em 3D a partir das mesmas especificações que geram os arquivos de corte na <a href="/blog/laser">biblioteca de corte a laser</a>. A base mede 415 por 160 mm. A espessura de projeto é de 3 mm. Na montagem, cada furo e rasgo do desenho plano ocupa sua posição em relação às outras peças, o que permite conferir o conjunto antes de cortar a chapa.</p>
+<p><img src="/img/ibby/montagem-tras.png" alt="Chassi do Ibby visto por trás e pela direita, mostrando o berço elevado sobre os cavaletes" loading="lazy"></p>
+<p><em>Na ponta, o berço da Mega fica sobre dois cavaletes e uma travessa. As aberturas dos cavaletes deixam passagem para os fios.</em></p>
+<p>Em cada uma das seis posições de motor há dois pinos: o alto entra no entalhe aberto da borda, e o curto entra no rasgo fechado, por dentro. Os pés descem abaixo da base e deixam entre eles o espaço para prender o motor TT.</p>
+<p><img src="/img/ibby/vista-inferior.png" alt="Vista inferior do Ibby, com os pés dos pinos atravessando a base" loading="lazy"></p>
+<p><em>Vista por baixo. Os pés dos pinos descem 25 mm abaixo da chapa.</em></p>
+<p>Também gerei uma vista explodida e um detalhe ampliado do encaixe. Conferi as interferências no OpenCascade.</p>
+<p><img src="/img/ibby/vista-explodida.png" alt="Vista explodida do chassi, com os pinos, cavaletes, travessa e berço separados acima da base" loading="lazy"></p>
+<p><em>As peças separadas na vertical mostram onde cada pino e cada parte do suporte se encaixam.</em></p>
+<h2>O que aprendi</h2>
+<p>Com as peças espalhadas na chapa, o desenho de corte não explica toda a montagem. No Ibby, foi preciso definir em qual rasgo cada pino entra e para que lado sua face larga fica voltada. Olhar por baixo ajudou.</p>
+<p><img src="/img/ibby/detalhe-encaixe.png" alt="Detalhe de um par de pinos do Ibby, com o pino alto na borda e o curto por dentro" loading="lazy"></p>
+<p><em>Detalhe de um par de pinos. O vão entre as faces internas é de 18,4 mm; os três furos do pino alto permitem ajustar a fixação da carcaça.</em></p>
+<p>A conferência de interferência resolve a geometria nominal. O ajuste físico também depende da espessura medida da chapa e do material removido pelo laser. Mantive essas duas etapas distintas ao documentar o conjunto para a modelagem da carcaça.</p>
+<h2>Resultados</h2>
+<ul>
+<li>17 peças na montagem: uma base, seis pinos altos, seis pinos curtos, um berço, dois cavaletes e uma travessa.</li>
+<li>Cinco vistas renderizadas do conjunto, incluindo montagem, vista inferior, explodida e detalhe de encaixe.</li>
+<li>Nenhuma interferência de volume entre as peças na verificação do modelo nominal.</li>
+<li>Modelos STEP e STL, documento técnico de 14 páginas e tabela de coordenadas gerados para orientar a modelagem da carcaça.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20ibby">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/handshake">&laquo; Tópico anterior: Handshake</a></span>
+    <span><a href="/blog/shield-arduino">Próximo tópico: Shield multifunção do Arduino &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

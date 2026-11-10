@@ -2,7 +2,7 @@
 slug: credenciais-verificaveis
 titulo: Certificados verificáveis para o LinkedIn
 sub: Emissor de credenciais em Open Badges 3.0 com a prova gravada na blockchain, uma transação por lote
-data: 2026-08-14
+data: 2026-06-01
 stack: [Node.js, Ethereum, Open Badges 3.0, Blockcerts, SHA-256, árvore de Merkle]
 competencias: [criptografia aplicada, design de produto, processo]
 areas: [Segurança e privacidade, Código aberto, Web, Educação]

@@ -2,7 +2,7 @@
 slug: artigo-ic
 titulo: Viés linguístico em material didático gerado por LLM
 sub: Iniciação científica, coautoria com o Prof. Osmar Ventura Gomes
-data: 2026-08-18
+data: 2026-09-06
 stack: [Python, pandas, ANOVA, Ollama, embeddings]
 competencias: [pesquisa, estatística, desenho experimental, escrita científica]
 areas: [IA aplicada, Dados e estatística, Pesquisa]

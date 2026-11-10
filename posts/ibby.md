@@ -2,7 +2,7 @@
 slug: ibby
 titulo: Ibby: chassi de um carrinho de seis rodas
 sub: Modelagem 3D da base, dos encaixes e do suporte da eletrônica, a partir das peças de corte a laser
-data: 2026-10-23
+data: 2026-10-28
 stack: [Python, CadQuery, OpenCascade, Three.js, CAD, corte a laser]
 competencias: [modelagem 3D, projeto mecânico, fabricação digital, desenho técnico]
 areas: [Hardware e fabricação, Design]

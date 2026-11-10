@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Dino contra a máquina</title>
+<meta name="description" content="Dino contra a máquina: O jogo do dinossauro num display de 16 colunas, com um adversário automático calibrado para perder de vez em quando">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Dino contra a máquina :: oqojfr?">
+<meta property="og:description" content="Dino contra a máquina: O jogo do dinossauro num display de 16 colunas, com um adversário automático calibrado para perder de vez em quando">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/dino-vs-ia">
+<link rel="canonical" href="https://jadistel.com/blog/dino-vs-ia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Dino contra a máquina</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 28</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>17 Jun 2026</b></span>
+            <span>Assunto: <b>Dino contra a máquina</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>O jogo do dinossauro num display de 16 colunas, com um adversário automático calibrado para perder de vez em quando</dd>
+              <dt>Stack</dt><dd><span class="marca-item">C++</span><span class="marca-item">Arduino</span><span class="marca-item">LCD HD44780</span><span class="marca-item">Python</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">sistemas embarcados</span><span class="marca-item">simulação</span><span class="marca-item">aprendizado por reforço</span><span class="marca-item">design de jogo</span></dd>
+
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Foi meu primeiro projeto de hardware. Eu queria um jogo em que uma pessoa disputasse contra uma máquina num aparelho físico, e comecei pelo menor que cabia na bancada: o jogo do dinossauro do navegador, num display de caracteres de 16 colunas por 2 linhas, com um Arduino Uno.</p>
+<p>Escolhi esse jogo porque ele é reflexo e pontuação. Jogo da velha tem solução conhecida, e a máquina nunca perde. Aqui existe tempo de reação, e dá para errar.</p>
+<h2>O que eu fiz</h2>
+<p>A primeira versão era só para humano. O dinossauro corre numa coluna fixa, os cactos vêm da direita e um botão faz pular. O recorde fica gravado na memória permanente da placa e a pontuação sai pela serial.</p>
+<p>Na segunda versão a partida virou disputa. A pessoa joga uma rodada, a máquina joga outra, e o display compara os dois placares.</p>
+<p>Para acertar o adversário, escrevi um simulador do jogo em Python com a mesma mecânica do firmware: 16 colunas, pulo de 4 ticks, velocidade que cresce com a pontuação.</p>
+<h2>Como funciona</h2>
+<p>O display aceita só 8 caracteres personalizados, de 5 por 8 pontos. Usei cinco: dois quadros do dinossauro correndo, um pulando e dois cactos.</p>
+<p>O mundo é um vetor de 16 posições que rola uma casa para a esquerda a cada tick. O tick começa em 140 ms e encolhe até 70 ms.</p>
+<p><img src="/img/dino-vs-ia/tela.svg" alt="Tela do jogo no display" loading="lazy"></p>
+<p><em>Reconstituição da tela a partir dos caracteres do firmware.</em></p>
+<p>O adversário não é uma rede neural. É uma regra: quando um cacto chega a 3 colunas de distância, ele pula. A cada cacto existe 3% de chance de ele vacilar e não pular.</p>
+<h2>O que aprendi</h2>
+<p>Minha primeira regra pulava no último instante, com o cacto a uma coluna. No simulador, em 500 partidas, a mediana foi 31 pontos. Qualquer pessoa ganhava.</p>
+<p>Troquei para pular com o cacto a 3 colunas e rodei de novo. As 500 partidas bateram no teto da simulação. Imortal. Um adversário que nunca perde é tão sem graça quanto um que perde sempre.</p>
+<p>A dificuldade de um jogo não está em fazer a máquina jogar bem. Está em escolher quanto ela erra. Testei taxas de vacilo de 2% a 8% e fiquei com 3%, que dá mediana de 177 pontos: difícil, mas vencível.</p>
+<p><img src="/img/dino-vs-ia/simulacao.svg" alt="Mediana por taxa de vacilo" loading="lazy"></p>
+<p><em>Resultado do simulador para cada taxa de erro.</em></p>
+<p>Rodei também um aprendizado por reforço no simulador, 500 episódios partindo do zero. A pontuação média subiu de 41 para 285. Serviu para confirmar a regra. No Arduino continua indo a versão de duas linhas, que eu consigo explicar.</p>
+<p>O hardware cobrou a parte dele. Com um teclado matricial ligado, o display passou a mostrar lixo: uma coluna do teclado dividia fio com o LCD. Voltei para um botão só.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Mediana do adversário de 31 para 177 pontos, medida em 500 partidas simuladas por configuração.</li>
+<li>Seis taxas de erro testadas, de 2% a 8%, para escolher a dificuldade.</li>
+<li>Firmware de 202 linhas e simulador de 149.</li>
+<li>Tick do jogo de 140 ms no início e 70 ms no limite.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20dino-vs-ia">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/cifra-local">&laquo; Tópico anterior: Dados cifrados no aparelho</a></span>
+    <span><a href="/blog/fernando-pessoa">Próximo tópico: Fernando Pessoa &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

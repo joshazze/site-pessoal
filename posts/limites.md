@@ -2,7 +2,7 @@
 slug: limites
 titulo: Limites
 sub: App de barra de menus para macOS com os limites de uso do Claude Code e do Codex
-data: 2026-09-18
+data: 2026-09-16
 stack: [Swift, SwiftUI, swift-testing, AppleScript, GitHub Actions]
 competencias: [macOS nativo, engenharia reversa, privacidade, ferramenta de desenvolvedor]
 areas: [Ferramentas de desenvolvedor, IA aplicada, Código aberto]

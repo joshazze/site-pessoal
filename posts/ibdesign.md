@@ -2,7 +2,7 @@
 slug: ibdesign
 titulo: Site da IbDesign
 sub: Reconstrução do site da liga de design e arquitetura do Ibmec BH, em contas da própria liga
-data: 2026-10-11
+data: 2026-10-10
 stack: [HTML, CSS, JavaScript, Python, Supabase, Cloudflare Pages]
 competencias: [frontend, migração, performance, documentação]
 areas: [Web, Design, Infraestrutura e deploy, Liderança e ligas]

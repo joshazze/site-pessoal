@@ -2,7 +2,7 @@
 slug: cerebro
 titulo: Cérebro
 sub: Memória permanente para assistente de IA, com o custo de contexto medido
-data: 2026-08-09
+data: 2026-08-06
 stack: [Bash, jq, Obsidian, Markdown]
 competencias: [arquitetura, análise de grafos, medição de desempenho, documentação]
 areas: [IA aplicada, Ferramentas de desenvolvedor, Dados e estatística, Código aberto]

@@ -2,7 +2,7 @@
 slug: ibbot
 titulo: Liga Acadêmica IbBot
 sub: Cofundação e direção da liga de robótica do Ibmec BH
-data: 2026-08-17
+data: 2026-09-01
 stack: [ESP32, INMP441, C++, eletrônica, fabricação]
 competencias: [liderança, hardware, gestão de projeto, orçamento]
 areas: [Hardware e fabricação, Liderança e ligas]

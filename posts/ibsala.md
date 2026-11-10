@@ -2,7 +2,7 @@
 slug: ibsala
 titulo: ibsala
 sub: Reserva e consulta de salas do Ibmec BH, no ar para os alunos
-data: 2026-08-15
+data: 2026-08-17
 stack: [Flask, Docker, PostgreSQL, Supabase, Web Push, Cloudflare Pages]
 competencias: [backend, PWA, banco de dados, segurança, deploy, produto]
 areas: [Web, Apps e PWA, Infraestrutura e deploy, Segurança e privacidade, Produto]

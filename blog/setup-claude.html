@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: Setup por um link</title>
+<meta name="description" content="Setup por um link: Um roteiro que o próprio assistente lê e executa para instalar memória, personas e editor na máquina de outra pessoa">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Setup por um link :: oqojfr?">
+<meta property="og:description" content="Setup por um link: Um roteiro que o próprio assistente lê e executa para instalar memória, personas e editor na máquina de outra pessoa">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/setup-claude">
+<link rel="canonical" href="https://jadistel.com/blog/setup-claude">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » Setup por um link</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 28</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>10 Ago 2026</b></span>
+            <span>Assunto: <b>Setup por um link</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Um roteiro que o próprio assistente lê e executa para instalar memória, personas e editor na máquina de outra pessoa</dd>
+              <dt>Stack</dt><dd><span class="marca-item">Bash</span><span class="marca-item">jq</span><span class="marca-item">Claude Code</span><span class="marca-item">Obsidian</span><span class="marca-item">Markdown</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">ferramenta de desenvolvedor</span><span class="marca-item">instalação não destrutiva</span><span class="marca-item">documentação</span><span class="marca-item">distribuição</span></dd>
+              <dt>Código</dt><dd><a href="https://github.com/joshazze/setup-claude">joshazze/setup-claude</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>Eu já tinha publicado duas peças do meu ambiente de trabalho: o Cérebro, que dá memória entre sessões ao assistente de código, e os heterónimos, personas estreitas com gatilho próprio. Cada uma tinha instalador e documentação.</p>
+<p>Instalar tudo na máquina de outra pessoa era o problema. Eram três repositórios, uma ordem certa de instalação e uma parte que não morava em repositório nenhum: o editor Obsidian com um plugin de captura e o assistente rodando dentro dele.</p>
+<p>Ninguém ia seguir aquilo.</p>
+<h2>O que eu fiz</h2>
+<p>Um repositório guarda-chuva com duas entradas. A primeira é uma frase que a pessoa cola no assistente, pedindo que ele leia um roteiro e execute. Para quem prefere, existe um script de shell que faz a mesma instalação sem gastar token.</p>
+<p>O roteiro tem sete passos. O assistente faz cinco perguntas numa mensagem só, instala as três camadas em ordem, verifica o resultado e termina explicando o que a pessoa ganhou e o que digitar no dia seguinte.</p>
+<p>Esse repositório não reimplementa as outras duas camadas. Ele chama os instaladores delas e acrescenta a terceira.</p>
+<h2>Como funciona</h2>
+<p>O roteiro é um arquivo de texto escrito para um leitor que não é humano. Cada passo diz o que rodar, como conferir que deu certo e o que fazer se falhar. O último passo, explicar, é obrigatório.</p>
+<p>A instalação não destrói nada. Quem chega já tem arquivo de configuração e notas próprias. Todo JSON existente é mesclado com <code>jq</code>, com backup datado antes de qualquer escrita, e nenhuma nota do cofre é sobrescrita. Rodar duas vezes não duplica.</p>
+<p>Um script de diagnóstico confere as três camadas e diz qual está quebrada. Outro desinstala ganchos e scripts e deixa o cofre onde está, porque as notas são da pessoa.</p>
+<h2>O que aprendi</h2>
+<p>O arquivo de instruções do assistente entra no contexto em todo turno de toda sessão. Com quatro personas descritas por inteiro, ele chegava a 25 KB, cerca de 6 mil tokens pagos a cada mensagem, usando a persona ou não.</p>
+<p>A saída foi separar ativação de especificação. No arquivo fica só o gatilho de cada persona e o caminho do arquivo completo, que o assistente lê quando o gatilho dispara. Um script faz esse corte numa instalação existente.</p>
+<p>Escrever para um agente executar é diferente de escrever documentação. Onde um humano improvisa, o agente segue a frase ao pé da letra. &quot;Configurar o cofre&quot; não é um comando. Cada passo precisa ser uma ação com uma verificação.</p>
+<p>Mantive o caminho por script de propósito. Ele faz a mesma instalação de forma determinística, e serve de prova de que o roteiro não depende de o modelo interpretar bem um texto.</p>
+<h2>Resultados</h2>
+<ul>
+<li>Três repositórios instalados por uma frase colada, em 10 a 15 minutos.</li>
+<li>Arquivo de instruções reduzido de 25 KB para 5,8 KB.</li>
+<li>Índice de sessão de cerca de 1.100 tokens, com as notas abertas sob demanda.</li>
+<li>Dependências: <code>git</code>, <code>jq</code>, <code>curl</code> e <code>awk</code>.</li>
+<li>Licença MIT.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20setup-claude">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/cerebro">&laquo; Tópico anterior: Cérebro</a></span>
+    <span><a href="/blog/fernando-pessoa">Próximo tópico: Fernando Pessoa &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

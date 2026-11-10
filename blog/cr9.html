@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>oqojfr? :: Ver tópico: CR9</title>
+<meta name="description" content="CR9: Aplicativo que acompanha as notas do semestre e calcula a chance de fechar com média 9">
+<meta name="theme-color" content="#e5e5e5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="CR9 :: oqojfr?">
+<meta property="og:description" content="CR9: Aplicativo que acompanha as notas do semestre e calcula a chance de fechar com média 9">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jadistel.com/blog/cr9">
+<link rel="canonical" href="https://jadistel.com/blog/cr9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/forum.css?v=2">
+</head>
+<body>
+
+<div class="pagina">
+
+  <div class="logo">
+    <a href="/blog"><span class="marca">oqojfr?</span></a>
+    <span class="tagline">o que o joshua fez recentemente</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="/blog">Índice</a></li>
+    <li><a href="/">Início</a></li>
+    <li><a href="https://github.com/joshazze">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jadistel/">LinkedIn</a></li>
+    <li><a href="mailto:contato@jadistel.com">Contato</a></li>
+  </ul>
+
+  <p class="trilha"><a href="/blog">Índice do fórum</a> » <a href="/blog">Projetos</a> » CR9</p>
+
+  <table class="quadro post">
+    <thead>
+      <tr>
+        <th scope="col" class="col-autor">Autor</th>
+        <th scope="col">Mensagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="perfil">
+          <span class="nome">joshazze</span>
+          <span class="patente">Administrador</span>
+          <span class="avatar" aria-hidden="true">JD</span>
+          <span class="stat">Registrado em: Fev 2026</span>
+          <span class="stat">Mensagens: 28</span>
+          <span class="stat">Localização: Belo Horizonte</span>
+        </td>
+        <td class="mensagem">
+
+          <div class="cabecalho-msg">
+            <span>Enviado em: <b>03 Out 2026</b></span>
+            <span>Assunto: <b>CR9</b></span>
+          </div>
+
+          <div class="ficha">
+            <dl>
+              <dt>Resumo</dt><dd>Aplicativo que acompanha as notas do semestre e calcula a chance de fechar com média 9</dd>
+              <dt>Stack</dt><dd><span class="marca-item">HTML</span><span class="marca-item">CSS</span><span class="marca-item">JavaScript</span><span class="marca-item">PWA</span><span class="marca-item">SVG</span></dd>
+              <dt>Competências</dt><dd><span class="marca-item">estatística aplicada</span><span class="marca-item">simulação de Monte Carlo</span><span class="marca-item">frontend</span><span class="marca-item">produto</span></dd>
+              <dt>No ar</dt><dd><a href="https://joshazze.github.io/cr9/">joshazze.github.io/cr9</a></dd>
+            </dl>
+          </div>
+
+          <div class="corpo">
+<h2>Contexto</h2>
+<p>O Ibmec dá um reconhecimento, o Stars, a quem fecha o período com coeficiente de rendimento 9,0 ou mais em pelo menos quatro disciplinas. A conta parece simples e não é.</p>
+<p>Cada disciplina tem duas provas, atividades de peso variável e um trabalho que soma bônus. Existe ainda uma prova substitutiva que, se feita, tira o aluno do reconhecimento. No meio do semestre, a pergunta que importa é outra: ainda dá para fechar 9?</p>
+<p>Não achei aplicativo que tratasse essa conta direito. Fiz o meu.</p>
+<h2>O que eu fiz</h2>
+<p>Um aplicativo web instalável no celular, sem framework, sem empacotador e sem dependência em tempo de execução. Abre sem internet.</p>
+<p>Os dados ficam só no aparelho, no armazenamento do navegador. Não há servidor nem conta. Para trocar de celular, exporto um arquivo JSON e importo no outro.</p>
+<p>A tela inicial tem três modos, escolhidos na primeira abertura. Um mostra a chance de fechar 9. Outro traz gráficos de acompanhamento, e o terceiro serve só para lançar nota rápido.</p>
+<p>Chegou à versão 20 em setembro de 2026, e já guarda mais de um período, com o anterior arquivado para comparação.</p>
+<h2>Como funciona</h2>
+<p>A chance sai de uma simulação. Para cada avaliação que ainda falta, o aplicativo sorteia uma nota de uma distribuição Beta, ajustada pelo que eu já tirei no período. Ele repete o semestre 20 mil vezes e conta em quantas a média fechou acima de 9.</p>
+<p>A semente do sorteio vem de um hash do próprio estado. Mesmas notas, mesmo resultado. Sem isso, o número mudaria a cada vez que a tela redesenha, e ninguém confia num percentual que pisca.</p>
+<p>Junto da chance aparece a projeção, com a média esperada e a faixa entre o décimo e o nonagésimo percentil.</p>
+<p>Os gráficos são SVG escrito à mão. A tendência é uma regressão linear sobre as notas lançadas, e a forma recente é uma média móvel exponencial dos últimos dez lançamentos.</p>
+<h2>O que aprendi</h2>
+<p>O modelo era pessimista. Com poucas notas lançadas, ele dava peso demais ao pouco que tinha visto e a chance caía mais do que devia.</p>
+<p>Afrouxei o ponto de partida e passei a tratar cada avaliação separadamente. A lição serve fora do aplicativo: com três notas na mão, o que eu acredito antes de ver os dados pesa mais que os próprios dados.</p>
+<p>Aprendi também a separar nota oficial de previsão. O aplicativo deixa lançar a nota que eu espero tirar, e ela entra na projeção. Mas o selo de &quot;garantido&quot; só aparece com ponto oficial.</p>
+<p>Tirei uma função no caminho. A sincronização entre aparelhos usava um banco em nuvem e foi removida em julho. O aplicativo voltou a viver num aparelho só, sem serviço nenhum por trás.</p>
+<h2>Resultados</h2>
+<ul>
+<li>20 versões publicadas em 48 commits.</li>
+<li>20 mil semestres simulados a cada cálculo, com resultado idêntico para o mesmo conjunto de notas.</li>
+<li>237 KB de código no total, sem dependência externa.</li>
+<li>Motor matemático num arquivo separado de 17 KB, sem acesso à tela, que roda fora do navegador para teste.</li>
+</ul>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="acoes">
+    <a class="botao" href="mailto:contato@jadistel.com?subject=oqojfr%3F%20cr9">Responder</a>
+    <a class="botao" href="/blog">Voltar ao índice</a>
+  </div>
+
+  <p class="rodape-info">
+    <span><a href="/blog/laser">&laquo; Tópico anterior: Biblioteca de corte a laser</a></span>
+    <span><a href="/blog/ibdesign">Próximo tópico: Site da IbDesign &raquo;</a></span>
+  </p>
+
+  <div class="pe">
+    Escrito e mantido por <a href="/">J. A. Distel</a>.
+  </div>
+
+</div>
+
+</body>
+</html>

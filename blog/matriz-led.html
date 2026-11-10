@@ -56,7 +56,7 @@
         <td class="mensagem">
 
           <div class="cabecalho-msg">
-            <span>Enviado em: <b>09 Nov 2026</b></span>
+            <span>Enviado em: <b>06 Nov 2026</b></span>
             <span>Assunto: <b>Matriz de LED endereçável</b></span>
           </div>
 
@@ -80,7 +80,11 @@
 <h2>Como funciona</h2>
 <p>A função <code>digitalWrite</code> leva alguns microssegundos, mais que um bit inteiro do WS2812B. Escrever no registrador com <code>PORTD |= B01000000</code> vira uma instrução só, de 2 ciclos de clock. A 16 MHz, isso dá 125 nanossegundos.</p>
 <p>Com essa unidade eu monto o bit contando instruções. O fio sobe e fica alto por três escritas. Na quarta, ele continua alto se o bit for 1 e desce se for 0. Depois desce de vez.</p>
+<p><img src="/img/matriz-led/bit.svg" alt="Forma de onda dos bits 0 e 1" loading="lazy"></p>
+<p><em>O bit 0 e o bit 1 diferem só no tempo em nível alto.</em></p>
 <p>A matriz é ligada em serpentina: a linha par corre da esquerda para a direita, a ímpar volta. Uma função converte coluna e linha na posição da fila, invertendo o x nas linhas ímpares.</p>
+<p><img src="/img/matriz-led/serpentina.svg" alt="Mapa da fila em serpentina" loading="lazy"></p>
+<p><em>Posição de cada LED na fila.</em></p>
 <p>O jogo usa dois timers. O Timer2 lê a direção digitada a cada 10 ms. Já o passo da cobra fica com o Timer1, a cada 300 ms. O <code>loop()</code> não faz nada.</p>
 <h2>O que aprendi</h2>
 <p>Uma interrupção no meio do envio estica um bit, e o LED entende outro valor. Por isso o envio inteiro roda com as interrupções desligadas. São 64 LEDs vezes 24 bits vezes 1,25 microssegundo: 1,92 ms de silêncio a cada quadro.</p>

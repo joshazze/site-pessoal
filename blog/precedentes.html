@@ -56,7 +56,7 @@
         <td class="mensagem">
 
           <div class="cabecalho-msg">
-            <span>Enviado em: <b>13 Set 2026</b></span>
+            <span>Enviado em: <b>11 Set 2026</b></span>
             <span>Assunto: <b>Buscador de precedentes</b></span>
           </div>
 
@@ -76,6 +76,8 @@
 <p>Daí a decisão que moldou tudo: a busca roda inteira na máquina dele.</p>
 <h2>O que eu fiz</h2>
 <p>Uma extensão do Chrome que abre num painel lateral, com 4.929 súmulas e teses do STJ e do STF embutidas. Cada resultado traz a citação pronta para copiar.</p>
+<p><img src="/img/precedentes/busca-termo.png" alt="Busca por termo técnico" loading="lazy"></p>
+<p><em>Busca por termo técnico, com os sinônimos que a consulta ganhou.</em></p>
 <p>A extensão declara três permissões: painel lateral, menu de contexto e armazenamento local. Não pede acesso a site nenhum, não injeta script em página e não faz requisição de rede.</p>
 <p>Escrevi também um botão que junta os enunciados escolhidos num bloco com o texto integral de cada um e a fonte oficial, pronto para colar num assistente de IA. O bloco leva seis regras que proíbem citar o que não está na lista.</p>
 <h2>Como funciona</h2>
@@ -83,11 +85,15 @@
 <p>O primeiro é o BM25, o cálculo clássico de relevância por palavra, aplicado sobre radicais. Um redutor de palavras do português, escrito em JavaScript, serve tanto para montar o índice quanto para ler a consulta. Assim o plural e o singular da mesma palavra se encontram.</p>
 <p>O segundo é um dicionário de 79 grupos de sinônimos, escrito à mão. Cobre o par técnico e também o leigo, como &quot;pai não paga pensão&quot; e &quot;prisão civil do devedor de alimentos&quot;.</p>
 <p>O terceiro é semântico e não usa modelo de linguagem. Uma decomposição matemática do próprio acervo resume cada enunciado em 128 números. Ocupa 2 MB dentro do pacote e liga &quot;preso trabalhou na cadeia&quot; a &quot;remição da pena pelo trabalho&quot; sem que ninguém tenha escrito essa ligação.</p>
+<p><img src="/img/precedentes/busca-sentido.png" alt="Busca por caso descrito" loading="lazy"></p>
+<p><em>Caso descrito em linguagem comum, achado pela camada semântica.</em></p>
 <p>Palavra digitada errado cai numa busca por trigramas e vira o termo conhecido mais próximo.</p>
 <h2>O que aprendi</h2>
 <p>Não dá para ajustar uma busca no olho. Montei 42 consultas com a resposta certa declarada, entre termo técnico, número de súmula, erro de digitação e caso contado em linguagem comum. Um script roda as 42 e conta em quantas a resposta certa aparece no topo.</p>
 <p>Com esse portão, os pesos da fusão deixaram de ser palpite. Outro script varre as combinações e imprime a melhor.</p>
 <p>Foi ele que mostrou quanto vale a parte semântica. Só com palavras, a resposta certa vinha em primeiro lugar em 34 das 42 consultas. Com a semântica, em 37. Parece pouco. Mas as duas consultas que não apareciam nem entre as cinco primeiras passaram a aparecer entre as três.</p>
+<p><img src="/img/precedentes/avaliacao.svg" alt="Acerto nas 42 consultas" loading="lazy"></p>
+<p><em>Antes e depois da camada semântica.</em></p>
 <p>O ponto fraco é o acervo. Ele vem de uma captura de julho de 2026, e a ingestão direta das fontes oficiais ainda não existe. Também falta a prova de uso: a extensão está empacotada, mas ainda não passou por um dia de trabalho real.</p>
 <h2>Resultados</h2>
 <ul>
@@ -109,7 +115,7 @@
   </div>
 
   <p class="rodape-info">
-    <span><a href="/blog/palestra-ia">&laquo; Tópico anterior: Palestra de IA aplicada</a></span>
+    <span><a href="/blog/artigo-ic">&laquo; Tópico anterior: Viés linguístico em material didático gerado por LLM</a></span>
     <span><a href="/blog/limites">Próximo tópico: Limites &raquo;</a></span>
   </p>
 

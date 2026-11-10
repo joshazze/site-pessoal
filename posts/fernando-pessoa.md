@@ -2,7 +2,7 @@
 slug: fernando-pessoa
 titulo: Fernando Pessoa
 sub: Um heterônimo para cada ferramenta: personas de IA que persistem e ativam sozinhas
-data: 2026-08-11
+data: 2026-07-04
 stack: [Bash, hooks, Claude Code, Markdown]
 competencias: [arquitetura de agentes, design de sistema, escrita técnica]
 areas: [IA aplicada, Ferramentas de desenvolvedor, Código aberto]

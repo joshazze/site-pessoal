@@ -79,18 +79,26 @@
 <p>Fiquei com o gabinete, a fabricação e a documentação, e preparei a hospedagem do servidor com HTTPS. O firmware e o servidor nasceram com outro integrante do grupo.</p>
 <p>O gabinete são dois módulos de MDF de 3 mm cortados a laser. O biométrico, de 250 x 250 x 1000 mm, leva tela, teclado, leitor de digital e câmera. Já o armário mede 750 x 1000 x 250 mm e tem porta de acrílico, fechadura elétrica e um gaveteiro.</p>
 <p>Nenhuma coordenada foi desenhada à mão. As medidas moram num arquivo JSON, e um gerador em Python monta as faces, recorta os vãos e empacota as peças em cargas que cabem na mesa da cortadora. Corrigir uma cota é trocar um número e rodar de novo.</p>
+<p><img src="/img/dispensario/armario-3d.png" alt="Montagem 3D do armário" loading="lazy"></p>
+<p><em>As 29 peças do armário montadas em 3D a partir dos arquivos de corte.</em></p>
 <p>Também escrevi o site do projeto, em nove páginas, com requisitos, eletrônica, firmware, servidor, gabinete e fabricação.</p>
 <h2>Como funciona</h2>
 <p>Duas placas, com papéis separados. Um Arduino Mega lê o teclado e a digital, guarda os cadastros e decide sozinho quem entra. A ESP32-CAM recebe os eventos pela serial, fotografa o acesso autorizado e entrega tudo ao servidor.</p>
 <p>A regra que organiza o resto: o acesso nunca depende de rede. Se o Wi-Fi cair, a porta continua abrindo para quem tem direito. O servidor serve para auditoria.</p>
 <p>No gabinete, cada parede é um sanduíche de duas lâminas. As faces se unem por abraçadeiras de nylon em vez de parafuso, e o conjunto se desmonta com um alicate. A altura de 1000 mm veio da cortadora, que tem mesa de 1150 x 1000 mm.</p>
 <p>O gaveteiro saiu de uma contagem. A RENAME 2024, lista de medicamentos essenciais do SUS, tem 265 princípios ativos em comprimido ou cápsula. Contei por letra inicial e cheguei a 15 gavetas: letra frequente fica sozinha, as raras se juntam à vizinha.</p>
+<p><img src="/img/dispensario/letras.svg" alt="Princípios ativos por letra inicial" loading="lazy"></p>
+<p><em>A contagem que definiu as gavetas.</em></p>
 <h2>O que aprendi</h2>
 <p>A primeira versão do armário media 1260 x 1500 x 350 mm e tinha três portas. Era bonita na tela. Doze painéis não cabiam na mesa da máquina.</p>
 <p>Refiz o armário em 07/10 começando pela restrição: toda peça cabe em 1000 x 1000 mm. Hoje a primeira pergunta que faço num projeto de corte é o tamanho da mesa.</p>
 <p>O leitor de digital me custou três tentativas. O manual mostrava um canal lateral de 1,5 mm, e desenhei um garfo para entrar nele. O corpo real tinha uma travinha que o desenho do fabricante não mostrava. Terminou colado com cola quente num vão justo de 20 x 18 mm.</p>
 <p>A tabela de parâmetros colada na máquina também não valia. Ela pedia 26 mm/s a 65% para MDF de 3 mm, e a máquina só atravessou a chapa a 10 mm/s e 74,5%, número que saiu de matrizes de calibração cortadas na própria máquina.</p>
 <p>Passei a testar em retalho toda feição que encosta num componente comprado. No cupom, a fechadura encaixou na primeira.</p>
+<p><img src="/img/dispensario/gaveta-3d.png" alt="Gaveta com divisórias" loading="lazy"></p>
+<p><em>A gaveta, conferida em 3D antes de ir para a máquina.</em></p>
+<p><img src="/img/dispensario/rota-de-corte.png" alt="Rota de corte de uma mesa" loading="lazy"></p>
+<p><em>Uma mesa de corte com a rota calculada. Em laranja, o caminho com o laser desligado.</em></p>
 <h2>Resultados</h2>
 <ul>
 <li>Armário de 750 x 1000 x 250 mm em 29 peças, montado em 3D a partir dos próprios arquivos de corte, sem sobreposição.</li>

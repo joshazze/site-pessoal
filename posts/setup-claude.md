@@ -2,7 +2,7 @@
 slug: setup-claude
 titulo: Setup por um link
 sub: Um roteiro que o próprio assistente lê e executa para instalar memória, personas e editor na máquina de outra pessoa
-data: 2026-08-10
+data: 2026-08-12
 stack: [Bash, jq, Claude Code, Obsidian, Markdown]
 competencias: [ferramenta de desenvolvedor, instalação não destrutiva, documentação, distribuição]
 areas: [Ferramentas de desenvolvedor, IA aplicada, Código aberto]
@@ -24,6 +24,10 @@ Um repositório guarda-chuva com duas entradas. A primeira é uma frase que a pe
 O roteiro tem sete passos. O assistente faz cinco perguntas numa mensagem só, instala as três camadas em ordem, verifica o resultado e termina explicando o que a pessoa ganhou e o que digitar no dia seguinte.
 
 Esse repositório não reimplementa as outras duas camadas. Ele chama os instaladores delas e acrescenta a terceira.
+
+![As três camadas da instalação](/img/setup-claude/camadas.svg)
+
+*O que a frase colada instala, em ordem.*
 
 ## Como funciona
 

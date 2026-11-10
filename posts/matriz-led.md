@@ -2,7 +2,7 @@
 slug: matriz-led
 titulo: Matriz de LED endereçável
 sub: 64 LEDs WS2812B num fio só, primeiro com biblioteca e depois escrevendo o sinal direto na porta do microcontrolador
-data: 2026-11-09
+data: 2026-11-06
 stack: [C++, Arduino, AVR, WS2812B]
 competencias: [sistemas embarcados, temporização, interrupções, protocolo de um fio]
 areas: [Hardware e fabricação, Código aberto]
@@ -29,7 +29,15 @@ A função `digitalWrite` leva alguns microssegundos, mais que um bit inteiro do
 
 Com essa unidade eu monto o bit contando instruções. O fio sobe e fica alto por três escritas. Na quarta, ele continua alto se o bit for 1 e desce se for 0. Depois desce de vez.
 
+![Forma de onda dos bits 0 e 1](/img/matriz-led/bit.svg)
+
+*O bit 0 e o bit 1 diferem só no tempo em nível alto.*
+
 A matriz é ligada em serpentina: a linha par corre da esquerda para a direita, a ímpar volta. Uma função converte coluna e linha na posição da fila, invertendo o x nas linhas ímpares.
+
+![Mapa da fila em serpentina](/img/matriz-led/serpentina.svg)
+
+*Posição de cada LED na fila.*
 
 O jogo usa dois timers. O Timer2 lê a direção digitada a cada 10 ms. Já o passo da cobra fica com o Timer1, a cada 300 ms. O `loop()` não faz nada.
 

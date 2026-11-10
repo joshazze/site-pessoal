@@ -2,7 +2,7 @@
 slug: blank-page
 titulo: Blank Page
 sub: Plugin do Obsidian que tira o atrito entre querer escrever e estar escrevendo
-data: 2026-08-14
+data: 2026-07-30
 stack: [TypeScript, Obsidian API, esbuild]
 competencias: [produto, ferramenta de autor, design de interação]
 areas: [Ferramentas de desenvolvedor, Código aberto, Produto]

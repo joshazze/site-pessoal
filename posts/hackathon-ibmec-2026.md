@@ -2,7 +2,7 @@
 slug: hackathon-ibmec-2026
 titulo: Anatomia de três choques
 sub: Hackathon Nacional Ibmec 2026, equipe Os Terríveis, etapa Belo Horizonte
-data: 2026-05-22
+data: 2026-05-24
 stack: [Python, statsmodels, Prophet, scikit-learn, VAR, weasyprint]
 competencias: [econometria, análise de dados, pitch, trabalho em equipe]
 areas: [Dados e estatística, Competições e prêmios, Pesquisa]

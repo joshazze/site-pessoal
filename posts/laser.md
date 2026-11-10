@@ -2,7 +2,7 @@
 slug: laser
 titulo: Biblioteca de corte a laser
 sub: Peças de acrílico geradas por código, com um portão de validação antes de cada arquivo de corte
-data: 2026-09-19
+data: 2026-09-22
 stack: [Python, DXF, SVG, PDF]
 competencias: [geometria computacional, fabricação digital, testes, desenho técnico]
 areas: [Hardware e fabricação, Ferramentas de desenvolvedor]

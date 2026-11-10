@@ -2,7 +2,7 @@
 slug: cartao-de-visita
 titulo: Cartão de visita sem framework
 sub: Um quarto de chalé pixelado em primeira pessoa, zero dependência
-data: 2026-05-03
+data: 2026-04-29
 stack: [HTML5, CSS3, JavaScript, Vanilla]
 competencias: [frontend, acessibilidade, design de interação]
 areas: [Web, Design, Código aberto]

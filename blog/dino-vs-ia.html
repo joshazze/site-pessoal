@@ -56,7 +56,7 @@
         <td class="mensagem">
 
           <div class="cabecalho-msg">
-            <span>Enviado em: <b>05 Jun 2026</b></span>
+            <span>Enviado em: <b>17 Jun 2026</b></span>
             <span>Assunto: <b>Dino contra a máquina</b></span>
           </div>
 
@@ -80,11 +80,15 @@
 <h2>Como funciona</h2>
 <p>O display aceita só 8 caracteres personalizados, de 5 por 8 pontos. Usei cinco: dois quadros do dinossauro correndo, um pulando e dois cactos.</p>
 <p>O mundo é um vetor de 16 posições que rola uma casa para a esquerda a cada tick. O tick começa em 140 ms e encolhe até 70 ms.</p>
+<p><img src="/img/dino-vs-ia/tela.svg" alt="Tela do jogo no display" loading="lazy"></p>
+<p><em>Reconstituição da tela a partir dos caracteres do firmware.</em></p>
 <p>O adversário não é uma rede neural. É uma regra: quando um cacto chega a 3 colunas de distância, ele pula. A cada cacto existe 3% de chance de ele vacilar e não pular.</p>
 <h2>O que aprendi</h2>
 <p>Minha primeira regra pulava no último instante, com o cacto a uma coluna. No simulador, em 500 partidas, a mediana foi 31 pontos. Qualquer pessoa ganhava.</p>
 <p>Troquei para pular com o cacto a 3 colunas e rodei de novo. As 500 partidas bateram no teto da simulação. Imortal. Um adversário que nunca perde é tão sem graça quanto um que perde sempre.</p>
 <p>A dificuldade de um jogo não está em fazer a máquina jogar bem. Está em escolher quanto ela erra. Testei taxas de vacilo de 2% a 8% e fiquei com 3%, que dá mediana de 177 pontos: difícil, mas vencível.</p>
+<p><img src="/img/dino-vs-ia/simulacao.svg" alt="Mediana por taxa de vacilo" loading="lazy"></p>
+<p><em>Resultado do simulador para cada taxa de erro.</em></p>
 <p>Rodei também um aprendizado por reforço no simulador, 500 episódios partindo do zero. A pontuação média subiu de 41 para 285. Serviu para confirmar a regra. No Arduino continua indo a versão de duas linhas, que eu consigo explicar.</p>
 <p>O hardware cobrou a parte dele. Com um teclado matricial ligado, o display passou a mostrar lixo: uma coluna do teclado dividia fio com o LCD. Voltei para um botão só.</p>
 <h2>Resultados</h2>
@@ -108,7 +112,7 @@
 
   <p class="rodape-info">
     <span><a href="/blog/cifra-local">&laquo; Tópico anterior: Dados cifrados no aparelho</a></span>
-    <span><a href="/blog/atletica">Próximo tópico: Atlética Ibmec BH &raquo;</a></span>
+    <span><a href="/blog/fernando-pessoa">Próximo tópico: Fernando Pessoa &raquo;</a></span>
   </p>
 
   <div class="pe">

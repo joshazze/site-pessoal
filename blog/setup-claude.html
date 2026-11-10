@@ -56,7 +56,7 @@
         <td class="mensagem">
 
           <div class="cabecalho-msg">
-            <span>Enviado em: <b>10 Ago 2026</b></span>
+            <span>Enviado em: <b>12 Ago 2026</b></span>
             <span>Assunto: <b>Setup por um link</b></span>
           </div>
 
@@ -78,6 +78,8 @@
 <p>Um repositório guarda-chuva com duas entradas. A primeira é uma frase que a pessoa cola no assistente, pedindo que ele leia um roteiro e execute. Para quem prefere, existe um script de shell que faz a mesma instalação sem gastar token.</p>
 <p>O roteiro tem sete passos. O assistente faz cinco perguntas numa mensagem só, instala as três camadas em ordem, verifica o resultado e termina explicando o que a pessoa ganhou e o que digitar no dia seguinte.</p>
 <p>Esse repositório não reimplementa as outras duas camadas. Ele chama os instaladores delas e acrescenta a terceira.</p>
+<p><img src="/img/setup-claude/camadas.svg" alt="As três camadas da instalação" loading="lazy"></p>
+<p><em>O que a frase colada instala, em ordem.</em></p>
 <h2>Como funciona</h2>
 <p>O roteiro é um arquivo de texto escrito para um leitor que não é humano. Cada passo diz o que rodar, como conferir que deu certo e o que fazer se falhar. O último passo, explicar, é obrigatório.</p>
 <p>A instalação não destrói nada. Quem chega já tem arquivo de configuração e notas próprias. Todo JSON existente é mesclado com <code>jq</code>, com backup datado antes de qualquer escrita, e nenhuma nota do cofre é sobrescrita. Rodar duas vezes não duplica.</p>
@@ -109,7 +111,7 @@
 
   <p class="rodape-info">
     <span><a href="/blog/cerebro">&laquo; Tópico anterior: Cérebro</a></span>
-    <span><a href="/blog/fernando-pessoa">Próximo tópico: Fernando Pessoa &raquo;</a></span>
+    <span><a href="/blog/ibsala">Próximo tópico: ibsala &raquo;</a></span>
   </p>
 
   <div class="pe">

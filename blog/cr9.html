@@ -56,7 +56,7 @@
         <td class="mensagem">
 
           <div class="cabecalho-msg">
-            <span>Enviado em: <b>03 Out 2026</b></span>
+            <span>Enviado em: <b>01 Out 2026</b></span>
             <span>Assunto: <b>CR9</b></span>
           </div>
 
@@ -78,12 +78,16 @@
 <p>Um aplicativo web instalável no celular, sem framework, sem empacotador e sem dependência em tempo de execução. Abre sem internet.</p>
 <p>Os dados ficam só no aparelho, no armazenamento do navegador. Não há servidor nem conta. Para trocar de celular, exporto um arquivo JSON e importo no outro.</p>
 <p>A tela inicial tem três modos, escolhidos na primeira abertura. Um mostra a chance de fechar 9. Outro traz gráficos de acompanhamento, e o terceiro serve só para lançar nota rápido.</p>
+<p><img src="/img/cr9/chance.png" alt="Tela inicial com a chance de fechar 9" loading="lazy"></p>
+<p><em>Tela inicial, com disciplinas e notas fictícias.</em></p>
 <p>Chegou à versão 20 em setembro de 2026, e já guarda mais de um período, com o anterior arquivado para comparação.</p>
 <h2>Como funciona</h2>
 <p>A chance sai de uma simulação. Para cada avaliação que ainda falta, o aplicativo sorteia uma nota de uma distribuição Beta, ajustada pelo que eu já tirei no período. Ele repete o semestre 20 mil vezes e conta em quantas a média fechou acima de 9.</p>
 <p>A semente do sorteio vem de um hash do próprio estado. Mesmas notas, mesmo resultado. Sem isso, o número mudaria a cada vez que a tela redesenha, e ninguém confia num percentual que pisca.</p>
 <p>Junto da chance aparece a projeção, com a média esperada e a faixa entre o décimo e o nonagésimo percentil.</p>
 <p>Os gráficos são SVG escrito à mão. A tendência é uma regressão linear sobre as notas lançadas, e a forma recente é uma média móvel exponencial dos últimos dez lançamentos.</p>
+<p><img src="/img/cr9/acompanhamento.png" alt="Tela de acompanhamento" loading="lazy"></p>
+<p><em>Modo de acompanhamento, também com dados fictícios.</em></p>
 <h2>O que aprendi</h2>
 <p>O modelo era pessimista. Com poucas notas lançadas, ele dava peso demais ao pouco que tinha visto e a chance caía mais do que devia.</p>
 <p>Afrouxei o ponto de partida e passei a tratar cada avaliação separadamente. A lição serve fora do aplicativo: com três notas na mão, o que eu acredito antes de ver os dados pesa mais que os próprios dados.</p>

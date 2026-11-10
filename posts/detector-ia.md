@@ -2,7 +2,7 @@
 slug: detector-ia
 titulo: detector-ia
 sub: Detector de texto gerado por IA que separa prova de estimativa
-data: 2026-10-22
+data: 2026-10-24
 stack: [Python, stdlib, estatística, Unicode]
 competencias: [estatística aplicada, segurança, avaliação de modelos, PT-BR]
 areas: [IA aplicada, Dados e estatística, Segurança e privacidade, Pesquisa]

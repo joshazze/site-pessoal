@@ -2,7 +2,7 @@
 slug: cifra-local
 titulo: Dados cifrados no aparelho
 sub: Um padrão de app pessoal que não tem servidor para vazar, com o myco como caso
-data: 2026-06-02
+data: 2026-06-09
 stack: [WebCrypto, PBKDF2, AES-GCM, IndexedDB, Vite]
 competencias: [criptografia aplicada, privacidade por desenho, PWA]
 areas: [Web, Segurança e privacidade, Apps e PWA, Código aberto]

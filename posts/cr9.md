@@ -2,7 +2,7 @@
 slug: cr9
 titulo: CR9
 sub: Aplicativo que acompanha as notas do semestre e calcula a chance de fechar com média 9
-data: 2026-10-03
+data: 2026-10-01
 stack: [HTML, CSS, JavaScript, PWA, SVG]
 competencias: [estatística aplicada, simulação de Monte Carlo, frontend, produto]
 areas: [Apps e PWA, Dados e estatística, Web]
@@ -25,6 +25,10 @@ Os dados ficam só no aparelho, no armazenamento do navegador. Não há servidor
 
 A tela inicial tem três modos, escolhidos na primeira abertura. Um mostra a chance de fechar 9. Outro traz gráficos de acompanhamento, e o terceiro serve só para lançar nota rápido.
 
+![Tela inicial com a chance de fechar 9](/img/cr9/chance.png)
+
+*Tela inicial, com disciplinas e notas fictícias.*
+
 Chegou à versão 20 em setembro de 2026, e já guarda mais de um período, com o anterior arquivado para comparação.
 
 ## Como funciona
@@ -36,6 +40,10 @@ A semente do sorteio vem de um hash do próprio estado. Mesmas notas, mesmo resu
 Junto da chance aparece a projeção, com a média esperada e a faixa entre o décimo e o nonagésimo percentil.
 
 Os gráficos são SVG escrito à mão. A tendência é uma regressão linear sobre as notas lançadas, e a forma recente é uma média móvel exponencial dos últimos dez lançamentos.
+
+![Tela de acompanhamento](/img/cr9/acompanhamento.png)
+
+*Modo de acompanhamento, também com dados fictícios.*
 
 ## O que aprendi
 

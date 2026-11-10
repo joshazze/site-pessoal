@@ -2,7 +2,7 @@
 slug: shield-arduino
 titulo: Shield multifunção do Arduino
 sub: Display de quatro dígitos, três botões e dois registradores de deslocamento, controlados por interrupção
-data: 2026-10-27
+data: 2026-11-01
 stack: [C++, Arduino, AVR]
 competencias: [sistemas embarcados, interrupções, multiplexação, depuração de hardware]
 areas: [Hardware e fabricação]

@@ -26,6 +26,10 @@ O gabinete são dois módulos de MDF de 3 mm cortados a laser. O biométrico, de
 
 Nenhuma coordenada foi desenhada à mão. As medidas moram num arquivo JSON, e um gerador em Python monta as faces, recorta os vãos e empacota as peças em cargas que cabem na mesa da cortadora. Corrigir uma cota é trocar um número e rodar de novo.
 
+![Montagem 3D do armário](/img/dispensario/armario-3d.png)
+
+*As 29 peças do armário montadas em 3D a partir dos arquivos de corte.*
+
 Também escrevi o site do projeto, em nove páginas, com requisitos, eletrônica, firmware, servidor, gabinete e fabricação.
 
 ## Como funciona
@@ -38,6 +42,10 @@ No gabinete, cada parede é um sanduíche de duas lâminas. As faces se unem por
 
 O gaveteiro saiu de uma contagem. A RENAME 2024, lista de medicamentos essenciais do SUS, tem 265 princípios ativos em comprimido ou cápsula. Contei por letra inicial e cheguei a 15 gavetas: letra frequente fica sozinha, as raras se juntam à vizinha.
 
+![Princípios ativos por letra inicial](/img/dispensario/letras.svg)
+
+*A contagem que definiu as gavetas.*
+
 ## O que aprendi
 
 A primeira versão do armário media 1260 x 1500 x 350 mm e tinha três portas. Era bonita na tela. Doze painéis não cabiam na mesa da máquina.
@@ -49,6 +57,14 @@ O leitor de digital me custou três tentativas. O manual mostrava um canal later
 A tabela de parâmetros colada na máquina também não valia. Ela pedia 26 mm/s a 65% para MDF de 3 mm, e a máquina só atravessou a chapa a 10 mm/s e 74,5%, número que saiu de matrizes de calibração cortadas na própria máquina.
 
 Passei a testar em retalho toda feição que encosta num componente comprado. No cupom, a fechadura encaixou na primeira.
+
+![Gaveta com divisórias](/img/dispensario/gaveta-3d.png)
+
+*A gaveta, conferida em 3D antes de ir para a máquina.*
+
+![Rota de corte de uma mesa](/img/dispensario/rota-de-corte.png)
+
+*Uma mesa de corte com a rota calculada. Em laranja, o caminho com o laser desligado.*
 
 ## Resultados
 

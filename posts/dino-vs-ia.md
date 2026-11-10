@@ -2,7 +2,7 @@
 slug: dino-vs-ia
 titulo: Dino contra a máquina
 sub: O jogo do dinossauro num display de 16 colunas, com um adversário automático calibrado para perder de vez em quando
-data: 2026-06-05
+data: 2026-06-17
 stack: [C++, Arduino, LCD HD44780, Python]
 competencias: [sistemas embarcados, simulação, aprendizado por reforço, design de jogo]
 areas: [Hardware e fabricação, IA aplicada]
@@ -28,6 +28,10 @@ O display aceita só 8 caracteres personalizados, de 5 por 8 pontos. Usei cinco:
 
 O mundo é um vetor de 16 posições que rola uma casa para a esquerda a cada tick. O tick começa em 140 ms e encolhe até 70 ms.
 
+![Tela do jogo no display](/img/dino-vs-ia/tela.svg)
+
+*Reconstituição da tela a partir dos caracteres do firmware.*
+
 O adversário não é uma rede neural. É uma regra: quando um cacto chega a 3 colunas de distância, ele pula. A cada cacto existe 3% de chance de ele vacilar e não pular.
 
 ## O que aprendi
@@ -37,6 +41,10 @@ Minha primeira regra pulava no último instante, com o cacto a uma coluna. No si
 Troquei para pular com o cacto a 3 colunas e rodei de novo. As 500 partidas bateram no teto da simulação. Imortal. Um adversário que nunca perde é tão sem graça quanto um que perde sempre.
 
 A dificuldade de um jogo não está em fazer a máquina jogar bem. Está em escolher quanto ela erra. Testei taxas de vacilo de 2% a 8% e fiquei com 3%, que dá mediana de 177 pontos: difícil, mas vencível.
+
+![Mediana por taxa de vacilo](/img/dino-vs-ia/simulacao.svg)
+
+*Resultado do simulador para cada taxa de erro.*
 
 Rodei também um aprendizado por reforço no simulador, 500 episódios partindo do zero. A pontuação média subiu de 41 para 285. Serviu para confirmar a regra. No Arduino continua indo a versão de duas linhas, que eu consigo explicar.
 

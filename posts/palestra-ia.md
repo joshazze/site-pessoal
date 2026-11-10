@@ -2,7 +2,7 @@
 slug: palestra-ia
 titulo: Palestra de IA aplicada
 sub: 40 minutos para calouros de engenharia, com deck só de imagens e prática ao vivo no terminal
-data: 2026-08-23
+data: 2026-08-27
 stack: [HTML, SVG, Chrome headless, Claude Code]
 competencias: [comunicação, didática, pesquisa de fontes, design de apresentação]
 areas: [IA aplicada, Educação, Liderança e ligas]

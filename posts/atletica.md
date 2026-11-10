@@ -2,7 +2,7 @@
 slug: atletica
 titulo: Atlética Ibmec BH
 sub: Site institucional, catálogo com reservas e gestão de estoque
-data: 2026-07-24
+data: 2026-07-21
 stack: [Flask, Jinja, HTMX, PostgreSQL, Docker]
 competencias: [backend, produto, operação, entrega com prazo]
 areas: [Web, Infraestrutura e deploy, Produto]
